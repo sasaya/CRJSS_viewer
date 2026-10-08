@@ -123,7 +123,7 @@ function start_history(input::AbstractString;seconds=120.0,hoists=1,workers=8,se
         # JLLの実行環境からDLL検索パスを継承します。グローバルPATHは変更しません。
         jll_command=ORTools_jll.sat_runner()
         environment=isnothing(jll_command.env) ? copy(ENV) : Dict(split(e,'=';limit=2)[1]=>split(e,'=';limit=2)[2] for e in jll_command.env)
-        runtime=abspath(joinpath(@__DIR__,"..","vendor","windows_runtime"))
+        runtime=abspath(joinpath(@__DIR__,"..","..","..","runtime","windows_runtime"))
         separator=Sys.iswindows() ? ';' : ':'
         environment["PATH"]=join([runtime,get(environment,"PATH",get(ENV,"PATH",""))],separator)
         command=setenv(Cmd(Cmd([abspath(executable)]);dir=directory,windows_hide=true),environment)

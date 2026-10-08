@@ -1,7 +1,7 @@
 ﻿$ErrorActionPreference = 'Stop'
 $applicationRoot = $PSScriptRoot
 $bundledJulia = Join-Path $applicationRoot 'runtime/julia/bin/julia.exe'
-if (-not (Test-Path -LiteralPath $bundledJulia)) { throw '同梱Juliaが見つかりません。フォルダー全体を配置してください。' }
+if (-not (Test-Path -LiteralPath $bundledJulia)) { throw 'Juliaが見つかりません。先にsetup.cmdまたはsetup.ps1を実行してください。' }
 $env:JULIA_DEPOT_PATH = Join-Path $applicationRoot 'runtime/depot'
 $env:JULIA_LOAD_PATH = '@;@stdlib'
 $env:JULIA_PKG_OFFLINE = 'true'

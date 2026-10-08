@@ -1,0 +1,32 @@
+Windows x64 セットアップ
+
+初回はインターネット接続が必要です。
+setup.cmd をダブルクリックするか、プロジェクトのフォルダーで実行してください。
+
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1
+
+Manifest.toml の julia_version に一致する Julia を公式配布元から取得し、
+SHA-256 を照合して runtime/julia に展開します。
+Julia のパッケージマネージャーが両プロジェクトの Manifest.toml に従って
+OR-Tools、HiGHS、その他の依存関係を runtime/depot に取得します。
+システムへのインストールや管理者権限は不要です。
+最適化の進捗を受け取る補助プログラム用に、固定バージョンの WinLibs
+コンパイラーを SHA-256 検証付きで runtime/history-tools に取得します。
+補助プログラムはソースからビルドし、既存の Git 除外対象である
+vendor/HoistScheduling/vendor/history_bridge/build に保存します。
+再実行時は既存の Julia と取得済みパッケージを再利用します。
+
+セットアップ後は start.cmd をダブルクリックして起動してください。
+準備済みの環境はオフラインで起動できます。
+オフラインでセットアップを再実行する場合は次のコマンドを使います。
+
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1 -Offline
+
+OR-Tools の配布物から自動生成する DLL も runtime/windows_runtime に保存します。
+runtime/ 全体が Git の除外対象です。
+セットアップスクリプトには個人のフォルダパスを記載していません。
+既存の runtime/julia が不完全またはバージョン違いの場合は、
+そのフォルダーを別の場所に移してから再実行してください。
+
+公式配布元: https://julialang.org/downloads/
+パッケージ管理: https://pkgdocs.julialang.org/v1/api/
