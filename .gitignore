@@ -1,0 +1,15 @@
+# Documentation and local runtime/output files (at any depth).
+*.[mM][dD]
+runtime/
+results/
+
+/data/input_data_12.json
+/data/input_data_24.json
+
+test
+
+# Native build output contains local build-machine paths.
+/vendor/HoistScheduling/vendor/history_bridge/build/
+
+# Source archive also contains Markdown; extracted CSS/license are retained.
+/web/vendor/lism-css/lism-css-1.0.1.tgz

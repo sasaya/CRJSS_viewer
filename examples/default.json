@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "problem_path": "data/input_data.json",
+  "import_options": {
+    "processing_time": "lower",
+    "copies_per_route": 3,
+    "transport_count": 2
+  },
+  "control": {
+    "mode": "optimized_priority"
+  },
+  "optimizer": {
+    "period_sim_seconds": 60,
+    "solver_limit_wall_seconds": 60,
+    "request_limit_wall_seconds": 300,
+    "workers": 8,
+    "seed": 1,
+    "warmup": false,
+    "recalculation_mode": "events"
+  },
+  "clock": {
+    "speed": 1
+  },
+  "faults": {
+    "mode": "none"
+  }
+}

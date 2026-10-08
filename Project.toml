@@ -1,0 +1,27 @@
+name = "JobShopSimProposedMethod"
+uuid = "91f7d85e-8a60-47da-aad6-11efc071f921"
+version = "0.1.0"
+
+[deps]
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+JobShopSim = "8c7eb0be-0a0b-46ca-9408-cd56d2c1cf36"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+SHA = "ea8e919c-243c-51af-8825-aaa63cd721ce"
+UUIDs = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+
+[sources]
+JobShopSim = {path = "vendor/JobShopSim"}
+
+[compat]
+HTTP = "1"
+JSON3 = "1"
+julia = "1.10"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

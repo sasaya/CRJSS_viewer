@@ -1,0 +1,140 @@
+{
+  "name": "lism-css",
+  "version": "1.0.1",
+  "description": "Lism CSS is a layout-first CSS framework for websites.",
+  "author": {
+    "name": "ddryo",
+    "url": "https://github.com/ddryo"
+  },
+  "license": "MIT",
+  "keywords": [
+    "css-framework",
+    "astro-component",
+    "react-component"
+  ],
+  "files": [
+    "dist",
+    "config.js",
+    "config.d.ts",
+    "astro",
+    "!astro/**/*.test.ts",
+    "src/scss"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./config.js": "./config.js",
+    "./config": {
+      "import": "./dist/config/index.js",
+      "types": "./dist/config/index.d.ts"
+    },
+    "./default-config": {
+      "import": "./dist/config/default-config.js",
+      "types": "./dist/config/default-config.d.ts"
+    },
+    "./config-types": {
+      "types": "./dist/config/types.d.ts",
+      "import": "./dist/config/types.js"
+    },
+    "./config/helper": {
+      "import": "./dist/config/helper.js",
+      "types": "./dist/config/helper.d.ts"
+    },
+    "./config/defaults/*": {
+      "import": "./dist/config/defaults/*.js",
+      "types": "./dist/config/defaults/*.d.ts"
+    },
+    "./config/presets/*": {
+      "import": "./dist/config/presets/*.js",
+      "types": "./dist/config/presets/*.d.ts"
+    },
+    "./lib/*": {
+      "import": "./dist/lib/*.js",
+      "types": "./dist/lib/*.d.ts"
+    },
+    "./react": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./react/*": {
+      "import": "./dist/components/*.js",
+      "types": "./dist/components/*.d.ts"
+    },
+    "./astro": {
+      "import": "./astro/index.ts"
+    },
+    "./astro/*": "./astro/*",
+    "./scss/*": "./src/scss/*",
+    "./*.css": "./dist/css/*.css"
+  },
+  "homepage": "https://lism-css.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lism-css/core/tree/main/packages/lism-css"
+  },
+  "bugs": {
+    "url": "https://github.com/lism-css/core/issues"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.29.7",
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@storybook/react-vite": "^10.4.6",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^25.9.4",
+    "@vitejs/plugin-react-swc": "^3.11.0",
+    "astro": "^7.3.2",
+    "eslint": "^9.39.4",
+    "glob": "^13.0.6",
+    "jsdom": "^27.4.0",
+    "lucide-react": "^0.577.0",
+    "rollup": "^4.62.2",
+    "stylelint": "^17.14.0",
+    "tsx": "^4.22.5",
+    "typescript": "^5.9.3",
+    "unplugin-dts": "1.0.0-beta.6",
+    "vite": "^7.3.6",
+    "vitest": "^4.1.11"
+  },
+  "dependencies": {
+    "csstype": "^3.2.3"
+  },
+  "peerDependencies": {
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    },
+    "@types/react-dom": {
+      "optional": true
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "dev": "vite",
+    "test": "vitest run && pnpm test:icon:astro",
+    "typecheck": "tsc --noEmit && astro check --tsconfig astro/tsconfig.json",
+    "build": "pnpm build:js && pnpm build:css:only",
+    "build:js": "vite build && pnpm exec tsc -p config/tsconfig.json && node bin/verify-dts-imports.mjs",
+    "build:css": "pnpm build:js && pnpm build:css:only",
+    "build:css:only": "tsx bin/script-build-css.js",
+    "format": "prettier --write . --ignore-path ../../.prettierignore",
+    "lint": "pnpm lint:eslint && pnpm lint:style",
+    "lint:eslint": "eslint '**/*.{js,mjs,ts,tsx,astro}'",
+    "lint:style": "stylelint '**/*.{css,scss}'",
+    "preview": "vite preview",
+    "test:icon:astro": "node bin/verify-icon-astro.mjs"
+  }
+}

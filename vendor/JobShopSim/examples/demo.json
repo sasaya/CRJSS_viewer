@@ -1,0 +1,10 @@
+{
+  "machines": ["M1", "M2", "M3"],
+  "jobs": [
+    {"id": "J1", "operations": [{"machine": "M1", "duration": 12}, {"machine": "M2", "duration": 8}, {"machine": "M3", "duration": 6}]},
+    {"id": "J2", "operations": [{"machine": "M2", "duration": 10}, {"machine": "M1", "duration": 7}]},
+    {"id": "J3", "operations": [{"machine": "M1", "duration": 8}, {"machine": "M3", "duration": 10}]},
+    {"id": "J4", "release": 15, "operations": [{"machine": "M3", "duration": 9}, {"machine": "M2", "duration": 5}]}
+  ],
+  "faults": {"mode": "none"}
+}

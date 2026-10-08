@@ -1,0 +1,136 @@
+/* Application theme built on Lism CSS 1.0.1 semantic and spacing tokens. */
+:root {
+  --ff--base: system-ui, -apple-system, "Segoe UI", "Yu Gothic UI", "Hiragino Sans", sans-serif;
+  --fz--base: 15px;
+  --lh: 1.55;
+  --page-padding: var(--s15);
+  --bg: #f3f6fa;
+  --base: #fff;
+  --base-2: #edf3f7;
+  --text: #193144;
+  --text-2: #52677a;
+  --divider: #d7e2eb;
+  --brand: #08766a;
+  --accent: var(--brand);
+  --link: #076e85;
+  --red: #b52b41;
+  --yellow: #8d5a0d;
+  --shadow: rgb(21 48 69 / 6%);
+  --panel: var(--base);
+  --line: var(--divider);
+  --muted: var(--text-2);
+  --primary-text: #fff;
+  --release-color: #ae2871;
+  --holding-color: #506c85;
+  --completed-color: #6540a2;
+  --job-text-lightness: 28%;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0b1421;
+  --base: #142234;
+  --base-2: #1c2d42;
+  --text: #eff5fb;
+  --text-2: #b4c6d8;
+  --divider: #30465d;
+  --brand: #68dfca;
+  --link: #80dfec;
+  --red: #ff9aa5;
+  --yellow: #f6d482;
+  --shadow: rgb(0 0 0 / 24%);
+  --primary-text: #062c28;
+  --release-color: #ffb9ef;
+  --holding-color: #a3bad0;
+  --completed-color: #c4b5fd;
+  --job-text-lightness: 75%;
+  --L: 72%;
+  --C: .18;
+  color-scheme: dark;
+}
+body { background: var(--bg); font-family: var(--ff--base); line-height: var(--lh); }
+main { max-width: 1600px; padding: var(--page-padding); }
+.panel {
+  background: var(--base);
+  border-color: var(--divider);
+  border-radius: var(--bdrs--40);
+  padding: var(--s25);
+  margin-bottom: var(--s25);
+  box-shadow: var(--bxsh--10);
+}
+main > .panel > h2, main > .grid .panel > h2 { margin-bottom: var(--s15); }
+h1,h2,h3 { color: var(--text); font-weight: 650; letter-spacing: -.015em; }
+small,.muted,label,summary,th,.subtitle,#event-log,#connection { color: var(--text-2); }
+.eyebrow { color: var(--brand); font-weight: 650; letter-spacing: .12em; }
+a { color: var(--link); text-underline-offset: 3px; }
+button,input,select,textarea {
+  color: var(--text);
+  background: var(--base);
+  border-color: var(--divider);
+  border-radius: var(--bdrs--30);
+}
+button { background: var(--base-2); font-weight: 550; }
+button:hover { background: color-mix(in srgb,var(--brand) 9%,var(--base)); border-color: var(--brand); }
+button.primary { background: var(--brand); color: var(--primary-text); border-color: var(--brand); }
+button.primary:hover { background: color-mix(in srgb,var(--brand) 88%,var(--text)); }
+button.primary[aria-busy="true"] { color: var(--primary-text); }
+button.danger { color: var(--red); }
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible {
+  outline: 2px solid var(--brand); outline-offset: 2px;
+}
+input[type="checkbox"],input[type="range"] { accent-color: var(--brand); }
+textarea { background: var(--base-2); font-family: var(--ff--mono); }
+::file-selector-button { border: 1px solid var(--divider); border-radius: var(--bdrs--20); background: var(--base-2); padding: 5px 9px; margin-right: 10px; }
+.badge { background: var(--base-2); color: var(--text-2); border: 1px solid var(--divider); font-weight: 550; border-radius: var(--bdrs--99); }
+.badge.running { color: var(--brand); background: color-mix(in srgb,var(--brand) 10%,var(--base)); border-color: color-mix(in srgb,var(--brand) 35%,var(--divider)); }
+.badge.failed,.badge.blocked { color: var(--red); }
+.badge.completed { color: var(--completed-color); }
+.machine,.transporter { background: var(--base-2); border-color: var(--divider); border-radius: var(--bdrs--30); padding: var(--s20); }
+.machine.failed { border-color: var(--red); }
+.track { background: var(--divider); }
+.fill { background: var(--brand); }
+.failed .fill { background: var(--red); }
+th { background: var(--base-2); }
+th,td { border-color: var(--divider); }
+tbody tr:hover { background: color-mix(in srgb,var(--brand) 5%,var(--base)); }
+.overflow { border-radius: var(--bdrs--20); }
+#sequence-progress,#fault-plan,#scheduled {
+  max-height: min(320px, 45vh);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+#sequence-progress thead th,#fault-plan thead th,#scheduled thead th { position: sticky; top: 0; z-index: 1; }
+#sequence-progress:focus-visible,#fault-plan:focus-visible,#scheduled:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.form-row { gap: var(--s10); }
+.cards,.grid { gap: var(--s15); }
+.metrics strong,.clock { font-variant-numeric: tabular-nums; }
+details > summary { padding-block: 2px; }
+#session-loading { background: var(--bg); color: var(--text); }
+#action-feedback { background: var(--base); color: var(--text); box-shadow: var(--bxsh--30); border-radius: var(--bdrs--30); }
+#action-feedback.error,#notice.error { color: var(--red); }
+#production-history-panel { padding: var(--s10); border-color: var(--divider); }
+#production-history-panel > .legend span:nth-child(2) { color: var(--release-color)!important; }
+#production-history-panel > .legend span:nth-child(3) { color: var(--holding-color)!important; }
+#gantt { background: #102033; border-color: #30465d; border-radius: var(--bdrs--20); }
+#gantt text,#cycle-conformance text { fill: #fff; color: #fff; }
+#history-convergence,#history-diagram { border-radius: var(--bdrs--20); overflow: auto; }
+#history-diagram { background: #fff; color-scheme: light; }
+.app-header { padding: 4px 0 6px; }
+.brand-mark { width: 30px; height: 30px; flex: none; display: grid; place-items: center; color: var(--primary-text); background: var(--brand); border-radius: var(--bdrs--30); }
+.brand-mark svg { width: 20px; height: 20px; }
+.app-brand h1 { line-height: 1.35; }
+.header-tools { gap: var(--s15); }
+.app-status { gap: var(--s5); }
+.app-status .clock { line-height: 1.2; }
+.theme-control { display: flex; align-items: center; gap: var(--s5); }
+.theme-control label { margin: 0; font-size: 12px; }
+.theme-control select { padding: 5px 8px; font-size: 12px; max-width: 120px; }
+.simulation-screen { gap: var(--s5); }
+.simulation-screen > header { gap: var(--s10); }
+@media(max-width:950px) { main { padding: var(--s15); } }
+@media(max-width:600px) {
+  .app-brand { gap: var(--s5); }
+  .brand-mark { width: 26px; height: 26px; }
+  .header-tools { gap: var(--s10); }
+  .theme-control label { display: none; }
+  .panel { padding: var(--s15); }
+}

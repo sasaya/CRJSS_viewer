@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="ja" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>搬送優先順位 · オンライン統合実験</title>
+<script id="theme-bootstrap">(()=>{let preference='system';try{preference=localStorage.getItem('jobshop-theme')||'system';}catch{}if(!['light','dark','system'].includes(preference))preference='system';const dark=typeof matchMedia==='function'&&matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=preference==='system'?(dark?'dark':'light'):preference;})();</script>
+<!-- LISM_CSS_START -->
+<style id="lism-css" data-version="1.0.1">
+/* Lism CSS 1.0.1
+MIT License
+
+Copyright (c) Loos, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+@layer lism-base, lism-block, lism-trait, lism-primitive, lism-custom, lism-utility;@layer lism-base{@layer reset{*,:after,:before{box-sizing:border-box}:not(dialog){margin:0}html{-webkit-text-size-adjust:none;text-size-adjust:none;line-break:strict;overflow-wrap:anywhere;overflow-x:clip;word-break:normal}html:has(:modal[open]){overflow:clip}body{display:flow-root;min-height:100dvh;overflow:inherit}abbr[title]{text-decoration:underline;text-decoration-style:dotted}pre{max-inline-size:100%;overflow-x:auto}:is(ul,ol)[class],menu{list-style:none;padding:0}audio,canvas,iframe,img,object,svg,video{max-inline-size:100%;vertical-align:middle}img,video{block-size:auto}iframe{border:none}::file-selector-button,button,input,select,textarea{color:inherit;font:inherit;font-size:max(16px,1em);letter-spacing:inherit}fieldset{min-inline-size:0}textarea{max-inline-size:100%;resize:block}[type=checkbox],[type=radio],label[for],select,summary{cursor:pointer}::file-selector-button,[role=button],[role=option],[role=tab],[type=button],[type=reset],[type=submit],button{cursor:pointer;touch-action:manipulation}:disabled{cursor:not-allowed}[hidden=until-found]{z-index:-1}}@property --hl{syntax:"<length>";inherits:true;initial-value:.25rem}@property --sz--bleed{syntax:"<length-percentage>";initial-value:100svi;inherits:true}:root{--shc:var(--shadow);--shc--near:color-mix(in srgb,var(--shc),transparent 50%);--shsz--5:0px 0px 1px;--shsz--10:0px 1px 3px;--shsz--20:0px 2px 6px;--shsz--30:0px 4px 12px;--shsz--40:0px 8px 24px;--shsz--50:0px 16px 48px;--gutter--base:var(--s30);--flow--base:var(--s30);--flow--s:var(--s20)}.set--bxsh{--shc--near:color-mix(in srgb,var(--shc),transparent 50%)}:root:where([lang=ja]){--flow--base:var(--s35)}:root{--L:60%;--C:0.2;--fz-mol:8;--hl-unit:0.125rem;--s-unit:0.5rem;--base:#fcfcfc;--base-2:#f2f2f3;--text:#141414;--text-2:#4e5155;--divider:#dfe0e2;--link:oklch(50% 0.3 240);--brand:#0f78f0;--accent:#d94a69;--neutral:#bebfc1;--shadow:rgba(10,10,10,.08);--red:oklch(var(--L) var(--C) 20);--blue:oklch(calc(var(--L) - 4%) calc(var(--C) + 0.01) 264);--green:oklch(calc(var(--L) + 4%) calc(var(--C) - 0.02) 152);--yellow:oklch(calc(var(--L) + 12%) calc(var(--C) - 0.02) 80);--purple:oklch(calc(var(--L) - 4%) calc(var(--C) + 0.01) 288);--orange:oklch(calc(var(--L) + 6%) calc(var(--C) - 0.01) 48);--pink:oklch(calc(var(--L) + 2%) calc(var(--C) + 0.01) 352);--gray:oklch(calc(var(--L) - 4%) calc(var(--C)/10) 240);--white:#fff;--black:#000;--fz--base:1rem;--fz--5xl:calc(1em*var(--fz-mol)/(var(--fz-mol) - 6));--fz--4xl:calc(1em*var(--fz-mol)/(var(--fz-mol) - 5));--fz--3xl:calc(1em*var(--fz-mol)/(var(--fz-mol) - 4));--fz--2xl:calc(1em*var(--fz-mol)/(var(--fz-mol) - 3));--fz--xl:calc(1em*var(--fz-mol)/(var(--fz-mol) - 2));--fz--l:calc(1em*var(--fz-mol)/(var(--fz-mol) - 1));--fz--m:1em;--fz--s:calc(1em*var(--fz-mol)/(var(--fz-mol) + 1));--fz--xs:calc(1em*var(--fz-mol)/(var(--fz-mol) + 2));--fz--2xs:calc(1em*var(--fz-mol)/(var(--fz-mol) + 3));--ff--base:-apple-system,"BlinkMacSystemFont","Hiragino Sans",sans-serif;--ff--accent:Georgia,serif;--ff--mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;--fw--light:300;--fw--normal:400;--fw--bold:600;--hl--base:calc(var(--hl-unit)*3);--hl--xs:var(--hl-unit);--hl--s:calc(var(--hl-unit)*2);--hl--l:calc(var(--hl-unit)*4);--hl--xl:calc(var(--hl-unit)*5);--lh--xs:1.125;--lh--s:1.25;--lh--m:1.5;--lh--l:1.75;--lh--xl:2;--lts--base:0em;--lts--xs:calc(var(--lts--base) - 0.05em);--lts--s:calc(var(--lts--base) - 0.025em);--lts--l:calc(var(--lts--base) + 0.05em);--lts--xl:calc(var(--lts--base) + 0.1em);--o--mp:0.9;--o--p:0.8;--o--pp:0.6;--o--ppp:0.4;--bdrs--10:0.25rem;--bdrs--20:0.375rem;--bdrs--30:0.625rem;--bdrs--40:1rem;--bdrs--50:1.5rem;--bdrs--99:99rem;--ar--og:1.91/1;--sz--xs:400px;--sz--s:640px;--sz--m:880px;--sz--l:1200px;--sz--xl:1600px}.set--bxsh,:root{--bxsh--10:var(--shsz--5) var(--shc--near),var(--shsz--10) var(--shc);--bxsh--20:var(--shsz--10) var(--shc--near),var(--shsz--20) var(--shc);--bxsh--30:var(--shsz--20) var(--shc--near),var(--shsz--30) var(--shc);--bxsh--40:var(--shsz--30) var(--shc--near),var(--shsz--40) var(--shc);--bxsh--50:var(--shsz--40) var(--shc--near),var(--shsz--50) var(--shc)}.set--s,:root{--s5:calc(var(--s-unit)*0.5);--s10:var(--s-unit);--s15:calc(var(--s-unit)*1.5);--s20:calc(var(--s-unit)*2);--s25:calc(var(--s-unit)*2.5);--s30:calc(var(--s-unit)*3);--s35:calc(var(--s-unit)*4);--s40:calc(var(--s-unit)*5);--s45:calc(var(--s-unit)*6.5);--s50:calc(var(--s-unit)*8);--s60:calc(var(--s-unit)*13);--s70:calc(var(--s-unit)*21)}body{--hl:var(--hl--base);background-color:var(--base);color:var(--text);font-family:var(--ff--base);font-size:var(--fz--base);letter-spacing:var(--lts--base);tab-size:4;text-underline-offset:.125em}*{line-height:var(--lh,calc(1em + var(--hl)*2))}:is(h1,h2,h3,h4,h5,h6){font-family:var(--headings-ff,inherit);font-weight:var(--headings-fw,var(--fw--bold))}h1{font-size:var(--fz--3xl)}h2{font-size:var(--fz--2xl)}h3{font-size:var(--fz--xl)}h4{font-size:var(--fz--l)}h5,h6{font-size:var(--fz--m)}a{color:var(--link-c,var(--link));-webkit-text-decoration:var(--link-td,underline);text-decoration:var(--link-td,underline)}small{--hl:var(--hl--s);font-size:var(--fz--xs)}b,strong{font-weight:var(--fw--bold)}sub,sup{--hl:var(--hl--xs);font-size:80%}code,kbd,samp,var{font-family:var(--ff--mono);letter-spacing:normal}:where(blockquote>p)+p{margin-block-start:var(--s10)}blockquote,q{font-style:italic}blockquote{background-color:var(--base-2);padding:var(--s20)}caption,figcaption{font-size:var(--fz--s)}hr{block-size:0;border:none;border-block-start:1px solid var(--divider)}:is(ul,ol):where(:not([class])){list-style:revert;padding-inline-start:var(--list-ps,1.75em)}dt{font-weight:var(--fw--bold)}dd+dt{margin-block-start:var(--s20)}td,th{padding:var(--cells-p,.625em .875em)}::file-selector-button,button,input:where(:not([type=range])),select,textarea{background-color:var(--controls-bgc,var(--base-2));border:1px solid var(--controls-bdc,var(--divider));padding:var(--controls-p,.25em .5em)}:disabled{opacity:var(--o--pp)}:focus-visible{outline-offset:var(--focus-offset,0)}@media (any-hover:hover){.set--hov:hover{--_notHov: }.set--hov:not(:is(:hover,:focus-within)){--_isHov: }}@media (any-hover:none){.set--hov{--_isHov: }}.set--hov:is(:focus-visible,:focus-within){--_notHov: }.set--bdrsInner{--bdrs--inner:calc(var(--bdrs, 0px) - var(--p, 0px) + 1px)}.set--bleed{--bleed:max(var(--gutter,var(--gutter--base)),calc((100cqi - min(100cqi, var(--contentSize, var(--sz--m)))) / 2))}.set--plain{background:none;border:none;border-radius:0;color:inherit;font:inherit;height:auto;line-height:var(--lh,calc(1em + var(--hl)*2));margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;text-align:inherit;text-decoration:none;width:auto}:is(ul,ol).set--revert{list-style:revert;padding-inline-start:var(--list-ps,1.75em)}.set--s{--s-unit:0.5em}}@layer lism-block{}@layer lism-trait{.is--container{container-type:inline-size}.is--container>*{--sz--bleed:100cqi}.is--container.has--gutter>*{--sz--bleed:calc(100cqi + var(--gutter)*2)}.is--container .is--container>*{--sz--bleed:inherit}.is--wrapper{--contentSize:var(--sz--m,100%)}.is--wrapper>*{inline-size:100%;margin-inline:auto;max-inline-size:min(100%,var(--contentSize))}.is--boxLink{color:inherit;cursor:pointer;display:block;isolation:isolate;pointer-events:auto;position:relative;text-decoration:none}.is--boxLink :where(a:not(.is--coverLink)){position:relative;z-index:2}.is--coverLink{color:inherit;position:static;text-decoration:none}.is--coverLink:before{content:"";inset:0;position:absolute;z-index:1}.is--layer{inset:0;overflow:hidden;position:absolute}.has--transition{--duration:var(--transition-duration,0.25s);--ease:ease;--delay:0s;--transitionProps:color,background-color,border-color,box-shadow,scale,rotate,translate,transform,opacity,filter,backdrop-filter;transition:var(--duration) var(--ease) var(--delay);transition-property:var(--transitionProps)}.has--gutter{--gutter:var(--gutter--base);padding-inline:var(--gutter)}.has--snap{--snapType:both mandatory;--snapAlign:start;--snapStop:normal;scroll-snap-type:var(--snapType)}.has--snap>*{scroll-snap-align:var(--snapAlign);scroll-snap-stop:var(--snapStop)}.has--mask{--maskPos:50%;--maskSize:contain;--maskRepeat:no-repeat;-webkit-mask:var(--maskImg) var(--maskRepeat) var(--maskPos)/var(--maskSize);mask:var(--maskImg) var(--maskRepeat) var(--maskPos)/var(--maskSize)}}@layer lism-primitive{@layer layout{.l--flow{display:flow-root}.l--flow>*+*{--flow:var(--flow--base);--mbs:var(--flow);margin-block-start:var(--mbs)}.l--flow>:where(img,video,iframe){display:block}.-flow\:s>*{--flow:var(--flow--s)}.-flow\:>*{--flow:inherit}.l--flow>:where(h1,h2,h3,h4){--mbs:calc(var(--flow)*1.5 + 0.5em);margin-block-start:var(--mbs)}.is--skipFlow+*,.l--flow>:first-child{--mbs:0px}.l--flex{display:flex}.l--flex>*{min-width:0}.l--cluster{align-items:center;display:flex;flex-wrap:wrap}.l--stack{display:flex;flex-direction:column}.l--grid{display:grid}.l--grid>*{min-width:0}.l--center{display:grid;grid-template-columns:minmax(0,auto);place-content:center;place-items:center}.l--autoColumns{--cols:20rem;--autoMode:auto-fill;display:grid;grid-template-columns:repeat(var(--autoMode),minmax(min(var(--cols),100%),1fr))}.l--columns{--cols:2;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr))}.l--withSide{--sideW:auto;--mainW:max(20rem,50%);display:flex;flex-wrap:wrap}.l--withSide>.is--side{flex-basis:var(--sideW);flex-grow:1;min-width:0}.l--withSide>:not(.is--side){flex-basis:min(100%,var(--mainW));flex-grow:9999999;min-width:0}.l--switchColumns{--breakSize:var(--sz--xs);display:flex;flex-wrap:wrap}.l--switchColumns>*{flex-basis:calc((var(--breakSize) - 100%)*9999);flex-grow:1}.l--tileGrid{display:grid;grid-template:repeat(var(--rows,1),minmax(0,1fr))/repeat(var(--cols,1),minmax(0,1fr))}.l--frame{overflow:hidden}.l--frame>:where(img,video,iframe){display:block;height:100%;object-fit:cover;width:100%}}@layer atomic{.a--divider{--bdc:var(--divider);--bds:solid;--bdw:1px;border-block-start:var(--bdw) var(--bds) var(--bdc)}.a--icon{flex-shrink:0}.a--icon:where(:not([fill])){fill:currentcolor}.a--icon:where(:not([width])){height:1em;width:1em}.a--spacer{min-height:1px;min-width:1px}}}@layer lism-custom{}@layer lism-utility{.u--trim{margin-block:calc(.5em - .5lh)}.u--trimAll>:not(:empty,figure,picture,video,button,textarea,table){margin-block:calc(.5em - .5lh)}.u--cbox{--mutedKeycolor:var(--keycolor);--c:color-mix(in srgb,var(--text),var(--keycolor) var(--cbox-cPct,25%));--bgc:color-mix(in srgb,var(--base),var(--mutedKeycolor) var(--cbox-bgPct,4%));--bdc:color-mix(in srgb,var(--divider),var(--keycolor) var(--cbox-bdPct,50%));--link-c:var(--keycolor);background-color:var(--bgc);color:var(--c)}@supports (color:oklch(from red l c h)){.u--cbox{--mutedKeycolor:oklch(from var(--keycolor) l calc(c * 0.75) h)}}.u--srOnly:not(#_){border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;white-space:nowrap;width:1px}.u--clipText{-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}}@layer lism-base{.-bd,[class*=" -bd-"],[class^=-bd-]{--bds:solid;--bdw:1px;--bdc:var(--divider)}}.-bd,[class*=" -bd-"],[class^=-bd-]{border-color:var(--bdc);border-width:var(--bdw)}.-bd{border-style:var(--bds)}.-bd-x{border-inline-style:var(--bds)}.-bd-y{border-block-style:var(--bds)}.-bd-s{border-inline-start-style:var(--bds)}.-bd-e{border-inline-end-style:var(--bds)}.-bd-t{border-top-style:var(--bds)}.-bd-b{border-bottom-style:var(--bds)}.-bd-l{border-left-style:var(--bds)}.-bd-r{border-right-style:var(--bds)}.-bd-bs{border-block-start-style:var(--bds)}.-bd-be{border-block-end-style:var(--bds)}.-max-sz\:full{max-inline-size:100%}:where(.has--gutter)>.-max-sz\:full{inline-size:auto;margin-inline:calc(var(--gutter)*-1);max-inline-size:calc(100% + var(--gutter)*2)}.-max-sz\:bleed{inline-size:auto;margin-inline:calc(50% - var(--sz--bleed, 100svi)/2);max-inline-size:var(--sz--bleed,100svi)}.-f\:inherit{font:inherit}.-fz{font-size:var(--fz)}.-fz\:base{font-size:var(--fz--base)}.-fz\:5xl{font-size:var(--fz--5xl)}.-fz\:4xl{font-size:var(--fz--4xl)}.-fz\:3xl{font-size:var(--fz--3xl)}.-fz\:2xl{font-size:var(--fz--2xl)}.-fz\:xl{font-size:var(--fz--xl)}.-fz\:l{font-size:var(--fz--l)}.-fz\:m{font-size:var(--fz--m)}.-fz\:s{font-size:var(--fz--s)}.-fz\:xs{font-size:var(--fz--xs)}.-fz\:2xs{font-size:var(--fz--2xs)}.-fw\:100{font-weight:100}.-fw\:200{font-weight:200}.-fw\:300{font-weight:300}.-fw\:400{font-weight:400}.-fw\:500{font-weight:500}.-fw\:600{font-weight:600}.-fw\:700{font-weight:700}.-fw\:800{font-weight:800}.-fw\:900{font-weight:900}.-fw\:light{font-weight:var(--fw--light)}.-fw\:normal{font-weight:var(--fw--normal)}.-fw\:bold{font-weight:var(--fw--bold)}.-ff\:base{font-family:var(--ff--base)}.-ff\:accent{font-family:var(--ff--accent)}.-ff\:mono{font-family:var(--ff--mono)}.-fs\:italic{font-style:italic}.-lh,[class*="-lh:"]{line-height:var(--lh)}.-lh\:1{--lh:1}.-lh\:xs{--lh:var(--lh--xs)}.-lh\:s{--lh:var(--lh--s)}.-lh\:m{--lh:var(--lh--m)}.-lh\:l{--lh:var(--lh--l)}.-lh\:xl{--lh:var(--lh--xl)}.-hl\:0{--hl:0px}.-hl\:base{--hl:var(--hl--base)}.-hl\:xs{--hl:var(--hl--xs)}.-hl\:s{--hl:var(--hl--s)}.-hl\:l{--hl:var(--hl--l)}.-hl\:xl{--hl:var(--hl--xl)}.-lts\:base{letter-spacing:var(--lts--base)}.-lts\:xs{letter-spacing:var(--lts--xs)}.-lts\:s{letter-spacing:var(--lts--s)}.-lts\:l{letter-spacing:var(--lts--l)}.-lts\:xl{letter-spacing:var(--lts--xl)}.-ta\:center{text-align:center}.-ta\:left{text-align:left}.-ta\:right{text-align:right}.-td\:none{text-decoration:none}.-tt\:uppercase{text-transform:uppercase}.-tt\:lowercase{text-transform:lowercase}.-d{display:var(--d)}.-d\:none{display:none}.-d\:block{display:block}.-d\:flex{display:flex}.-d\:inline-flex{display:inline-flex}.-d\:grid{display:grid}.-d\:inline-grid{display:inline-grid}.-d\:inline{display:inline}.-d\:inline-block{display:inline-block}.-o\:0{opacity:0}.-o\:mp{opacity:var(--o--mp)}.-o\:p{opacity:var(--o--p)}.-o\:pp{opacity:var(--o--pp)}.-o\:ppp{opacity:var(--o--ppp)}.-v\:hidden{visibility:hidden}.-ov\:hidden{overflow:hidden}.-ov\:auto{overflow:auto}.-ov\:clip{overflow:clip}.-ov-x\:clip{overflow-x:clip}.-ov-x\:auto{overflow-x:auto}.-ov-x\:scroll{overflow-x:scroll}.-ov-y\:clip{overflow-y:clip}.-ov-y\:auto{overflow-y:auto}.-ov-y\:scroll{overflow-y:scroll}.-ar{aspect-ratio:var(--ar)}.-ar\:21\/9{aspect-ratio:21/9}.-ar\:16\/9{aspect-ratio:16/9}.-ar\:3\/2{aspect-ratio:3/2}.-ar\:1\/1{aspect-ratio:1/1}.-ar\:og{aspect-ratio:var(--ar--og)}.-w{width:var(--w)}.-w\:100\%{width:100%}.-w\:fit{width:fit-content}.-h{height:var(--h)}.-h\:100\%{height:100%}.-h\:fit{height:fit-content}.-min-w{min-width:var(--min-w)}.-min-w\:100\%{min-width:100%}.-max-w{max-width:var(--max-w)}.-max-w\:100\%{max-width:100%}.-min-h{min-height:var(--min-h)}.-min-h\:100\%{min-height:100%}.-max-h{max-height:var(--max-h)}.-max-h\:100\%{max-height:100%}.-contentSize\:s{--contentSize:var(--sz--s)}.-contentSize\:m{--contentSize:var(--sz--m)}.-contentSize\:l{--contentSize:var(--sz--l)}.-contentSize\:xl{--contentSize:var(--sz--xl)}.-sz{inline-size:var(--sz)}.-min-sz{min-inline-size:var(--min-sz)}.-max-sz{max-inline-size:var(--max-sz)}.-max-sz\:xs{max-inline-size:var(--sz--xs)}.-max-sz\:s{max-inline-size:var(--sz--s)}.-max-sz\:m{max-inline-size:var(--sz--m)}.-max-sz\:l{max-inline-size:var(--sz--l)}.-max-sz\:xl{max-inline-size:var(--sz--xl)}.-bgr\:no-repeat{background-repeat:no-repeat}.-bgp\:center{background-position:50%}.-bgsz\:cover{background-size:cover}.-bgsz\:contain{background-size:contain}.-bgc,[class*="-bgc:"]{background-color:var(--bgc)}.-bgc\:base{--bgc:var(--base)}.-bgc\:base-2{--bgc:var(--base-2)}.-bgc\:text{--bgc:var(--text)}.-bgc\:brand{--bgc:var(--brand)}.-bgc\:accent{--bgc:var(--accent)}.-bgc\:keycolor{--bgc:var(--keycolor)}.-bgc\:transparent{--bgc:transparent}.-bgc\:current{--bgc:currentColor}.-bgc\:inherit{background-color:inherit}.-c,[class*="-c:"]{color:var(--c)}.-c\:base{--c:var(--base)}.-c\:text{--c:var(--text)}.-c\:text-2{--c:var(--text-2)}.-c\:brand{--c:var(--brand)}.-c\:accent{--c:var(--accent)}.-c\:keycolor{--c:var(--keycolor)}.-c\:inherit{color:inherit}.-bd\:none{border:none}.-bds\:dashed{--bds:dashed}.-bds\:dotted{--bds:dotted}.-bds\:double{--bds:double}.-bdc\:brand{--bdc:var(--brand)}.-bdc\:accent{--bdc:var(--accent)}.-bdc\:divider{--bdc:var(--divider)}.-bdc\:keycolor{--bdc:var(--keycolor)}.-bdc\:inherit{--bdc:inherit}.-bdc\:transparent{--bdc:transparent}.-bdc\:current{--bdc:currentColor}.-bdrs,[class*="-bdrs:"]{border-radius:var(--bdrs)}.-bdrs\:0{--bdrs:0}.-bdrs\:10{--bdrs:var(--bdrs--10)}.-bdrs\:20{--bdrs:var(--bdrs--20)}.-bdrs\:30{--bdrs:var(--bdrs--30)}.-bdrs\:40{--bdrs:var(--bdrs--40)}.-bdrs\:50{--bdrs:var(--bdrs--50)}.-bdrs\:99{--bdrs:var(--bdrs--99)}.-bdrs\:inner{--bdrs:var(--bdrs--inner)}.-bxsh{box-shadow:var(--bxsh)}.-bxsh\:0{box-shadow:none}.-bxsh\:10{box-shadow:var(--bxsh--10)}.-bxsh\:20{box-shadow:var(--bxsh--20)}.-bxsh\:30{box-shadow:var(--bxsh--30)}.-bxsh\:40{box-shadow:var(--bxsh--40)}.-bxsh\:50{box-shadow:var(--bxsh--50)}.-pos{position:var(--pos)}.-pos\:static{position:static}.-pos\:fixed{position:fixed}.-pos\:sticky{position:sticky}.-pos\:relative{position:relative}.-pos\:absolute{position:absolute}.-z\:0{z-index:0}.-z\:1{z-index:1}.-z\:99{z-index:99}.-z\:-1{z-index:-1}.-t\:0{top:0}.-t\:50\%{top:50%}.-t\:100\%{top:100%}.-l\:0{left:0}.-l\:50\%{left:50%}.-l\:100\%{left:100%}.-r\:0{right:0}.-r\:50\%{right:50%}.-r\:100\%{right:100%}.-b\:0{bottom:0}.-b\:50\%{bottom:50%}.-b\:100\%{bottom:100%}.-i\:0{inset:0}.-p,[class*="-p:"]{padding:var(--p)}.-p\:0{--p:0}.-p\:5{--p:var(--s5)}.-p\:10{--p:var(--s10)}.-p\:15{--p:var(--s15)}.-p\:20{--p:var(--s20)}.-p\:25{--p:var(--s25)}.-p\:30{--p:var(--s30)}.-p\:35{--p:var(--s35)}.-p\:40{--p:var(--s40)}.-p\:45{--p:var(--s45)}.-p\:50{--p:var(--s50)}.-p\:60{--p:var(--s60)}.-p\:70{--p:var(--s70)}.-px{padding-inline:var(--px)}.-px\:0{padding-inline:0}.-px\:5{padding-inline:var(--s5)}.-px\:10{padding-inline:var(--s10)}.-px\:15{padding-inline:var(--s15)}.-px\:20{padding-inline:var(--s20)}.-px\:25{padding-inline:var(--s25)}.-px\:30{padding-inline:var(--s30)}.-px\:35{padding-inline:var(--s35)}.-px\:40{padding-inline:var(--s40)}.-px\:45{padding-inline:var(--s45)}.-px\:50{padding-inline:var(--s50)}.-px\:60{padding-inline:var(--s60)}.-px\:70{padding-inline:var(--s70)}.-py{padding-block:var(--py)}.-py\:0{padding-block:0}.-py\:5{padding-block:var(--s5)}.-py\:10{padding-block:var(--s10)}.-py\:15{padding-block:var(--s15)}.-py\:20{padding-block:var(--s20)}.-py\:25{padding-block:var(--s25)}.-py\:30{padding-block:var(--s30)}.-py\:35{padding-block:var(--s35)}.-py\:40{padding-block:var(--s40)}.-py\:45{padding-block:var(--s45)}.-py\:50{padding-block:var(--s50)}.-py\:60{padding-block:var(--s60)}.-py\:70{padding-block:var(--s70)}.-ps{padding-inline-start:var(--ps)}.-ps\:5{padding-inline-start:var(--s5)}.-ps\:10{padding-inline-start:var(--s10)}.-ps\:15{padding-inline-start:var(--s15)}.-ps\:20{padding-inline-start:var(--s20)}.-ps\:25{padding-inline-start:var(--s25)}.-ps\:30{padding-inline-start:var(--s30)}.-ps\:35{padding-inline-start:var(--s35)}.-ps\:40{padding-inline-start:var(--s40)}.-ps\:45{padding-inline-start:var(--s45)}.-ps\:50{padding-inline-start:var(--s50)}.-ps\:60{padding-inline-start:var(--s60)}.-ps\:70{padding-inline-start:var(--s70)}.-pe{padding-inline-end:var(--pe)}.-pe\:5{padding-inline-end:var(--s5)}.-pe\:10{padding-inline-end:var(--s10)}.-pe\:15{padding-inline-end:var(--s15)}.-pe\:20{padding-inline-end:var(--s20)}.-pe\:25{padding-inline-end:var(--s25)}.-pe\:30{padding-inline-end:var(--s30)}.-pe\:35{padding-inline-end:var(--s35)}.-pe\:40{padding-inline-end:var(--s40)}.-pe\:45{padding-inline-end:var(--s45)}.-pe\:50{padding-inline-end:var(--s50)}.-pe\:60{padding-inline-end:var(--s60)}.-pe\:70{padding-inline-end:var(--s70)}.-pbs{padding-block-start:var(--pbs)}.-pbs\:5{padding-block-start:var(--s5)}.-pbs\:10{padding-block-start:var(--s10)}.-pbs\:15{padding-block-start:var(--s15)}.-pbs\:20{padding-block-start:var(--s20)}.-pbs\:25{padding-block-start:var(--s25)}.-pbs\:30{padding-block-start:var(--s30)}.-pbs\:35{padding-block-start:var(--s35)}.-pbs\:40{padding-block-start:var(--s40)}.-pbs\:45{padding-block-start:var(--s45)}.-pbs\:50{padding-block-start:var(--s50)}.-pbs\:60{padding-block-start:var(--s60)}.-pbs\:70{padding-block-start:var(--s70)}.-pbe{padding-block-end:var(--pbe)}.-pbe\:5{padding-block-end:var(--s5)}.-pbe\:10{padding-block-end:var(--s10)}.-pbe\:15{padding-block-end:var(--s15)}.-pbe\:20{padding-block-end:var(--s20)}.-pbe\:25{padding-block-end:var(--s25)}.-pbe\:30{padding-block-end:var(--s30)}.-pbe\:35{padding-block-end:var(--s35)}.-pbe\:40{padding-block-end:var(--s40)}.-pbe\:45{padding-block-end:var(--s45)}.-pbe\:50{padding-block-end:var(--s50)}.-pbe\:60{padding-block-end:var(--s60)}.-pbe\:70{padding-block-end:var(--s70)}.-pl{padding-left:var(--pl)}.-pl\:5{padding-left:var(--s5)}.-pl\:10{padding-left:var(--s10)}.-pl\:15{padding-left:var(--s15)}.-pl\:20{padding-left:var(--s20)}.-pl\:25{padding-left:var(--s25)}.-pl\:30{padding-left:var(--s30)}.-pl\:35{padding-left:var(--s35)}.-pl\:40{padding-left:var(--s40)}.-pl\:45{padding-left:var(--s45)}.-pl\:50{padding-left:var(--s50)}.-pl\:60{padding-left:var(--s60)}.-pl\:70{padding-left:var(--s70)}.-pr{padding-right:var(--pr)}.-pr\:5{padding-right:var(--s5)}.-pr\:10{padding-right:var(--s10)}.-pr\:15{padding-right:var(--s15)}.-pr\:20{padding-right:var(--s20)}.-pr\:25{padding-right:var(--s25)}.-pr\:30{padding-right:var(--s30)}.-pr\:35{padding-right:var(--s35)}.-pr\:40{padding-right:var(--s40)}.-pr\:45{padding-right:var(--s45)}.-pr\:50{padding-right:var(--s50)}.-pr\:60{padding-right:var(--s60)}.-pr\:70{padding-right:var(--s70)}.-pt{padding-top:var(--pt)}.-pt\:5{padding-top:var(--s5)}.-pt\:10{padding-top:var(--s10)}.-pt\:15{padding-top:var(--s15)}.-pt\:20{padding-top:var(--s20)}.-pt\:25{padding-top:var(--s25)}.-pt\:30{padding-top:var(--s30)}.-pt\:35{padding-top:var(--s35)}.-pt\:40{padding-top:var(--s40)}.-pt\:45{padding-top:var(--s45)}.-pt\:50{padding-top:var(--s50)}.-pt\:60{padding-top:var(--s60)}.-pt\:70{padding-top:var(--s70)}.-pb{padding-bottom:var(--pb)}.-pb\:5{padding-bottom:var(--s5)}.-pb\:10{padding-bottom:var(--s10)}.-pb\:15{padding-bottom:var(--s15)}.-pb\:20{padding-bottom:var(--s20)}.-pb\:25{padding-bottom:var(--s25)}.-pb\:30{padding-bottom:var(--s30)}.-pb\:35{padding-bottom:var(--s35)}.-pb\:40{padding-bottom:var(--s40)}.-pb\:45{padding-bottom:var(--s45)}.-pb\:50{padding-bottom:var(--s50)}.-pb\:60{padding-bottom:var(--s60)}.-pb\:70{padding-bottom:var(--s70)}.-m,[class*="-m:"]{margin:var(--m)}.-m\:0{--m:0}.-m\:5{--m:var(--s5)}.-m\:10{--m:var(--s10)}.-m\:15{--m:var(--s15)}.-m\:20{--m:var(--s20)}.-m\:25{--m:var(--s25)}.-m\:30{--m:var(--s30)}.-m\:35{--m:var(--s35)}.-m\:40{--m:var(--s40)}.-m\:45{--m:var(--s45)}.-m\:50{--m:var(--s50)}.-m\:60{--m:var(--s60)}.-m\:70{--m:var(--s70)}.-m\:auto{--m:auto}.-mx{margin-inline:var(--mx)}.-mx\:0{margin-inline:0}.-mx\:5{margin-inline:var(--s5)}.-mx\:10{margin-inline:var(--s10)}.-mx\:15{margin-inline:var(--s15)}.-mx\:20{margin-inline:var(--s20)}.-mx\:25{margin-inline:var(--s25)}.-mx\:30{margin-inline:var(--s30)}.-mx\:35{margin-inline:var(--s35)}.-mx\:40{margin-inline:var(--s40)}.-mx\:45{margin-inline:var(--s45)}.-mx\:50{margin-inline:var(--s50)}.-mx\:60{margin-inline:var(--s60)}.-mx\:70{margin-inline:var(--s70)}.-mx\:auto{margin-inline:auto}.-my{margin-block:var(--my)}.-my\:0{margin-block:0}.-my\:5{margin-block:var(--s5)}.-my\:10{margin-block:var(--s10)}.-my\:15{margin-block:var(--s15)}.-my\:20{margin-block:var(--s20)}.-my\:25{margin-block:var(--s25)}.-my\:30{margin-block:var(--s30)}.-my\:35{margin-block:var(--s35)}.-my\:40{margin-block:var(--s40)}.-my\:45{margin-block:var(--s45)}.-my\:50{margin-block:var(--s50)}.-my\:60{margin-block:var(--s60)}.-my\:70{margin-block:var(--s70)}.-my\:auto{margin-block:auto}.-ms{margin-inline-start:var(--ms)}.-ms\:5{margin-inline-start:var(--s5)}.-ms\:10{margin-inline-start:var(--s10)}.-ms\:15{margin-inline-start:var(--s15)}.-ms\:20{margin-inline-start:var(--s20)}.-ms\:25{margin-inline-start:var(--s25)}.-ms\:30{margin-inline-start:var(--s30)}.-ms\:35{margin-inline-start:var(--s35)}.-ms\:40{margin-inline-start:var(--s40)}.-ms\:45{margin-inline-start:var(--s45)}.-ms\:50{margin-inline-start:var(--s50)}.-ms\:60{margin-inline-start:var(--s60)}.-ms\:70{margin-inline-start:var(--s70)}.-ms\:auto{margin-inline-start:auto}.-me{margin-inline-end:var(--me)}.-me\:5{margin-inline-end:var(--s5)}.-me\:10{margin-inline-end:var(--s10)}.-me\:15{margin-inline-end:var(--s15)}.-me\:20{margin-inline-end:var(--s20)}.-me\:25{margin-inline-end:var(--s25)}.-me\:30{margin-inline-end:var(--s30)}.-me\:35{margin-inline-end:var(--s35)}.-me\:40{margin-inline-end:var(--s40)}.-me\:45{margin-inline-end:var(--s45)}.-me\:50{margin-inline-end:var(--s50)}.-me\:60{margin-inline-end:var(--s60)}.-me\:70{margin-inline-end:var(--s70)}.-me\:auto{margin-inline-end:auto}.-mbs{margin-block-start:var(--mbs)}.-mbs\:0{margin-block-start:0}.-mbs\:5{margin-block-start:var(--s5)}.-mbs\:10{margin-block-start:var(--s10)}.-mbs\:15{margin-block-start:var(--s15)}.-mbs\:20{margin-block-start:var(--s20)}.-mbs\:25{margin-block-start:var(--s25)}.-mbs\:30{margin-block-start:var(--s30)}.-mbs\:35{margin-block-start:var(--s35)}.-mbs\:40{margin-block-start:var(--s40)}.-mbs\:45{margin-block-start:var(--s45)}.-mbs\:50{margin-block-start:var(--s50)}.-mbs\:60{margin-block-start:var(--s60)}.-mbs\:70{margin-block-start:var(--s70)}.-mbs\:auto{margin-block-start:auto}.-mbe{margin-block-end:var(--mbe)}.-mbe\:5{margin-block-end:var(--s5)}.-mbe\:10{margin-block-end:var(--s10)}.-mbe\:15{margin-block-end:var(--s15)}.-mbe\:20{margin-block-end:var(--s20)}.-mbe\:25{margin-block-end:var(--s25)}.-mbe\:30{margin-block-end:var(--s30)}.-mbe\:35{margin-block-end:var(--s35)}.-mbe\:40{margin-block-end:var(--s40)}.-mbe\:45{margin-block-end:var(--s45)}.-mbe\:50{margin-block-end:var(--s50)}.-mbe\:60{margin-block-end:var(--s60)}.-mbe\:70{margin-block-end:var(--s70)}.-mbe\:auto{margin-block-end:auto}.-ml{margin-left:var(--ml)}.-ml\:5{margin-left:var(--s5)}.-ml\:10{margin-left:var(--s10)}.-ml\:15{margin-left:var(--s15)}.-ml\:20{margin-left:var(--s20)}.-ml\:25{margin-left:var(--s25)}.-ml\:30{margin-left:var(--s30)}.-ml\:35{margin-left:var(--s35)}.-ml\:40{margin-left:var(--s40)}.-ml\:45{margin-left:var(--s45)}.-ml\:50{margin-left:var(--s50)}.-ml\:60{margin-left:var(--s60)}.-ml\:70{margin-left:var(--s70)}.-mr{margin-right:var(--mr)}.-mr\:5{margin-right:var(--s5)}.-mr\:10{margin-right:var(--s10)}.-mr\:15{margin-right:var(--s15)}.-mr\:20{margin-right:var(--s20)}.-mr\:25{margin-right:var(--s25)}.-mr\:30{margin-right:var(--s30)}.-mr\:35{margin-right:var(--s35)}.-mr\:40{margin-right:var(--s40)}.-mr\:45{margin-right:var(--s45)}.-mr\:50{margin-right:var(--s50)}.-mr\:60{margin-right:var(--s60)}.-mr\:70{margin-right:var(--s70)}.-mt{margin-top:var(--mt)}.-mt\:5{margin-top:var(--s5)}.-mt\:10{margin-top:var(--s10)}.-mt\:15{margin-top:var(--s15)}.-mt\:20{margin-top:var(--s20)}.-mt\:25{margin-top:var(--s25)}.-mt\:30{margin-top:var(--s30)}.-mt\:35{margin-top:var(--s35)}.-mt\:40{margin-top:var(--s40)}.-mt\:45{margin-top:var(--s45)}.-mt\:50{margin-top:var(--s50)}.-mt\:60{margin-top:var(--s60)}.-mt\:70{margin-top:var(--s70)}.-mb{margin-bottom:var(--mb)}.-mb\:5{margin-bottom:var(--s5)}.-mb\:10{margin-bottom:var(--s10)}.-mb\:15{margin-bottom:var(--s15)}.-mb\:20{margin-bottom:var(--s20)}.-mb\:25{margin-bottom:var(--s25)}.-mb\:30{margin-bottom:var(--s30)}.-mb\:35{margin-bottom:var(--s35)}.-mb\:40{margin-bottom:var(--s40)}.-mb\:45{margin-bottom:var(--s45)}.-mb\:50{margin-bottom:var(--s50)}.-mb\:60{margin-bottom:var(--s60)}.-mb\:70{margin-bottom:var(--s70)}.-g{gap:var(--g)}.-g\:0{gap:0}.-g\:5{gap:var(--s5)}.-g\:10{gap:var(--s10)}.-g\:15{gap:var(--s15)}.-g\:20{gap:var(--s20)}.-g\:25{gap:var(--s25)}.-g\:30{gap:var(--s30)}.-g\:35{gap:var(--s35)}.-g\:40{gap:var(--s40)}.-g\:45{gap:var(--s45)}.-g\:50{gap:var(--s50)}.-g\:60{gap:var(--s60)}.-g\:70{gap:var(--s70)}.-g\:inherit{gap:inherit}.-cg{column-gap:var(--cg)}.-cg\:5{column-gap:var(--s5)}.-cg\:10{column-gap:var(--s10)}.-cg\:15{column-gap:var(--s15)}.-cg\:20{column-gap:var(--s20)}.-cg\:25{column-gap:var(--s25)}.-cg\:30{column-gap:var(--s30)}.-cg\:35{column-gap:var(--s35)}.-cg\:40{column-gap:var(--s40)}.-cg\:45{column-gap:var(--s45)}.-cg\:50{column-gap:var(--s50)}.-cg\:60{column-gap:var(--s60)}.-cg\:70{column-gap:var(--s70)}.-rg{row-gap:var(--rg)}.-rg\:5{row-gap:var(--s5)}.-rg\:10{row-gap:var(--s10)}.-rg\:15{row-gap:var(--s15)}.-rg\:20{row-gap:var(--s20)}.-rg\:25{row-gap:var(--s25)}.-rg\:30{row-gap:var(--s30)}.-rg\:35{row-gap:var(--s35)}.-rg\:40{row-gap:var(--s40)}.-rg\:45{row-gap:var(--s45)}.-rg\:50{row-gap:var(--s50)}.-rg\:60{row-gap:var(--s60)}.-rg\:70{row-gap:var(--s70)}.-fxw{flex-wrap:var(--fxw)}.-fxw\:wrap{flex-wrap:wrap}.-fxd{flex-direction:var(--fxd)}.-fxd\:column{flex-direction:column}.-fxd\:column-reverse{flex-direction:column-reverse}.-fxd\:row-reverse{flex-direction:row-reverse}.-fx{flex:var(--fx)}.-fx\:1{flex:1}.-fxg\:1{flex-grow:1}.-fxsh\:0{flex-shrink:0}.-fxb{flex-basis:var(--fxb)}.-gt{grid-template:var(--gt)}.-gta{grid-template-areas:var(--gta)}.-gtc{grid-template-columns:var(--gtc)}.-gtc\:subgrid{grid-template-columns:subgrid}.-gtr{grid-template-rows:var(--gtr)}.-gtr\:subgrid{grid-template-rows:subgrid}.-gaf{grid-auto-flow:var(--gaf)}.-gaf\:row{grid-auto-flow:row}.-gaf\:column{grid-auto-flow:column}.-ga{grid-area:var(--ga)}.-ga\:1\/1{grid-area:1/1}.-gc{grid-column:var(--gc)}.-gc\:1\/-1{grid-column:1/-1}.-gr{grid-row:var(--gr)}.-gr\:1\/-1{grid-row:1/-1}.-ai{align-items:var(--ai)}.-ai\:start{align-items:start}.-ai\:center{align-items:center}.-ai\:end{align-items:end}.-ai\:stretch{align-items:stretch}.-ai\:flex-start{align-items:flex-start}.-ai\:flex-end{align-items:flex-end}.-ac{align-content:var(--ac)}.-ac\:start{align-content:start}.-ac\:center{align-content:center}.-ac\:end{align-content:end}.-ac\:flex-start{align-content:flex-start}.-ac\:flex-end{align-content:flex-end}.-ac\:between{align-content:space-between}.-ji{justify-items:var(--ji)}.-ji\:start{justify-items:start}.-ji\:center{justify-items:center}.-ji\:end{justify-items:end}.-ji\:stretch{justify-items:stretch}.-ji\:flex-start{justify-items:flex-start}.-ji\:flex-end{justify-items:flex-end}.-jc{justify-content:var(--jc)}.-jc\:start{justify-content:start}.-jc\:center{justify-content:center}.-jc\:end{justify-content:end}.-jc\:flex-start{justify-content:flex-start}.-jc\:flex-end{justify-content:flex-end}.-jc\:between{justify-content:space-between}.-pi\:start{place-items:start}.-pi\:center{place-items:center}.-pi\:end{place-items:end}.-pc\:start{place-content:start}.-pc\:center{place-content:center}.-pc\:end{place-content:end}.-aslf\:start{align-self:start}.-aslf\:center{align-self:center}.-aslf\:end{align-self:end}.-aslf\:stretch{align-self:stretch}.-jslf\:start{justify-self:start}.-jslf\:center{justify-self:center}.-jslf\:end{justify-self:end}.-jslf\:stretch{justify-self:stretch}.-pslf\:start{place-self:start}.-pslf\:center{place-self:center}.-pslf\:end{place-self:end}.-order{order:var(--order)}.-order\:0{order:0}.-order\:1{order:1}.-order\:-1{order:-1}.-ovw\:anywhere{overflow-wrap:anywhere}.-whs\:nowrap{white-space:nowrap}.-float\:left{float:left}.-float\:right{float:right}.-clear\:both{clear:both}.-iso\:isolate{isolation:isolate}.-wm{writing-mode:var(--wm)}.-wm\:vertical-rl{writing-mode:vertical-rl}@container (min-width: 480px){.-fz_sm{font-size:var(--fz_sm)}.-hl_sm{--hl:var(--hl_sm)!important}.-d_sm{display:var(--d_sm)}.-ar_sm{aspect-ratio:var(--ar_sm)}.-w_sm{width:var(--w_sm)}.-h_sm{height:var(--h_sm)}.-min-w_sm{min-width:var(--min-w_sm)}.-max-w_sm{max-width:var(--max-w_sm)}.-min-h_sm{min-height:var(--min-h_sm)}.-max-h_sm{max-height:var(--max-h_sm)}.-sz_sm{inline-size:var(--sz_sm)}.-min-sz_sm{min-inline-size:var(--min-sz_sm)}.-max-sz_sm{max-inline-size:var(--max-sz_sm)}.-bdw_sm{--bdw:var(--bdw_sm)!important}.-bdrs_sm{border-radius:var(--bdrs);--bdrs:var(--bdrs_sm)!important}.-bxsh_sm{box-shadow:var(--bxsh_sm)}.-pos_sm{position:var(--pos_sm)}.-p_sm{padding:var(--p);--p:var(--p_sm)!important}.-px_sm{padding-inline:var(--px_sm)}.-py_sm{padding-block:var(--py_sm)}.-ps_sm{padding-inline-start:var(--ps_sm)}.-pe_sm{padding-inline-end:var(--pe_sm)}.-pbs_sm{padding-block-start:var(--pbs_sm)}.-pbe_sm{padding-block-end:var(--pbe_sm)}.-pl_sm{padding-left:var(--pl_sm)}.-pr_sm{padding-right:var(--pr_sm)}.-pt_sm{padding-top:var(--pt_sm)}.-pb_sm{padding-bottom:var(--pb_sm)}.-m_sm{margin:var(--m);--m:var(--m_sm)!important}.-mx_sm{margin-inline:var(--mx_sm)}.-my_sm{margin-block:var(--my_sm)}.-ms_sm{margin-inline-start:var(--ms_sm)}.-me_sm{margin-inline-end:var(--me_sm)}.-mbs_sm{margin-block-start:var(--mbs_sm)}.-mbe_sm{margin-block-end:var(--mbe_sm)}.-ml_sm{margin-left:var(--ml_sm)}.-mr_sm{margin-right:var(--mr_sm)}.-mt_sm{margin-top:var(--mt_sm)}.-mb_sm{margin-bottom:var(--mb_sm)}.-g_sm{gap:var(--g_sm)}.-cg_sm{column-gap:var(--cg_sm)}.-rg_sm{row-gap:var(--rg_sm)}.-cols_sm{--cols:var(--cols_sm)!important}.-rows_sm{--rows:var(--rows_sm)!important}.-fxw_sm{flex-wrap:var(--fxw_sm)}.-fxd_sm{flex-direction:var(--fxd_sm)}.-fx_sm{flex:var(--fx_sm)}.-fxb_sm{flex-basis:var(--fxb_sm)}.-gt_sm{grid-template:var(--gt_sm)}.-gta_sm{grid-template-areas:var(--gta_sm)}.-gtc_sm{grid-template-columns:var(--gtc_sm)}.-gtr_sm{grid-template-rows:var(--gtr_sm)}.-gaf_sm{grid-auto-flow:var(--gaf_sm)}.-ga_sm{grid-area:var(--ga_sm)}.-gc_sm{grid-column:var(--gc_sm)}.-gr_sm{grid-row:var(--gr_sm)}.-ai_sm{align-items:var(--ai_sm)}.-ac_sm{align-content:var(--ac_sm)}.-ji_sm{justify-items:var(--ji_sm)}.-jc_sm{justify-content:var(--jc_sm)}.-order_sm{order:var(--order_sm)}.-wm_sm{writing-mode:var(--wm_sm)}}@container (min-width: 800px){.-fz_md{font-size:var(--fz_md)}.-hl_md{--hl:var(--hl_md)!important}.-d_md{display:var(--d_md)}.-ar_md{aspect-ratio:var(--ar_md)}.-w_md{width:var(--w_md)}.-h_md{height:var(--h_md)}.-min-w_md{min-width:var(--min-w_md)}.-max-w_md{max-width:var(--max-w_md)}.-min-h_md{min-height:var(--min-h_md)}.-max-h_md{max-height:var(--max-h_md)}.-sz_md{inline-size:var(--sz_md)}.-min-sz_md{min-inline-size:var(--min-sz_md)}.-max-sz_md{max-inline-size:var(--max-sz_md)}.-bdw_md{--bdw:var(--bdw_md)!important}.-bdrs_md{border-radius:var(--bdrs);--bdrs:var(--bdrs_md)!important}.-bxsh_md{box-shadow:var(--bxsh_md)}.-pos_md{position:var(--pos_md)}.-p_md{padding:var(--p);--p:var(--p_md)!important}.-px_md{padding-inline:var(--px_md)}.-py_md{padding-block:var(--py_md)}.-ps_md{padding-inline-start:var(--ps_md)}.-pe_md{padding-inline-end:var(--pe_md)}.-pbs_md{padding-block-start:var(--pbs_md)}.-pbe_md{padding-block-end:var(--pbe_md)}.-pl_md{padding-left:var(--pl_md)}.-pr_md{padding-right:var(--pr_md)}.-pt_md{padding-top:var(--pt_md)}.-pb_md{padding-bottom:var(--pb_md)}.-m_md{margin:var(--m);--m:var(--m_md)!important}.-mx_md{margin-inline:var(--mx_md)}.-my_md{margin-block:var(--my_md)}.-ms_md{margin-inline-start:var(--ms_md)}.-me_md{margin-inline-end:var(--me_md)}.-mbs_md{margin-block-start:var(--mbs_md)}.-mbe_md{margin-block-end:var(--mbe_md)}.-ml_md{margin-left:var(--ml_md)}.-mr_md{margin-right:var(--mr_md)}.-mt_md{margin-top:var(--mt_md)}.-mb_md{margin-bottom:var(--mb_md)}.-g_md{gap:var(--g_md)}.-cg_md{column-gap:var(--cg_md)}.-rg_md{row-gap:var(--rg_md)}.-cols_md{--cols:var(--cols_md)!important}.-rows_md{--rows:var(--rows_md)!important}.-fxw_md{flex-wrap:var(--fxw_md)}.-fxd_md{flex-direction:var(--fxd_md)}.-fx_md{flex:var(--fx_md)}.-fxb_md{flex-basis:var(--fxb_md)}.-gt_md{grid-template:var(--gt_md)}.-gta_md{grid-template-areas:var(--gta_md)}.-gtc_md{grid-template-columns:var(--gtc_md)}.-gtr_md{grid-template-rows:var(--gtr_md)}.-gaf_md{grid-auto-flow:var(--gaf_md)}.-ga_md{grid-area:var(--ga_md)}.-gc_md{grid-column:var(--gc_md)}.-gr_md{grid-row:var(--gr_md)}.-ai_md{align-items:var(--ai_md)}.-ac_md{align-content:var(--ac_md)}.-ji_md{justify-items:var(--ji_md)}.-jc_md{justify-content:var(--jc_md)}.-order_md{order:var(--order_md)}.-wm_md{writing-mode:var(--wm_md)}}@container (min-width: 1120px){.-fz_lg{font-size:var(--fz_lg)}.-hl_lg{--hl:var(--hl_lg)!important}.-d_lg{display:var(--d_lg)}.-ar_lg{aspect-ratio:var(--ar_lg)}.-w_lg{width:var(--w_lg)}.-h_lg{height:var(--h_lg)}.-min-w_lg{min-width:var(--min-w_lg)}.-max-w_lg{max-width:var(--max-w_lg)}.-min-h_lg{min-height:var(--min-h_lg)}.-max-h_lg{max-height:var(--max-h_lg)}.-sz_lg{inline-size:var(--sz_lg)}.-min-sz_lg{min-inline-size:var(--min-sz_lg)}.-max-sz_lg{max-inline-size:var(--max-sz_lg)}.-bdw_lg{--bdw:var(--bdw_lg)!important}.-bdrs_lg{border-radius:var(--bdrs);--bdrs:var(--bdrs_lg)!important}.-bxsh_lg{box-shadow:var(--bxsh_lg)}.-pos_lg{position:var(--pos_lg)}.-p_lg{padding:var(--p);--p:var(--p_lg)!important}.-px_lg{padding-inline:var(--px_lg)}.-py_lg{padding-block:var(--py_lg)}.-ps_lg{padding-inline-start:var(--ps_lg)}.-pe_lg{padding-inline-end:var(--pe_lg)}.-pbs_lg{padding-block-start:var(--pbs_lg)}.-pbe_lg{padding-block-end:var(--pbe_lg)}.-pl_lg{padding-left:var(--pl_lg)}.-pr_lg{padding-right:var(--pr_lg)}.-pt_lg{padding-top:var(--pt_lg)}.-pb_lg{padding-bottom:var(--pb_lg)}.-m_lg{margin:var(--m);--m:var(--m_lg)!important}.-mx_lg{margin-inline:var(--mx_lg)}.-my_lg{margin-block:var(--my_lg)}.-ms_lg{margin-inline-start:var(--ms_lg)}.-me_lg{margin-inline-end:var(--me_lg)}.-mbs_lg{margin-block-start:var(--mbs_lg)}.-mbe_lg{margin-block-end:var(--mbe_lg)}.-ml_lg{margin-left:var(--ml_lg)}.-mr_lg{margin-right:var(--mr_lg)}.-mt_lg{margin-top:var(--mt_lg)}.-mb_lg{margin-bottom:var(--mb_lg)}.-g_lg{gap:var(--g_lg)}.-cg_lg{column-gap:var(--cg_lg)}.-rg_lg{row-gap:var(--rg_lg)}.-cols_lg{--cols:var(--cols_lg)!important}.-rows_lg{--rows:var(--rows_lg)!important}.-fxw_lg{flex-wrap:var(--fxw_lg)}.-fxd_lg{flex-direction:var(--fxd_lg)}.-fx_lg{flex:var(--fx_lg)}.-fxb_lg{flex-basis:var(--fxb_lg)}.-gt_lg{grid-template:var(--gt_lg)}.-gta_lg{grid-template-areas:var(--gta_lg)}.-gtc_lg{grid-template-columns:var(--gtc_lg)}.-gtr_lg{grid-template-rows:var(--gtr_lg)}.-gaf_lg{grid-auto-flow:var(--gaf_lg)}.-ga_lg{grid-area:var(--ga_lg)}.-gc_lg{grid-column:var(--gc_lg)}.-gr_lg{grid-row:var(--gr_lg)}.-ai_lg{align-items:var(--ai_lg)}.-ac_lg{align-content:var(--ac_lg)}.-ji_lg{justify-items:var(--ji_lg)}.-jc_lg{justify-content:var(--jc_lg)}.-order_lg{order:var(--order_lg)}.-wm_lg{writing-mode:var(--wm_lg)}}@media (any-hover:hover){.-hov\:-c:hover{color:var(--hov-c,var(--link))}.-hov\:-bdc:hover{border-color:var(--hov-bdc,currentColor)}.-hov\:-bgc:hover{background-color:var(--hov-bgc,var(--hov-bgc--default,color-mix(in srgb,var(--bgc,var(--base)),var(--neutral) 20%)))}.-hov\:-o:hover{opacity:var(--hov-o,var(--o--p))}.-hov\:-bxsh:hover{box-shadow:var(--hov-bxsh,var(--bxsh--50))}.-hov\:-transform:hover{transform:var(--hov-transform,translate(0,-4px))}.-hov\:underline:hover{text-decoration:underline}}.-hov\:in\:hide{--transitionProps:opacity;opacity:var(--_isHov,0)}.-hov\:in\:show{--transitionProps:opacity,visibility;opacity:var(--_notHov,0);visibility:var(--_notHov,hidden)}.-hov\:in\:zoom{--transitionProps:scale;scale:var(--_isHov,1.1)}
+</style>
+<!-- LISM_CSS_END -->
+<style>
+:root{color-scheme:dark;--bg:#0b1120;--panel:#151f32;--line:#2c3b53;--muted:#aab8cd;--text:#edf3fc;--accent:#6de0cf;--red:#ff8690;--yellow:#f4cc75}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 system-ui,sans-serif}main{max-width:1500px;margin:auto;padding:28px}header{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}h1{font-size:25px;margin:0}h2{font-size:18px;margin:0 0 16px}h3{font-size:16px;margin:0}p{margin:8px 0}small,.muted{color:var(--muted)}.eyebrow{color:var(--accent);letter-spacing:.14em;font-size:12px}.clock{font-variant-numeric:tabular-nums;font-size:36px;line-height:1.3}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:22px 0}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:20px}button,input,select,textarea{font:inherit;border-radius:7px;border:1px solid var(--line);background:#0d1728;color:var(--text);padding:8px 11px}button{cursor:pointer;background:#24354e}button:hover{border-color:var(--accent)}button.primary{background:var(--accent);color:#102522;font-weight:700}button.danger{color:var(--red)}button:disabled{opacity:.45;cursor:default}input[type=number]{width:115px}input,select,textarea{max-width:100%}textarea{width:100%;resize:vertical;font-family:ui-monospace,monospace;font-size:13px}label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}.inline-label{display:inline;margin:0}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.machine,.transporter{padding:18px;border:1px solid var(--line);border-radius:10px;background:#0e182a}.machine.failed{border-color:var(--red)}.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.badge{font-size:12px;border-radius:30px;padding:3px 10px;background:#25364e}.badge.running{color:var(--accent)}.badge.failed,.badge.blocked{color:var(--red)}.badge.completed{color:#aeb2ff}.metrics{display:flex;justify-content:space-between;margin:12px 0;gap:10px}.metrics strong{display:block;font-size:23px;font-variant-numeric:tabular-nums}.track{height:7px;background:#29384f;border-radius:8px;overflow:hidden;margin:14px 0}.fill{height:100%;background:var(--accent)}.failed .fill{background:var(--red)}.machine button{padding:5px 10px;font-size:13px}.grid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(340px,1fr);gap:20px}.overflow{overflow:auto}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:13px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px 9px}th{color:var(--muted);font-weight:500}td.num{font-variant-numeric:tabular-nums}.form-row{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:12px}.form-row>div{flex:1;min-width:120px}.operation{display:flex;gap:8px;margin-bottom:8px;align-items:center}.operation select{flex:1}.operation input{width:110px}.operation button{padding:7px 10px}details{margin-top:18px}summary{cursor:pointer;color:var(--muted)}#notice{min-height:26px;margin:6px 0 14px;color:var(--accent)}#notice.error{color:var(--red)}#connection{color:var(--muted);font-size:12px}.gantt{width:100%;min-width:580px;display:block}#event-log{max-height:210px;overflow:auto;font:12px/1.8 ui-monospace,monospace;color:var(--muted)}.subtitle{margin-top:4px;color:var(--muted)}.empty{padding:20px;color:var(--muted)}.section-head{margin-bottom:12px}#job-count{color:var(--muted);font-size:13px}#config-file{width:100%;font-size:13px}.legend{font-size:12px;color:var(--muted);margin-top:8px}a{color:var(--accent)}@media(max-width:950px){.grid{grid-template-columns:1fr}main{padding:16px}}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.grid>*{min-width:0}.machine{min-width:0;overflow-wrap:anywhere}@media(max-width:950px){.grid{grid-template-columns:minmax(0,1fr)}}
+:root{--page-padding:20px}main{padding:var(--page-padding)}
+.simulation-screen{max-height:calc(100vh - 2 * var(--page-padding));max-height:calc(100dvh - 2 * var(--page-padding));display:flex;flex-direction:column;gap:12px;margin-bottom:20px;min-height:0}
+.simulation-screen>header{flex:none;gap:8px}.simulation-screen header h1{font-size:21px}.simulation-screen .subtitle{display:none}.simulation-screen .clock{font-size:28px}
+#production-history-panel{display:flex;flex-direction:column;flex:0 1 auto;min-height:0;overflow:hidden;margin:0;padding:14px}
+#production-history-panel>.section-head{flex:none;margin-bottom:8px}
+#production-history-panel .toolbar{flex:none;gap:6px;margin:0 0 6px}
+#production-history-panel button,#production-history-panel select{padding:6px 9px;font-size:13px}
+#production-history-panel>.legend{flex:none;margin:0 0 6px!important}
+#gantt{flex:0 1 auto;height:var(--gantt-natural-height,42px);min-height:0;overflow:hidden;border-top:1px solid var(--line)}
+#gantt .gantt{width:100%;height:100%;min-width:0;display:block}
+#gantt text,#cycle-conformance text{fill:#fff;color:#fff}
+#gantt [data-job] text{stroke:#101828;stroke-width:2px;stroke-linejoin:round;paint-order:stroke}
+:root{--page-padding:12px}.simulation-screen{gap:6px}.simulation-screen .eyebrow{display:none}.simulation-screen header h1{font-size:18px}.simulation-screen .clock{font-size:24px}#production-history-panel{padding:10px}#production-history-panel>.section-head{margin-bottom:4px}#production-history-panel .toolbar{gap:4px;margin-bottom:4px}#production-history-panel button,#production-history-panel select{padding:4px 7px;font-size:12px}.calculation-strip{margin-bottom:4px}.history-help{margin-top:3px}
+#session-loading{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:var(--bg);color:var(--text);font-size:16px}#session-loading[hidden]{display:none}
+#action-feedback{position:fixed;right:16px;bottom:16px;z-index:20;max-width:min(560px,calc(100vw - 32px));padding:10px 16px;background:#151f32;border:1px solid var(--accent);border-radius:9px;box-shadow:0 4px 20px #0008;font-size:14px;pointer-events:none;overflow-wrap:anywhere}#action-feedback[hidden]{display:none}#action-feedback.error{border-color:var(--red);color:var(--red)}#action-feedback.processing:before{content:'';display:inline-block;width:12px;height:12px;margin-right:8px;border:2px solid var(--muted);border-top-color:var(--accent);border-radius:50%;animation:busy-spin 1s linear infinite}@keyframes busy-spin{to{transform:rotate(360deg)}}button[aria-busy=true]{opacity:1;color:var(--yellow)}
+.calculation-strip{flex:none;display:flex;align-items:center;justify-content:space-between;gap:4px 14px;flex-wrap:wrap;margin-bottom:6px;font-size:12px}.calculation-strip strong{font-size:20px;color:var(--accent)}.calculation-strip a{white-space:nowrap}#optimizer-reference strong{font-size:24px;color:var(--accent)}#optimizer-problem{font-size:13px;overflow-wrap:anywhere}#optimizer-problem dl{display:grid;grid-template-columns:100px 1fr;gap:5px 12px}#optimizer-problem dt{color:var(--muted)}#optimizer-problem dd{margin:0}
+.history-help{flex:none;max-height:25%;overflow:auto;margin-top:6px;font-size:12px}.history-help summary{font-size:12px}
+@media(max-width:950px){:root{--page-padding:12px}main{padding:var(--page-padding)}}
+@media(max-width:600px),(max-height:600px){.simulation-screen .eyebrow{display:none}.simulation-screen header h1{font-size:16px}.simulation-screen .clock{font-size:22px}#production-history-panel{padding:10px}.simulation-screen{gap:6px}#production-history-panel>.legend{font-size:10px}}
+.optimal-diagram svg{max-width:none;height:auto}.optimal-diagram .job-label,.optimal-diagram .axis{font-size:12px}</style>
+<!-- APP_THEME_START -->
+<style id="app-theme">
+/* Application theme built on Lism CSS 1.0.1 semantic and spacing tokens. */
+:root {
+  --ff--base: system-ui, -apple-system, "Segoe UI", "Yu Gothic UI", "Hiragino Sans", sans-serif;
+  --fz--base: 15px;
+  --lh: 1.55;
+  --page-padding: var(--s15);
+  --bg: #f3f6fa;
+  --base: #fff;
+  --base-2: #edf3f7;
+  --text: #193144;
+  --text-2: #52677a;
+  --divider: #d7e2eb;
+  --brand: #08766a;
+  --accent: var(--brand);
+  --link: #076e85;
+  --red: #b52b41;
+  --yellow: #8d5a0d;
+  --shadow: rgb(21 48 69 / 6%);
+  --panel: var(--base);
+  --line: var(--divider);
+  --muted: var(--text-2);
+  --primary-text: #fff;
+  --release-color: #ae2871;
+  --holding-color: #506c85;
+  --completed-color: #6540a2;
+  --job-text-lightness: 28%;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0b1421;
+  --base: #142234;
+  --base-2: #1c2d42;
+  --text: #eff5fb;
+  --text-2: #b4c6d8;
+  --divider: #30465d;
+  --brand: #68dfca;
+  --link: #80dfec;
+  --red: #ff9aa5;
+  --yellow: #f6d482;
+  --shadow: rgb(0 0 0 / 24%);
+  --primary-text: #062c28;
+  --release-color: #ffb9ef;
+  --holding-color: #a3bad0;
+  --completed-color: #c4b5fd;
+  --job-text-lightness: 75%;
+  --L: 72%;
+  --C: .18;
+  color-scheme: dark;
+}
+body { background: var(--bg); font-family: var(--ff--base); line-height: var(--lh); }
+main { max-width: 1600px; padding: var(--page-padding); }
+.panel {
+  background: var(--base);
+  border-color: var(--divider);
+  border-radius: var(--bdrs--40);
+  padding: var(--s25);
+  margin-bottom: var(--s25);
+  box-shadow: var(--bxsh--10);
+}
+main > .panel > h2, main > .grid .panel > h2 { margin-bottom: var(--s15); }
+h1,h2,h3 { color: var(--text); font-weight: 650; letter-spacing: -.015em; }
+small,.muted,label,summary,th,.subtitle,#event-log,#connection { color: var(--text-2); }
+.eyebrow { color: var(--brand); font-weight: 650; letter-spacing: .12em; }
+a { color: var(--link); text-underline-offset: 3px; }
+button,input,select,textarea {
+  color: var(--text);
+  background: var(--base);
+  border-color: var(--divider);
+  border-radius: var(--bdrs--30);
+}
+button { background: var(--base-2); font-weight: 550; }
+button:hover { background: color-mix(in srgb,var(--brand) 9%,var(--base)); border-color: var(--brand); }
+button.primary { background: var(--brand); color: var(--primary-text); border-color: var(--brand); }
+button.primary:hover { background: color-mix(in srgb,var(--brand) 88%,var(--text)); }
+button.primary[aria-busy="true"] { color: var(--primary-text); }
+button.danger { color: var(--red); }
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible {
+  outline: 2px solid var(--brand); outline-offset: 2px;
+}
+input[type="checkbox"],input[type="range"] { accent-color: var(--brand); }
+textarea { background: var(--base-2); font-family: var(--ff--mono); }
+::file-selector-button { border: 1px solid var(--divider); border-radius: var(--bdrs--20); background: var(--base-2); padding: 5px 9px; margin-right: 10px; }
+.badge { background: var(--base-2); color: var(--text-2); border: 1px solid var(--divider); font-weight: 550; border-radius: var(--bdrs--99); }
+.badge.running { color: var(--brand); background: color-mix(in srgb,var(--brand) 10%,var(--base)); border-color: color-mix(in srgb,var(--brand) 35%,var(--divider)); }
+.badge.failed,.badge.blocked { color: var(--red); }
+.badge.completed { color: var(--completed-color); }
+.machine,.transporter { background: var(--base-2); border-color: var(--divider); border-radius: var(--bdrs--30); padding: var(--s20); }
+.machine.failed { border-color: var(--red); }
+.track { background: var(--divider); }
+.fill { background: var(--brand); }
+.failed .fill { background: var(--red); }
+th { background: var(--base-2); }
+th,td { border-color: var(--divider); }
+tbody tr:hover { background: color-mix(in srgb,var(--brand) 5%,var(--base)); }
+.overflow { border-radius: var(--bdrs--20); }
+#sequence-progress,#fault-plan,#scheduled {
+  max-height: min(320px, 45vh);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+#sequence-progress thead th,#fault-plan thead th,#scheduled thead th { position: sticky; top: 0; z-index: 1; }
+#sequence-progress:focus-visible,#fault-plan:focus-visible,#scheduled:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.form-row { gap: var(--s10); }
+.cards,.grid { gap: var(--s15); }
+.metrics strong,.clock { font-variant-numeric: tabular-nums; }
+details > summary { padding-block: 2px; }
+#session-loading { background: var(--bg); color: var(--text); }
+#action-feedback { background: var(--base); color: var(--text); box-shadow: var(--bxsh--30); border-radius: var(--bdrs--30); }
+#action-feedback.error,#notice.error { color: var(--red); }
+#production-history-panel { padding: var(--s10); border-color: var(--divider); }
+#production-history-panel > .legend span:nth-child(2) { color: var(--release-color)!important; }
+#production-history-panel > .legend span:nth-child(3) { color: var(--holding-color)!important; }
+#gantt { background: #102033; border-color: #30465d; border-radius: var(--bdrs--20); }
+#gantt text,#cycle-conformance text { fill: #fff; color: #fff; }
+#history-convergence,#history-diagram { border-radius: var(--bdrs--20); overflow: auto; }
+#history-diagram { background: #fff; color-scheme: light; }
+.app-header { padding: 4px 0 6px; }
+.brand-mark { width: 30px; height: 30px; flex: none; display: grid; place-items: center; color: var(--primary-text); background: var(--brand); border-radius: var(--bdrs--30); }
+.brand-mark svg { width: 20px; height: 20px; }
+.app-brand h1 { line-height: 1.35; }
+.header-tools { gap: var(--s15); }
+.app-status { gap: var(--s5); }
+.app-status .clock { line-height: 1.2; }
+.theme-control { display: flex; align-items: center; gap: var(--s5); }
+.theme-control label { margin: 0; font-size: 12px; }
+.theme-control select { padding: 5px 8px; font-size: 12px; max-width: 120px; }
+.simulation-screen { gap: var(--s5); }
+.simulation-screen > header { gap: var(--s10); }
+@media(max-width:950px) { main { padding: var(--s15); } }
+@media(max-width:600px) {
+  .app-brand { gap: var(--s5); }
+  .brand-mark { width: 26px; height: 26px; }
+  .header-tools { gap: var(--s10); }
+  .theme-control label { display: none; }
+  .panel { padding: var(--s15); }
+}
+
+</style>
+<!-- APP_THEME_END -->
+</head>
+<body><div id="session-loading" role="status">現在の動作情報を取得しています…</div><div id="action-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div><main class="is--container" aria-busy="true">
+<div class="simulation-screen l--stack"><header class="app-header l--cluster"><div class="app-brand l--flex -ai:center -g:15"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M14 6h4v5M10 18H6v-5"/><path d="m15 8 3 3 3-3M3 16l3-3 3 3"/></svg></span><div><div class="eyebrow">LIVE PRODUCTION SIMULATION</div><h1>ジョブショップシミュレータ</h1><div class="subtitle">機械・ジョブ・故障を、シミュレーション時刻で追跡</div></div></div><div class="header-tools l--cluster"><div class="app-status l--cluster"><div class="clock"><span id="clock">0.00</span> <small style="font-size:16px">秒</small></div><span id="run-status" class="badge">一時停止</span> <span id="connection">接続中…</span></div><div class="theme-control"><label for="theme-mode">表示</label><select id="theme-mode" aria-label="ライト・ダークの表示モード"><option value="system">システム設定</option><option value="light">ライト</option><option value="dark">ダーク</option></select></div></div></header>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10" id="production-history-panel" aria-label="シミュレーション操作と処理履歴"><div class="row section-head l--cluster"><h2 style="margin:0">処理履歴</h2><select id="window" aria-label="ガントチャート表示範囲"><option value="60">直近60秒（1分）</option><option value="300">直近300秒（5分）</option><option value="600">直近600秒（10分）</option><option value="1800">直近1800秒（30分）</option><option value="3600">直近3600秒（1時間）</option><option value="10800">直近10800秒（3時間）</option><option value="86400">直近86400秒（24時間）</option><option value="0">全期間</option></select></div>
+<div class="calculation-strip"><span id="cycle-headline" role="status">最適周期：未計算</span><span id="solver-live" role="status">ソルバー情報の取得中</span><span id="simulation-start-status" role="status" aria-live="polite"></span><a href="#optimizer-panel">計算対象・結果の詳細</a></div>
+<div class="toolbar l--cluster">
+<label class="inline-label" for="simulation-start-mode">開始モード</label><select id="simulation-start-mode"><option value="parallel">計算と運転を並行</option><option value="after_optimization">計算完了後にJOB投入</option></select><button id="start" class="primary">開始 / 再開</button><button id="pause">一時停止</button><button id="step">1秒進める</button>
+<label class="inline-label" for="speed">速度</label><select id="speed"><option value="0.25">0.25倍</option><option value="0.5">0.5倍</option><option value="1" selected>1倍</option><option value="2">2倍</option><option value="5">5倍</option><option value="10">10倍</option><option value="20">20倍</option><option value="50">50倍</option><option value="100">100倍</option><option value="500">500倍</option><option value="1000">1000倍</option></select>
+<button id="reset">初期設定に戻す</button><button id="export">結果JSONを保存</button>
+<label class="inline-label" for="optimizer-solver">ソルバー</label><select id="optimizer-solver"><option value="cp_sat">OR-Tools CP-SAT</option><option value="highs">HiGHS MILP</option></select><button id="solver-apply">切り替えて再計算</button>
+</div>
+<div class="legend" style="margin-bottom:10px"><span style="color:var(--accent)">■ 機械での処理</span>　<span style="color:#ffb9ef">▼ JOB投入 / ◇ 投入予定</span>　<span style="color:#8798b3">■ 処理後の搬送待ち占有</span>　<span style="color:var(--yellow)">▨ 機械間の移動</span>　<span style="color:#91a7ff">◆ 改善解受け渡し</span>　破線の枠＝進行中</div><div id="gantt" class="overflow" aria-label="処理履歴（全機械行を画面内に同時表示）"></div><details class="history-help"><summary>履歴の見方</summary><div class="legend">処理は処理機械別、移動は搬送機械別の行にまとめ、文字サイズを保って同じ時間軸で表示します。機械行は1列で全行を同時に表示します。文字サイズを保ち、表示領域に合わせて行間だけを調整します。バーにカーソルを合わせるとジョブ・経路・経過秒数・進行中の残り秒数を確認できます。▼は実投入、◇は周期に合わせた投入予定です。最初の処理機械の行にJOB名と時刻を表示し、マーカーにカーソルを合わせると同時投入の全JOBと希望・実投入時刻を確認できます。◆は改善解の受け渡し時刻（シミュレーション秒）です。上端のラベルに更新番号・時刻・周期を表示し、縦線や◆にカーソルを合わせると反映結果と計算要求を確認できます。近接する更新は◆をまとめ、詳細に全更新を表示します。処理完了後は搬送開始まで現在の機械を占有し、灰色のバーで表示します。故障中は処理バーが伸びず、復旧後に別のバーで再開します。</div></details></section>
+</div>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10" id="optimizer-panel" style="margin-bottom:20px">
+<div class="eyebrow">CYCLIC SOLVER / ONLINE TRANSFER PRIORITY</div><h1>搬送優先順位のオンライン実験</h1>
+<p class="muted">周期解の搬送順位を使う方式と、指定時刻・担当搬送機に完全一致させる方式を選択できます。</p>
+<div class="form-row"><div><label for="optimizer-mode">比較モード</label><select id="optimizer-mode"><option value="optimized_priority">オンライン優先順位</option><option value="fifo">FIFO</option><option value="fixed_priority">初回計算後の固定優先順位</option><option value="compute_only">並行計算のみ / FIFO運転</option></select></div>
+<div><label for="optimizer-recalculation">再計算モード</label><select id="optimizer-recalculation"><option value="events">定期再計算なし（イベント時のみ）</option><option value="periodic">イベント時＋定期再計算</option></select></div><div><label for="optimizer-period">再計算間隔（simulation秒）</label><input id="optimizer-period" type="number" min="0.001" value="60"></div>
+<div><label for="optimizer-limit">求解上限（wall秒）</label><input id="optimizer-limit" type="number" min="0.001" value="60"></div>
+<div><label for="optimizer-stop">探索の終了条件</label><select id="optimizer-stop"><option value="gap">ギャップのみ</option><option value="time" selected>時間のみ</option><option value="time_or_gap">時間またはギャップ（先に到達した方）</option></select></div>
+<div><label for="optimizer-gap">ギャップ（％未満で終了・0％は最適性確認）</label><input id="optimizer-gap" type="number" min="0" max="100" step="0.1" value="1"></div>
+<div><label for="optimizer-delivery">パターンの受け渡し</label><select id="optimizer-delivery"><option value="final">計算終了後に渡す</option><option value="incremental">改善解の更新ごとに逐次渡す</option></select></div>
+<div><label for="transfer-execution">搬送の実行方式</label><select id="transfer-execution"><option value="priority">搬送順位のみ</option><option value="cyclic_timing">最適パターンの時刻に完全一致</option></select></div>
+<div><label for="optimizer-deadline">総要求期限（wall秒）</label><input id="optimizer-deadline" type="number" min="0.001" value="300"></div>
+<div><label for="optimizer-workers">求解ワーカー数</label><input id="optimizer-workers" type="number" min="1" max="64" value="8" step="1"></div><label class="inline-label"><input id="delay-job-release" type="checkbox" checked>周期に合わせてJOB投入を調整</label><button id="optimizer-settings">条件を適用</button><button id="optimizer-run" class="primary">再計算</button><button id="optimizer-cancel">計算を取消</button></div>
+<p id="optimizer-stop-description" class="muted"></p><p id="transfer-execution-description" class="muted" style="font-size:12px"></p><div id="timing-status" role="status"></div><div id="optimizer-summary" role="status"></div><p class="muted" style="font-size:12px">投入調整は検証済み周期解の受信後、原品種に対応する未着手・追加JOBに適用します。順位のみ方式では処理中のJOB、FIFO・計算のみモード、原品種に対応しないJOBは即時投入を維持します。投入希望・予定・実投入時刻はJOB一覧でも確認できます。</p><p class="muted" style="font-size:12px">周期Tは実績の完了時刻ではありません。原周期モデルは現在の仕掛品・故障を直接制約化しません。順位のみ方式は搬送可能な候補を選び、完全一致方式は指定時刻を実行できない場合に理由を表示して一時停止します。</p>
+<p class="muted" style="font-size:12px">開始モードは処理履歴の操作欄で選べます。「計算完了後にJOB投入」は開始・再開ごとの新規計算が終了し、検証済みの結果を適用してから時計とJOB投入を開始します。逐次受け渡し中の暫定解では運転を開始しません。運転中の条件変更・再計算は連続投入を維持します。</p><p id="optimizer-delivery-status" class="muted" role="status"></p>
+<div class="grid l--grid"><div><h3>今回の計算対象</h3><div id="optimizer-problem"></div></div><div><h3>周期の計算結果</h3><div id="optimizer-reference" aria-live="polite"></div><details><summary>サイクリック搬送パターン</summary><div id="optimizer-pattern" class="overflow" style="max-height:280px"></div></details></div></div>
+<h3 style="margin-top:14px">シミュレーション実績</h3><div id="optimizer-metrics"></div>
+<h3 style="margin-top:14px">計算周期と実際の流れの一致度</h3>
+<p class="muted" style="font-size:12px">同じ品種・同じ工程の隣接JOBを比較します。主指標は搬送開始間隔です。投入の調整が成功していても、搬送や完了が同じ周期になるとは限りません。</p>
+<div class="form-row"><div><label for="cycle-conformance-kind">評価する流れ</label><select id="cycle-conformance-kind"><option value="transport">搬送開始間隔（主指標）</option><option value="admission">JOB実投入間隔</option><option value="completion">JOB完了間隔</option></select></div><label class="inline-label"><input id="cycle-conformance-steady" type="checkbox">比較周期が変わった後の2周期を除外</label></div>
+<div id="cycle-conformance" aria-live="polite"></div>
+<details><summary>指標の定義と読み方</summary><p class="muted" style="font-size:12px">周期一致スコア＝max(0, 100−平均絶対相対誤差％)。誤差＝|実測間隔÷計算周期T−1|×100。品種・工程ごとの平均を等しい重みで集計します。±5％一致率、実測間隔の中央値、ばらつき（MAD/T）も併記します。速すぎる流れも遅すぎる流れも誤差です。JOB順の逆転は負の間隔として不一致に数えます。最新200区間を評価し、5区間未満は参考値です。未観測工程と更新の古さも確認してください。最適性ギャップは計算の証明精度であり、この実績の一致度とは別の値です。</p></details>
+<details open><summary>適用中の搬送順位</summary><div id="optimizer-order" class="overflow" style="max-height:300px"></div></details>
+<details><summary>選択・飛越し理由</summary><div id="optimizer-skips" class="overflow" style="max-height:220px"></div></details>
+<details><summary>計算履歴</summary><div id="optimizer-requests" class="overflow" style="max-height:250px"></div></details>
+<div class="form-row" style="margin-top:15px"><div><label for="route-job-id">追加ジョブID</label><input id="route-job-id" value="追加1"></div><div><label for="route-job-route">原品種番号</label><input id="route-job-route" type="number" min="1" value="1"></div><div><label for="route-job-at">投入秒（空欄＝現在）</label><input id="route-job-at" type="number" min="0" placeholder="現在"></div><button id="route-job-add">原経路でジョブ追加</button></div>
+<p id="experiment-directory" class="muted" style="overflow-wrap:anywhere"></p>
+<div class="form-row"><div><label for="replay-path">保存したreplay.jsonのパス</label><input id="replay-path" style="width:100%"></div><button id="replay-load">記録を再生用に読み込む</button></div>
+</section>
+<div class="toolbar l--cluster" aria-label="搬送機械の設定"><label class="inline-label" for="transport-count">搬送機械の台数</label><input id="transport-count" type="number" value="1" min="1" max="10000" step="1"><button id="apply-transport-count" class="primary">台数を適用</button><span id="transport-count-applied" class="badge"></span><small>同時に移動できるジョブ数の上限です。</small></div><div id="notice" role="status" aria-live="polite"></div>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10" id="job-scenario-panel"><div class="row section-head l--cluster"><h2 style="margin:0">ジョブシナリオ</h2><span id="job-scenario-active" class="badge">現在のシナリオ</span></div><p class="muted">input_data.jsonと同じ形式のJSONパスを指定してください。読み込み内容を確認してから適用できます。</p>
+<label for="config-path">シナリオJSONのパス（このPC上のファイル）</label><input id="config-path" type="text" value="data/input_data.json" style="width:100%">
+<small>例：data/input_data_24.json。エクスプローラーの「パスのコピー」も使用できます。表の番号やコピー数の列は含めないでください。</small>
+<div class="form-row" style="margin-top:12px"><div><label for="import-processing">処理時間</label><select id="import-processing"><option value="lower">下限 L</option><option value="upper">上限 U</option><option value="midpoint">LとUの中間</option></select></div><div><label for="import-copies">品種ごとのジョブ数</label><input id="import-copies" type="number" value="1" min="1" step="1"></div><div><label for="import-transport-count">搬送機械の台数</label><input id="import-transport-count" type="number" value="1" min="1" max="10000" step="1"></div><button id="load-config-path">シナリオを読み込む</button><button id="apply-job-scenario" class="primary" disabled>このシナリオを適用</button></div>
+<div id="job-scenario-preview" role="status" aria-live="polite" class="muted">シナリオは未読み込みです。</div><p class="muted" style="font-size:12px">読み込みだけでは現在のシミュレーションを変更しません。適用すると0秒・一時停止・故障なしで初期化します。</p></section>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10" id="scenario-sequence-panel"><h2>複数ジョブシナリオの連続投入</h2><p class="muted">実行する順にJSONを選択してください。コピー数を指定すると、同じファイルのシナリオをその回数だけ連続投入します。前のジョブが残っていても、時間条件で次のシナリオを投入できます。</p>
+<div class="form-row"><div style="flex:0 1 auto"><label for="sequence-copies">追加時のコピー数（元の1回を含む）</label><input id="sequence-copies" type="number" min="1" max="10000" step="1" value="1"></div><button id="sequence-copies-50" type="button">50</button><button id="sequence-copies-100" type="button">100</button><small>登録済みのコピー数は、下の一覧で変更できます。「品種ごとのジョブ数」とは別の設定です。</small></div>
+<div class="form-row"><div><label for="sequence-files">JSONファイルを複数選択</label><input id="sequence-files" type="file" accept=".json,application/json" multiple></div><button id="sequence-add-current">上の読み込み済みシナリオを追加</button></div>
+<details><summary>このPC上のJSONパスをまとめて追加</summary><label for="sequence-paths">1行につき1つのJSONパス（上から順に追加）</label><textarea id="sequence-paths" rows="3"></textarea><button id="sequence-add-paths">パスをリストに追加</button></details>
+<div id="sequence-selection" class="overflow" style="margin-top:12px"></div>
+<p id="sequence-selection-total" class="muted" role="status" aria-live="polite">元シナリオ 0件 / 連続投入 0回</p>
+<div class="form-row" style="margin-top:12px"><div><label for="sequence-mode">次のシナリオを開始する条件</label><select id="sequence-mode"><option value="completion_or_time">全ジョブ完了 または 指定時間（早い方）</option><option value="completion">全ジョブ完了を待つ</option><option value="time">指定時間が経過したら開始</option></select></div><div><label for="sequence-interval">シナリオ開始からの時間（秒）</label><input id="sequence-interval" type="number" value="60" min="0.001" step="any"></div><button id="sequence-preview">連続投入を確認</button><button id="sequence-apply" class="primary" disabled>連続投入を適用</button></div>
+<p class="muted">ファイル・パスから追加したシナリオの処理時間・品種ごとのジョブ数は上の設定を使用します。読み込み済みシナリオは確認した設定を保持します。搬送台数は画面上部の設定値を使用します。適用時に0秒・一時停止・故障なしで初期化します。「計算完了後にJOB投入」では最初のシナリオも計算終了まで保留します。「開始 / 再開」で開始してください。</p><div id="sequence-preview-result" class="muted" role="status" aria-live="polite">連続投入は未確認です。</div>
+<div id="sequence-warnings-preview" role="status" style="color:var(--yellow)"></div><h3 style="margin-top:16px">現在のシナリオ進捗</h3><div id="sequence-warnings-active" style="color:var(--yellow)"></div><div id="sequence-progress" class="overflow" role="region" aria-label="現在のシナリオ進捗" tabindex="0"></div></section>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10" id="fault-panel"><div class="row section-head l--cluster"><h2 style="margin:0">故障モード・シナリオ</h2><span id="fault-mode-status" class="badge">故障なし</span></div>
+<div class="form-row"><div><label for="fault-mode">故障モード（適用ボタンで変更）</label><select id="fault-mode"><option value="none">故障なし</option><option value="random">ランダム故障</option><option value="scenario">特定の故障シナリオ</option></select></div><button id="apply-faults" class="primary">故障モードを適用</button></div>
+<div id="fault-none-settings" class="muted">自動・予約・手動の故障を禁止します。初期状態はこのモードです。</div>
+<div id="fault-random-settings" hidden><div class="form-row"><div><label for="fault-mean">平均故障間隔（秒）</label><input id="fault-mean" type="number" min="0.001" step="any" value="30"></div><div><label for="fault-repair-duration">復旧までの時間（秒）</label><input id="fault-repair-duration" type="number" min="0.001" step="any" value="6"></div><div><label for="fault-seed">乱数シード</label><input id="fault-seed" type="number" min="0" step="1" value="1"></div></div><p class="muted">対象は全機械。各機械が正常な間の経過時間からランダムに故障を決め、指定時間後に自動復旧します。平均間隔は固定の周期ではありません。</p></div>
+<div id="fault-scenario-settings" hidden><label for="fault-scenario-json">故障・復旧の予定（絶対シミュレーション時刻、秒）</label><textarea id="fault-scenario-json" rows="5">[{"type":"fail_machine","machine":"M1","at":5},{"type":"repair_machine","machine":"M1","at":11}]</textarea><button id="fault-example" style="margin-top:8px">現在時刻からの例を作成</button><p class="muted">現在時刻以降を指定してください。復旧イベントがなければ故障状態が続きます。</p></div>
+<p class="muted" style="font-size:12px">適用すると以前の故障予約を取り消し、故障中の機械を復旧します。ジョブの進捗と現在時刻は保持します。適用前に選んだだけでは故障モードは変わりません。</p>
+<div id="fault-description" class="subtitle"></div><div id="fault-plan" class="overflow" role="region" aria-label="故障・復旧の予定" tabindex="0"></div>
+</section>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10"><h2>搬送機械の現在状態</h2><p class="muted">台数は画面上部の「搬送機械の台数」で設定できます。</p><p class="muted">空いた搬送機械へ要求順に割り当てます。処理中のジョブは並行して稼働できます。台数を減らす場合、取り除く搬送機械が移動中なら変更できません。</p><p id="transport-summary"></p><div id="transporters" class="cards l--grid"></div></section>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10"><h2>処理機械グループ（Capacity）</h2><div id="machine-groups" class="overflow"></div></section>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10"><div class="row section-head l--cluster"><h2 style="margin:0">機械の現在状態</h2><small>処理時間は故障による停止時間を除きます</small></div><div id="machines" class="cards l--grid"></div></section>
+<div class="grid l--grid"><div>
+
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10"><div class="row section-head l--cluster"><h2 style="margin:0">ジョブ一覧</h2><span id="job-count"></span></div><div id="jobs-table-view" class="overflow" style="max-height:420px"><table><thead><tr><th>ジョブ</th><th>状態</th><th>投入希望 / 予定 / 実投入（秒）</th><th>工程</th><th>機械 / 移動経路</th><th>機械グループ</th><th>累計処理秒</th><th>工程残り秒</th><th>移動残り秒</th><th>全工程残り秒</th><th>今後の移動秒</th><th>搬送機械</th><th>累計搬送待ち秒</th></tr></thead><tbody id="jobs"></tbody></table></div></section>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10"><h2>移動の現在状態</h2><div id="moving-jobs"></div><details><summary>移動履歴</summary><div id="transfer-history" class="overflow"></div></details></section>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10"><h2>イベント履歴</h2><div id="event-log"></div></section>
+</div><aside>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10"><h2>外部入力</h2><label for="input-at">適用するシミュレーション時刻（秒）</label><input id="input-at" type="number" min="0" step="any" placeholder="空欄 = 即時" style="width:100%"><p class="muted" style="font-size:12px">空欄なら入力を受け付けた時点で適用。時刻を指定すると、その時刻に適用します。一時停止中も入力できます。</p>
+<form id="job-form"><div style="margin:18px 0 12px"><label for="job-id">追加するジョブID</label><input id="job-id" required maxlength="80" placeholder="例: J5" style="width:100%"></div><label>工程順（機械 / 処理秒数）</label><div id="operations"></div><div class="row l--cluster"><button id="add-operation" type="button">＋ 工程</button><button class="primary" type="submit">ジョブを投入</button></div></form>
+<hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+<label for="fault-machine">故障 / 復旧する機械</label><select id="fault-machine" style="width:100%"></select><div class="toolbar l--cluster" style="margin:12px 0"><button id="fail" class="danger">故障させる</button><button id="repair">復旧させる</button></div>
+<details><summary>JSONで外部入力</summary><p class="muted" style="font-size:12px">JSON内の at で時刻指定。省略時は即時。</p><textarea id="command-json" rows="6" aria-label="外部入力JSON">{"type":"add_job","job":{"id":"J5","operations":[{"machine":"M1","duration":10}]}}</textarea><button id="send-json" style="margin-top:8px">送信</button></details>
+</section>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10"><h2>予約入力</h2><div id="scheduled" class="overflow" role="region" aria-label="予約入力の一覧" tabindex="0"></div></section>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10"><h2>初期設定JSON</h2><p class="muted" style="font-size:12px">通常の設定JSONとW/R/N/V/L/U形式をファイル選択・編集で適用できます。ジョブシナリオのパス指定は画面上部にあります。</p><label for="config-file">ファイルを選択</label><input type="file" id="config-file" accept=".json,application/json" aria-label="初期設定ファイル"><details id="config-editor"><summary>初期設定JSONを編集（開くと読み込み）</summary><textarea id="config-json" rows="15" aria-label="初期設定JSON"></textarea></details><button id="apply-config" style="margin-top:12px" disabled>設定を適用して初期化</button></section>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10"><h2>読み込んだ定義</h2><div id="input-summary" class="muted"></div><details><summary>機械間の移動時間（秒）</summary><div id="travel-definition" class="overflow"></div></details><details><summary>ジョブの工程と移動時間</summary><div id="route-definition" style="overflow-wrap:anywhere"></div></details></section>
+</aside></div>
+<section class="panel l--box -bgc:base -bdrs:40 -bxsh:10" id="optimization-visuals"><h2>最適パターンの収束過程と図</h2>
+<p class="muted">1回の探索で取得した改善解を表示します。横軸はソルバーの探索経過秒、縦軸は周期Tです。図には実行可能な最良パターンを表示します。</p>
+<div class="form-row"><div><label for="history-request">計算要求</label><select id="history-request"></select></div><label class="inline-label"><input id="history-follow" type="checkbox" checked>新しい改善解を追従</label><button id="history-latest">最新の計算</button><button id="history-play">▶ 再生</button><div><label for="history-speed">再生間隔</label><select id="history-speed"><option value="2000">2秒</option><option value="1000" selected>1秒</option><option value="500">0.5秒</option></select></div></div>
+<p id="history-status" role="status">計算が始まると収束過程を表示します。</p><div id="history-convergence" style="overflow-x:auto;overflow-y:visible"></div>
+<div class="form-row"><div style="flex:1"><label for="history-index">表示する改善解</label><input id="history-index" type="range" min="1" max="1" value="1" disabled style="width:100%"></div><div><label for="history-style">最適パターンの図</label><select id="history-style"><option value="trajectory">時刻 × 機械番号の軌跡図</option><option value="gantt">JOB・工程ガント図</option></select></div></div>
+<div class="toolbar l--cluster"><label class="inline-label"><input id="history-labels" type="checkbox" checked>時刻ラベル</label><label class="inline-label"><input id="history-dwell" type="checkbox" checked>槽内処理</label><label class="inline-label"><input id="history-terminal" type="checkbox" checked>終端処理</label><label class="inline-label"><input id="history-empty" type="checkbox" checked>空移動</label><label class="inline-label"><input id="history-idle" type="checkbox" checked>待機</label></div>
+<p id="history-selection"></p><div id="history-diagram" class="optimal-diagram" style="overflow-x:auto;overflow-y:visible">実行可能解を待っています。</div>
+<details><summary>改善解の更新ログ</summary><div class="overflow"><table><thead><tr><th>更新</th><th>探索経過秒</th><th>周期T</th><th>下界</th><th>改善量</th><th>ギャップ％</th></tr></thead><tbody id="history-log"></tbody></table></div></details></section>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const themeMedia=typeof window.matchMedia==='function'?window.matchMedia('(prefers-color-scheme: dark)'):null;
+function applyTheme(preference,persist=false){
+ if(!['light','dark','system'].includes(preference))preference='system';
+ document.documentElement.dataset.theme=preference==='system'?(themeMedia?.matches?'dark':'light'):preference;
+ $('theme-mode').value=preference;
+ if(persist)try{localStorage.setItem('jobshop-theme',preference);}catch{}
+}
+let themePreference='system';try{themePreference=localStorage.getItem('jobshop-theme')||'system';}catch{}
+applyTheme(themePreference);
+$('theme-mode').onchange=()=>applyTheme($('theme-mode').value,true);
+themeMedia?.addEventListener('change',()=>{if($('theme-mode').value==='system')applyTheme('system');});
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=v=>Number(v).toFixed(2);
+const statusText={running:'処理中',idle:'待機',failed:'故障',holding:'処理完了・搬送待ち',blocked:'故障で停止',queued:'順番待ち',completed:'完了',moving:'移動中',waiting_transport:'搬送待ち',waiting_release:'周期に合わせて投入待ち'};
+let latest=null,machineIds=[],refreshing=false,chain=Promise.resolve(),faultSignature=null,pendingJobScenario=null,scenarioRevision=0,lastTransportCount=null,sequenceEntries=[],pendingSequence=null,sequenceRevision=0;
+let sessionReady=false,sessionLoading=false,viewPreference={experiment:null,details:{}},scrollSaveTimer=null;
+function detailKey(element){return (element.parentElement.closest('[id]')?.id||'main')+':'+element.querySelector('summary')?.textContent.trim();}
+function saveView(){
+ if(!sessionReady||!latest||viewPreference.experiment!==latest.experiment_directory)return;
+ viewPreference.window=$('window').value;viewPreference.scroll=window.scrollY;
+ viewPreference.conformance={kind:$('cycle-conformance-kind').value||'transport',steady:!!$('cycle-conformance-steady').checked};
+ document.querySelectorAll('details').forEach(element=>viewPreference.details[detailKey(element)]=element.open);
+ try{localStorage.setItem('jobshop-view:'+viewPreference.experiment,JSON.stringify(viewPreference));}catch{}
+}
+function loadView(experiment){
+ let saved=null;try{saved=JSON.parse(localStorage.getItem('jobshop-view:'+experiment)||'null');}catch{}
+ viewPreference={experiment,details:{},...(saved?.experiment===experiment?saved:{})};
+ $('cycle-conformance-kind').value=['transport','admission','completion'].includes(viewPreference.conformance?.kind)?viewPreference.conformance.kind:'transport';$('cycle-conformance-steady').checked=!!viewPreference.conformance?.steady;
+ if([...$('window').options].some(option=>option.value===viewPreference.window))$('window').value=viewPreference.window;
+}
+function restoreDetails(){document.querySelectorAll('details').forEach(element=>{const key=detailKey(element);if(typeof viewPreference.details[key]==='boolean')element.open=viewPreference.details[key];});}
+function panelHTML(id,html){const element=$(id);if(element.dataset.rendered!==html){element.innerHTML=html;element.dataset.rendered=html;}}
+document.addEventListener('toggle',event=>{if(event.target.tagName==='DETAILS')saveView();},true);
+window.addEventListener('pagehide',saveView);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)saveView();});
+window.addEventListener('scroll',()=>{clearTimeout(scrollSaveTimer);scrollSaveTimer=setTimeout(saveView,150);},{passive:true});
+const faultNames={none:'故障なし',random:'ランダム故障',scenario:'特定の故障シナリオ'};
+const dispatchNames={fifo:'FIFO',optimized_priority:'最適パターン',fixed_priority:'固定パターン',cyclic_timing:'周期時刻に完全一致'};
+function dispatchSwitchLabel(e){return `${dispatchNames[e.from]||e.from} → ${dispatchNames[e.to]||e.to}`;}
+function incumbentApplicationLabel(e){
+ const labels={applied:'反映済み',staged_until_start:'受信・JOB投入開始待ち',retained_better_pattern:'既存の良いパターンを維持',compute_only:'計算のみ・運転へは未反映',completed_run:'受信・シミュレーション完了済み',timing_stopped:'受信・時刻不一致による停止を維持'};
+ return (labels[e.application]||'受信・反映結果不明')+(e.application==='retained_better_pattern'?`（適用周期 ${fmt(e.applied_period)}秒）`:'');
+}
+function incumbentDeliveryLabel(e){return `${e.application==='applied'?'改善解反映':'改善解受信'} #${e.index??'—'} / ${fmt(e.time)}s / T=${fmt(e.period)}s`;}
+function incumbentDeliveryDescription(e){return `${incumbentDeliveryLabel(e)} / ${incumbentApplicationLabel(e)} / 計算要求 ${e.request_id||'—'} / 順位 ${e.order_id||'—'}`;}
+function showFaultSettings(){const mode=$('fault-mode').value;['none','random','scenario'].forEach(m=>$('fault-'+m+'-settings').hidden=m!==mode);}
+function renderFaults(s){
+ const policy=s.faults,signature=JSON.stringify(policy);$('fault-mode-status').textContent='適用中：'+faultNames[policy.mode];
+ if(signature!==faultSignature){faultSignature=signature;$('fault-mode').value=policy.mode;showFaultSettings();if(policy.mode==='scenario')$('fault-scenario-json').value=JSON.stringify(policy.events,null,2);if(policy.mode==='random'){$('fault-mean').value=policy.random.mean_uptime;$('fault-repair-duration').value=policy.random.repair_duration;$('fault-seed').value=policy.random.seed;}}
+ $('fail').disabled=policy.mode==='none';$('repair').disabled=policy.mode==='none';
+ $('fault-description').textContent=policy.mode==='none'?'故障は発生しません。故障を入力するにはモードを変更して適用してください。':policy.mode==='random'?`平均故障間隔 ${fmt(policy.random.mean_uptime)} 秒 / 復旧 ${fmt(policy.random.repair_duration)} 秒 / シード ${policy.random.seed} / 対象 ${policy.random.machines.join(', ')}。次の故障・復旧予定を表示しています。`:'指定シナリオの故障・復旧予定を表示しています。';
+ const faultEvents=s.events.filter(e=>e.type==='fail_machine'||e.type==='repair_machine');
+ const plan=policy.mode==='scenario'?policy.events.map(e=>({...e,target:e.machine,source:'scenario',applied:e.at<=s.time})):faultEvents;
+ const extra=policy.mode==='scenario'?faultEvents.filter(e=>e.source==='external'):[];
+ $('fault-plan').innerHTML=plan.length||extra.length?`<table><thead><tr><th>時刻（秒）</th><th>機械</th><th>動作</th><th>状態</th><th>入力元</th></tr></thead><tbody>${[...plan,...extra].sort((a,b)=>a.at-b.at).map(e=>`<tr><td>${fmt(e.at)}</td><td>${esc(e.target)}</td><td>${e.type==='fail_machine'?'故障':'復旧'}</td><td>${e.applied?'適用済み':'予約中'}</td><td>${esc({scenario:'指定シナリオ',random:'ランダム',external:'手動 / API'}[e.source])}</td></tr>`).join('')}</tbody></table>`:'<p class="muted">故障・復旧の予定はありません。</p>';
+}
+let actionSource=null,actionRevision=0,feedbackTimer=null,lastNotice='',lastNoticeError=false;
+const busyActions=new Map();
+function feedback(){
+ clearTimeout(feedbackTimer);const box=$('action-feedback');box.hidden=false;
+ box.className=busyActions.size?'processing':lastNoticeError?'error':'';
+ box.textContent=busyActions.size?`処理中です… ${[...busyActions.values()].map(item=>item.label).join(' / ')}`:lastNotice;
+ if(!busyActions.size&&!lastNoticeError)feedbackTimer=setTimeout(()=>{box.hidden=true;},5000);
+}
+function notice(message,error=false){lastNotice=message;lastNoticeError=error;$('notice').textContent=message;$('notice').className=error?'error':'';feedback();}
+function controlKey(element){return element?.id||(element?.dataset.machine?`machine:${element.dataset.machine}:${element.dataset.kind}`:element);}
+function keepButtonsBusy(){
+ document.querySelectorAll('button,input[type=file],select').forEach(element=>{const item=busyActions.get(controlKey(element));if(!item)return;
+  // Save the enabled state computed by the latest render, then retain the busy lock.
+  if(['start','pause','step'].includes(element.id)||item.element!==element)item.disabled=element.disabled;
+  item.element=element;element.disabled=true;element.setAttribute('aria-busy','true');
+  if(element.tagName==='BUTTON')element.textContent='処理中…';
+ });
+}
+function api(path,data){
+ const request=()=>fetch(path,data===undefined?{cache:'no-store'}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(async r=>{const result=await r.json();if(!r.ok){const error=Error(result.error||`HTTP ${r.status}`);error.status=r.status;throw error;}return result;});
+ // Background reads must not delay a click; preserve ordering between mutations.
+ if(data===undefined)return request();
+ const pending=chain.then(request);chain=pending.catch(()=>{});return pending;
+}
+async function action(work){
+ const element=actionSource,key=controlKey(element)||work;if(busyActions.has(key))return;
+ const item={element,label:element?.tagName==='BUTTON'?element.textContent.trim():element?.getAttribute('aria-label')||'設定変更',disabled:element?.disabled??false};
+ if(!busyActions.size){lastNotice='';lastNoticeError=false;}busyActions.set(key,item);actionRevision++;
+ if(element){element.disabled=true;element.setAttribute('aria-busy','true');if(element.tagName==='BUTTON')element.textContent='処理中…';}
+ feedback();
+ try{await new Promise(resolve=>setTimeout(resolve,0));await work();}
+ catch(e){notice(e.message,true);}
+ finally{
+  busyActions.delete(key);actionRevision++;
+  if(item.element){item.element.disabled=item.disabled;item.element.removeAttribute('aria-busy');if(item.element.tagName==='BUTTON')item.element.textContent=item.label;}
+  if(!lastNotice)lastNotice='処理が完了しました';feedback();
+ }
+}
+function eventTime(command){const raw=$('input-at').value;if(raw!==''){const at=Number(raw);if(!Number.isFinite(at)||at<0)throw Error('時刻には0以上の数値を指定してください');command.at=at;}return command;}
+async function send(command){const r=await api('/api/input',command);render(r.state);notice(`入力を受け付けました: ${r.accepted.type} / ${fmt(r.accepted.at)} 秒`);}
+async function control(action,extra={}){render(await api('/api/control',{action,...extra}));if(latest.completed){notice('セット済みの全ジョブが完了したため停止しました');return;}notice(({start:latest.simulation_start?.waiting?'計算を開始しました。計算完了・パターン適用後にJOB投入と運転を自動開始します':'シミュレーションを開始しました',pause:'一時停止しました',step:'1秒進めました',speed:'速度を変更しました',reset:'初期設定に戻しました'})[action]);}
+function color(id){let hash=0;for(const c of id)hash=(hash*31+c.codePointAt(0))|0;return `hsl(${(hash>>>0)%360},65%,66%)`;}
+function jobTextColor(id){return color(id).replace(',66%',',var(--job-text-lightness)');}
+function addOperation(machine,duration=10){
+ const row=document.createElement('div');row.className='operation';
+ const select=document.createElement('select');select.setAttribute('aria-label','工程の機械');
+ machineIds.forEach(id=>{const o=document.createElement('option');o.value=id;o.textContent=id;select.append(o);});if(machine)select.value=machine;
+ const input=document.createElement('input');input.type='number';input.min='0';input.step='any';input.required=true;input.value=duration;input.setAttribute('aria-label','工程の処理秒数');
+ const remove=document.createElement('button');remove.type='button';remove.textContent='×';remove.setAttribute('aria-label','工程を削除');remove.onclick=()=>{if($('operations').children.length>1)row.remove();else notice('工程を1つ以上指定してください',true);};
+ row.append(select,input,remove);$('operations').append(row);
+}
+function updateMachines(ids){
+ if(JSON.stringify(ids)===JSON.stringify(machineIds))return;
+ machineIds=ids;$('fault-machine').replaceChildren();ids.forEach(id=>{const o=document.createElement('option');o.value=id;o.textContent=id;$('fault-machine').append(o);});$('operations').replaceChildren();addOperation();
+}
+function groupRows(s){const rows=(s.scenario_sequence||[]).flatMap(e=>Object.entries(e.machine_groups||{}).filter(([id,members])=>members.length>1).map(([id,members])=>({label:e.id+' / '+id,id,members,scenario:e.id})));return rows.length?rows:Object.entries(s.machine_groups||{}).filter(([id,members])=>members.length>1).map(([id,members])=>({label:id,id,members,scenario:null}));}
+function groupDescription(s){return groupRows(s).map(r=>`${esc(r.label)}：${r.members.map(esc).join(' / ')}（${r.members.length}台）`).join('<br>')||'Capacity=1（各機械が独立）';}
+function warningsHTML(s){return (s.warnings||[]).length?'<p><strong>警告（開始できます）</strong></p>'+s.warnings.map(w=>`<p>${esc(w)}</p>`).join(''):'';}
+const panelVisibility=new Map(),panelUpdates=new Map();
+function panelTarget(id){return $(id==='jobs'?'jobs-table-view':id);}
+function panelVisible(id){
+ const target=$(id),details=target.closest('details');
+ if(details?.tagName==='DETAILS'&&!details.open)return false;
+ if(panelVisibility.has(id))return panelVisibility.get(id);
+ const box=panelTarget(id).getBoundingClientRect();
+ return !Number.isFinite(box.top)||(box.bottom>=0&&box.top<window.innerHeight);
+}
+function updatePanel(id){
+ if(!panelVisible(id))return false;
+ const now=Date.now(),last=panelUpdates.get(id);
+ if(last&&last.experiment===latest?.experiment_directory&&now-last.time<1000&&!busyActions.size)return false;
+ panelUpdates.set(id,{time:now,experiment:latest?.experiment_directory});return true;
+}
+const heavyPanels=['machine-groups','jobs','moving-jobs','transfer-history','travel-definition','route-definition','optimizer-order','optimizer-skips','cycle-conformance','scheduled','machines','transporters'];
+if(typeof IntersectionObserver!=='undefined'){
+ const observer=new IntersectionObserver(entries=>{for(const entry of entries)for(const id of heavyPanels)if(panelTarget(id)===entry.target){panelVisibility.set(id,entry.isIntersecting);if(entry.isIntersecting)panelUpdates.delete(id);}}, {rootMargin:'100px'});
+ for(const target of new Set(heavyPanels.map(panelTarget)))observer.observe(target);
+}
+function virtualRows(host,rows,columns,format){
+ const height=42,top=Math.max(0,(host.scrollTop||0)-42),start=Math.max(0,Math.floor(top/height)-8),end=Math.min(rows.length,start+Math.ceil((host.clientHeight||300)/height)+16);
+ const spacer=n=>n?'<tr aria-hidden="true"><td colspan="'+columns+'" style="padding:0;border:0;height:'+n*height+'px"></td></tr>':'';
+ return spacer(start)+rows.slice(start,end).map(format).join('')+spacer(rows.length-end);
+}
+function renderOrder(s){
+ if(s.transfer_order_included===false)return;
+ const host=$('optimizer-order');
+ host.innerHTML='<table><thead><tr><th>rank</th><th>ジョブ</th><th>搬送工程</th><th>状態</th></tr></thead><tbody>'+virtualRows(host,s.transfer_order||[],4,e=>`<tr style="height:42px"><td>${e.rank}</td><td>${esc(e.job_id)}</td><td>${e.source_operation} → ${e.source_operation+1}</td><td>${esc(orderStateNames[e.state]||e.state)}</td></tr>`)+'</tbody></table>';
+}
+$('optimizer-order').addEventListener('scroll',()=>{if(latest)renderOrder(latest);},{passive:true});
+function renderJobs(s){
+ $('jobs').innerHTML=s.jobs.length?virtualRows($('jobs-table-view'),s.jobs,13,j=>`<tr><td style="color:${jobTextColor(j.id)}">${esc(j.id)}</td><td><span class="badge ${j.status}">${j.waiting_for==='machine_group'?'グループ空き待ち':statusText[j.status]}</span></td><td class="num">${fmt(j.requested_at??j.entered)} / ${j.planned_release_at==null?'—':fmt(j.planned_release_at)} / ${j.release_at===null?'待機中':fmt(j.release_at??j.entered)}</td><td>${j.operation} / ${j.operation_count}</td><td>${['moving','waiting_transport'].includes(j.status)?esc(j.travel_from)+' → '+esc(j.travel_to):esc(j.machine??'—')}</td><td>${esc(j.machine_group??'—')}</td><td class="num">${fmt(j.processed)}</td><td class="num">${fmt(j.remaining)}</td><td class="num">${fmt(j.travel_remaining)}</td><td class="num">${fmt(j.total_remaining)}</td><td class="num">${fmt(j.total_travel_remaining)}</td><td>${esc(j.transporter??'—')}</td><td>${fmt(j.transport_wait_seconds??0)}</td></tr>`):'<tr><td colspan="13" class="empty">ジョブを投入してください</td></tr>';
+}
+$('jobs-table-view').addEventListener('scroll',()=>{if(latest)renderJobs(latest);},{passive:true});
+let fullConfigLoaded=false,configLoading=false;
+function invalidateConfig(){fullConfigLoaded=false;$('config-json').value='';$('config-json').placeholder='編集欄を開くと現在の設定を読み込みます';$('apply-config').disabled=true;if($('config-editor').open)void loadFullConfig();}
+async function loadFullConfig(){
+ if(fullConfigLoaded||configLoading)return;configLoading=true;const experiment=latest?.experiment_directory;
+ $('config-json').placeholder='現在の設定を読み込み中です…';
+ try{const config=await api('/api/config');if(experiment!==latest?.experiment_directory)return;$('config-json').value=JSON.stringify(config,null,2);fullConfigLoaded=true;$('apply-config').disabled=false;}
+ catch(error){notice(error.message,true);}finally{configLoading=false;}
+}
+$('config-editor').addEventListener('toggle',()=>{if($('config-editor').open)void loadFullConfig();});
+function renderGroups(s){
+ const groups=groupRows(s);
+ $('machine-groups').innerHTML=groups.length?`<table><thead><tr><th>代表機械</th><th>同じグループの機械</th><th>処理中</th><th>搬送予約</th><th>待ちジョブ</th></tr></thead><tbody>${groups.map(({label,id,members,scenario})=>`<tr><td>${esc(label)}</td><td>${members.map(esc).join(' / ')}（${members.length}台）</td><td>${members.filter(m=>s.machines.find(x=>x.id===m)?.job!==null).length}</td><td>${members.filter(m=>s.machine_reservations?.[m]).length}</td><td>${s.jobs.filter(j=>j.machine_group===id&&(!scenario||j.id.startsWith(scenario+':'))&&['queued','waiting_transport'].includes(j.status)).map(j=>esc(j.id)).join(' → ')||'なし'}</td></tr>`).join('')}</tbody></table>`:'<p class="muted">Capacity=1：各機械が独立しています。</p>';
+}
+function render(s){
+ const experimentChanged=viewPreference.experiment!==s.experiment_directory;
+ if(experimentChanged)loadView(s.experiment_directory);
+ latest=s;if(experimentChanged){invalidateConfig();restoreOptimizerSettings(s.optimizer?.calculation?.configured_optimizer,s.optimizer?.mode);}renderSequenceProgress(s);if(updatePanel('machine-groups'))renderGroups(s);$('sequence-warnings-active').innerHTML=warningsHTML(s);
+ if(lastTransportCount!==s.transport_count){lastTransportCount=s.transport_count;$('transport-count').value=s.transport_count??1;}
+ $('transport-count-applied').textContent=`適用中：${s.transport_count??1}台`;
+ const resources=s.transporters||[];$('transport-summary').textContent=`搬送中 ${resources.filter(t=>t.job!==null).length} / ${s.transport_count??1} 台　搬送待ち：${(s.transfer_queue||[]).join(' → ')||'なし'}`;
+ if(updatePanel('transporters'))$('transporters').innerHTML=resources.map(t=>`<article class="transporter"><div class="row l--cluster"><h3>${esc(t.id)}</h3><span class="badge">${t.job?'搬送中':'空き'}</span></div><p>${t.job?esc(t.job):'ジョブなし'}</p><p>移動残り ${fmt(t.remaining)} 秒 / 累計搬送 ${fmt(t.busy_seconds)} 秒</p></article>`).join('');
+ updateMachines(s.machines.map(m=>m.id));renderFaults(s);$('clock').textContent=fmt(s.time);$('run-status').textContent=s.completed?'全ジョブ完了・停止':s.simulation_start?.waiting?'計算完了待ち・JOB投入停止':s.simulation_start?.error?'開始を保留':s.running?'実行中':'一時停止';$('run-status').className='badge '+(s.running?'running':'');
+ $('job-scenario-active').textContent=s.scenario_sequence?.length?'適用中：連続投入 '+s.scenario_sequence.length+'シナリオ':s.input_info.source_file?'適用中：'+s.input_info.source_file.split(/[\\/]/).pop():'適用中：初期設定JSON';
+ $('start').disabled=s.running||s.completed||!!s.simulation_start?.waiting;$('pause').disabled=!s.running&&!s.simulation_start?.waiting;$('step').disabled=s.running||s.completed||!!s.simulation_start?.admission_blocked;
+ const rate=String(s.speed);if(![...$('speed').options].some(o=>o.value===rate)){const o=document.createElement('option');o.value=rate;o.textContent=rate+'倍';$('speed').append(o);}$('speed').value=rate;
+ if(updatePanel('machines'))$('machines').innerHTML=s.machines.map(m=>`<article class="machine ${esc(m.status)}"><div class="row l--cluster"><h3>${esc(m.id)}</h3><span class="badge ${esc(m.status)}">${m.reserved_job&&m.status==='idle'?'搬送到着待ち':statusText[m.status]}</span></div>${m.group&&m.group!==m.id?`<small>グループ ${esc(m.group)}</small>`:''}${m.reserved_job?`<p class="muted">搬送予約：${esc(m.reserved_job)}</p>`:''}<p>${m.job===null?'ジョブなし':`<strong style="color:${jobTextColor(m.job)}">${esc(m.job)}</strong> / 工程 ${m.operation}`}</p><div class="metrics"><div><small>処理済み</small><strong>${fmt(m.processed)} <small style="font-size:12px">秒</small></strong></div><div><small>残り</small><strong>${fmt(m.remaining)} <small style="font-size:12px">秒</small></strong></div></div><div class="track"><div class="fill" style="width:${m.duration?Math.min(100,100*m.processed/m.duration):0}%"></div></div><small>工程時間 ${fmt(m.duration)} 秒 / 稼働率 ${fmt(m.utilization*100)}%</small><p class="muted" style="font-size:12px">待ち: ${m.queue.length?m.queue.map(esc).join(' → '):'なし'}<br>累計処理 ${fmt(m.busy_seconds)} 秒 / 故障 ${fmt(m.down_seconds)} 秒</p><button ${s.faults.mode==='none'?'disabled title="故障なしモードでは操作できません"':''} data-machine="${esc(m.id)}" data-kind="${m.status==='failed'?'repair_machine':'fail_machine'}">${m.status==='failed'?'今すぐ復旧':'今すぐ故障'}</button></article>`).join('');
+ $('job-count').textContent=`${s.jobs.filter(j=>j.status==='completed').length} / ${s.jobs.length} 完了`;
+ if(updatePanel('jobs'))renderJobs(s);
+ const waiting=s.jobs.filter(j=>j.status==='waiting_transport');
+ const moving=s.jobs.filter(j=>j.status==='moving');if(updatePanel('moving-jobs')){$('moving-jobs').innerHTML=moving.length?moving.map(j=>`<div class="row l--cluster" style="padding:8px 0"><strong style="color:${jobTextColor(j.id)}">${esc(j.id)}</strong><span>${esc(j.transporter??'')} / ${esc(j.travel_from)} → ${esc(j.travel_to)}</span><span>残り ${fmt(j.travel_remaining)} 秒</span></div>`).join(''):'<div class="muted">現在移動中のジョブはありません。</div>';
+ $('moving-jobs').innerHTML+=waiting.map(j=>`<p class="muted">${esc(j.id)}：${j.waiting_for==='machine_group'?'グループ空き待ち':'搬送待ち'} ${fmt(j.transport_wait_seconds)} 秒 / ${esc(j.travel_from)} → ${esc(j.travel_to)} / 移動所要 ${fmt(j.travel_remaining)} 秒</p>`).join('');}
+ if(updatePanel('transfer-history'))$('transfer-history').innerHTML=s.transfers.length?`<table><thead><tr><th>ジョブ</th><th>搬送機械</th><th>経路</th><th>開始秒</th><th>終了 / 現在秒</th><th>移動済み秒</th></tr></thead><tbody>${s.transfers.map(t=>`<tr><td>${esc(t.job)}</td><td>${esc(t.transporter??'—')}</td><td>${esc(t.from)} → ${esc(t.to)}</td><td>${fmt(t.start)}</td><td>${fmt(t.end)}</td><td>${fmt(t.end-t.start)}</td></tr>`).join('')}</tbody></table>`:'<p class="muted">移動履歴はありません。</p>';
+ const info=s.input_info;$('input-summary').innerHTML=`<p>機械数 ${s.machine_count} / 登録ジョブ数 ${s.job_count}（予約を含む） / 搬送機械 ${s.transport_count??1}台</p>${info.format?`<p>形式 ${esc(info.format)} / ${info.route_count}品種 × 各${info.copies_per_route}ジョブ<br>工程数 ${esc(info.stage_counts.join(', '))}<br>処理時間 ${esc({lower:'下限 L',upper:'上限 U',midpoint:'LとUの中間'}[info.processing_time])}<br>移動時間 ${esc(info.travel_rule)}<br>荷役 ${fmt(info.handling_time)} 秒 / 番号差あたり ${fmt(info.seconds_per_unit)} 秒</p><p>${esc(info.source_file||'')}</p><p style="font-size:12px">${esc(info.note)}</p>`:`<p>未指定の異なる機械間の移動 ${fmt(s.default_travel_time)} 秒 / 同じ機械間は0秒</p>`}`;
+ if(updatePanel('travel-definition'))$('travel-definition').innerHTML=`<table><thead><tr><th>移動元 / 先</th>${s.machines.map(m=>`<th>${esc(m.id)}</th>`).join('')}</tr></thead><tbody>${s.machines.map(from=>`<tr><th>${esc(from.id)}</th>${s.machines.map(to=>`<td>${fmt(from.id===to.id?0:(s.travel_times[from.id]?.[to.id]??s.default_travel_time))}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+ if(updatePanel('route-definition'))$('route-definition').innerHTML=s.jobs.map(j=>`<p><strong>${esc(j.id)}</strong><br>${j.operations.map((op,k)=>`${k?' → 移動 '+fmt(op.travel_before)+'秒 → ':''}${esc(op.machine)}（処理 ${fmt(op.duration)}秒）`).join('')}</p>`).join('');
+ if(updatePanel('scheduled'))$('scheduled').innerHTML=s.events.length?`<table><thead><tr><th>秒</th><th>入力</th><th>対象</th></tr></thead><tbody>${s.events.map(e=>`<tr><td>${fmt(e.at)}</td><td>${esc({add_job:'ジョブ投入',release_job:'周期に合わせたJOB投入',fail_machine:'故障',repair_machine:'復旧'}[e.type])}</td><td>${esc(e.target)}</td></tr>`).join('')}</tbody></table>`:'<div class="muted">予約はありません</div>';
+ const types={simulation_start_waiting:'計算完了後の開始待ち',simulation_started:'シミュレーション開始',simulation_start_failed:'計算結果を適用できず開始保留',simulation_start_paused:'自動開始を一時停止',simulation_start_mode_changed:'開始モード変更',optimizer_started:'計算開始',optimizer_received:'計算受信',optimizer_incumbent_received:'改善解の逐次受信',optimizer_reused:'周期解再利用',optimizer_cancelled:'計算取消',order_applied:'順位適用',priority_selected:'搬送候補選択',transfer_consumed:'0秒搬送消化',optimizer_mode_changed:'制御モード変更',optimizer_settings_changed:'最適化条件変更（運転継続）',dispatch_policy_changed:'搬送方式切替',scenario_started:'シナリオ開始',scenario_completed:'シナリオ完了',transport_requested:'搬送要求',transport_count_changed:'搬送台数変更',transfer_started:'移動開始',transfer_completed:'移動完了',fault_mode_changed:'故障モード変更',job_added:'JOB投入受付',job_release_planned:'JOB投入時刻を調整',job_release_rescheduled:'投入予約を前倒し',job_released:'JOB実投入',operation_started:'工程開始',operation_completed:'工程完了',job_completed:'ジョブ完了',machine_failed:'機械故障',machine_repaired:'機械復旧'};
+ Object.assign(types,{transfer_execution_changed:'搬送実行方式変更',cyclic_timing_pattern_applied:'周期時刻パターン適用',cyclic_job_planned:'周期時刻をJOBに割当',cyclic_transfer_matched:'指定時刻に搬送',cyclic_timing_missed:'周期時刻不一致・一時停止'});
+ $('event-log').innerHTML=s.log.filter((e,i)=>i>=s.log.length-100||e.type==='dispatch_policy_changed').reverse().map(e=>`<div>${fmt(e.time)}s · ${types[e.type]||esc(e.type)} ${e.type==='dispatch_policy_changed'?esc(dispatchSwitchLabel(e))+(e.order_id?' / 順位 '+esc(e.order_id):''):e.type==='job_release_rescheduled'?e.jobs_count+' JOB / 周期 '+fmt(e.period)+'秒 / 最大 '+fmt(e.max_advance_seconds)+'秒前倒し':e.type==='optimizer_incumbent_received'?esc(incumbentDeliveryDescription(e)):e.type==='cyclic_timing_missed'?esc(e.reason):e.type==='cyclic_transfer_matched'?'予定 '+fmt(e.planned_at)+'秒 / 時刻差 '+fmt(e.difference_seconds)+'秒':''} ${esc(e.scenario||'')} ${esc(e.job||'')} ${esc(e.machine||'')} ${esc(e.transporter||'')} ${e.mode?(faultNames[e.mode]||esc(e.mode)):''} ${e.source?'['+esc({scenario:'指定シナリオ',random:'ランダム',external:'手動 / API',mode_change:'モード切替'}[e.source]||e.source)+']':''} ${e.operation?'工程 '+e.operation:''}</div>`).join('')||'イベントはありません';
+ drawGantt(s);keepButtonsBusy();
+}
+function drawGantt(s){
+ const windowSeconds=Number($('window').value),end=windowSeconds?Math.max(windowSeconds,s.time):Math.max(10,s.time),start=windowSeconds?Math.max(0,end-windowSeconds):0;
+ const transfers=s.transfers||[],lastTransfer=new Map();transfers.forEach(t=>lastTransfer.set(t.job,t));
+ const travelMachines=[...new Set([...(s.transporters||[]).map(t=>t.id),...transfers.map(t=>t.transporter??'搬送')])];
+ const resources=[...s.machines.map(m=>({id:m.id,kind:'processing',machine:m})),...travelMachines.map(id=>({id,kind:'transfer'}))];
+ $('gantt').style.setProperty('--gantt-natural-height',`${42+30*Math.max(1,resources.length)}px`);
+ const box=$('gantt').getBoundingClientRect(),fullWidth=Math.max(1,Math.floor(box.width)),height=Math.max(1,Math.floor(box.height));
+ const top=20,bottom=22,width=fullWidth,visible=resources,lane=Math.min(30,(height-top-bottom)/Math.max(1,resources.length));
+ let svg=`<svg class="gantt" viewBox="0 0 ${fullWidth} ${height}" preserveAspectRatio="xMinYMin meet" role="img" aria-label="全処理機械と搬送機械の履歴ガントチャート"><defs><pattern id="travel-hatch" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#f4cc75"/><path d="M-2 2L2-2M0 8L8 0M6 10L10 6" stroke="#936b29" stroke-width="1"/></pattern></defs>`;
+ const left=Math.min(112,Math.max(72,Math.floor(width*.23))),right=12,plot=Math.max(1,width-left-right),x=t=>left+(t-start)/(end-start)*plot;
+ const ticks=Math.max(1,Math.min(6,Math.floor(plot/85)));
+ for(let i=0;i<=ticks;i++){const t=start+(end-start)*i/ticks;svg+=`<line x1="${x(t)}" y1="${top}" x2="${x(t)}" y2="${height-bottom}" stroke="#2c3b53"/><text x="${x(t)}" y="${height-7}" fill="#aab8cd" text-anchor="${i===ticks?'end':i===0?'start':'middle'}" font-size="12">${t.toFixed(1)}s</text>`;}
+ svg+=`<text x="8" y="15" fill="#aab8cd" font-size="12">機械 / 搬送機</text>`;
+ function row(resource,y){const label=(resource.kind==='transfer'?'搬送 ':'')+resource.id,limit=Math.max(6,Math.floor((left-12)/7));svg+=`<text data-resource="${esc(resource.id)}" x="8" y="${y+lane/2+4}" fill="${resource.kind==='transfer'?'#f4cc75':'#edf3fc'}" font-size="12">${esc(label.length>limit?label.slice(0,limit-1)+'…':label)}<title>${esc(label)}</title></text><line x1="${left}" y1="${y+lane-1}" x2="${width-right}" y2="${y+lane-1}" stroke="#202d43"/>`;}
+ function bar(h,y,kind,active,title){
+  if(h.start>end||h.end<start||(!active&&(h.end<=start||h.end<=h.start)))return;
+  const a=x(Math.max(start,h.start)),b=x(Math.min(end,h.end)),w=Math.max(active?2:0,b-a),fill=kind==='transfer'?'url(#travel-hatch)':kind==='holding'?'#8798b3':color(h.job),label=h.job+(active?(kind==='transfer'?' 移動中':kind==='holding'?' 搬送待ち':' 処理中'):''),barHeight=Math.max(12,Math.min(24,lane-2)),barY=y+(lane-barHeight)/2;
+  svg+=`<g data-kind="${kind}" data-job="${esc(h.job)}" data-active="${active}"><title>${esc(title)}</title><rect x="${a}" y="${barY}" width="${w}" height="${barHeight}" rx="3" fill="${fill}" ${active?'stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4 2"':''}/>${w>38?`<svg x="${a+4}" y="${barY}" width="${Math.max(0,w-8)}" height="${barHeight}" overflow="hidden"><text y="${barHeight/2+4}" fill="#101828" font-size="12">${esc(label)}</text></svg>`:''}</g>`;
+ }
+ const jobsById=new Map(s.jobs.map(j=>[j.id,j]));
+ visible.forEach((r,i)=>{const y=top+i*lane;row(r,y);
+  if(r.kind==='processing'){const m=r.machine;s.history.filter(h=>h.machine===m.id).forEach(h=>{const holding=h.kind==='holding',active=(holding?m.status==='holding':m.status==='running')&&m.job===h.job&&m.operation===h.operation&&h.end===s.time;bar(h,y,holding?'holding':'processing',active,`${holding?'搬送待ち占有：':''}${h.job} / ${m.id} / 工程${h.operation}: ${fmt(h.start)}〜${fmt(h.end)}秒 / 処理 ${fmt(h.end-h.start)}秒${active?(holding?' / 搬送待ち占有':' / 処理中')+(s.running?'':'（一時停止）')+(holding?'':' / 工程残り '+fmt(m.remaining)+'秒'):''}`);});}
+  else transfers.filter(t=>(t.transporter??'搬送')===r.id).forEach(t=>{const j=jobsById.get(t.job),active=j?.status==='moving'&&lastTransfer.get(t.job)===t;bar(t,y,'transfer',active,`${t.job} / ${r.id} / ${t.from} → ${t.to}: ${fmt(t.start)}〜${fmt(t.end)}秒 / 移動 ${fmt(t.end-t.start)}秒${active?' / 移動中'+(s.running?'':'（一時停止）')+' / 移動残り '+fmt(j.travel_remaining)+'秒':''}`);});
+ });
+ // Admission marks share the first machine's row; no extra rows or scrolling.
+ const admissions=new Map(),firstOperations=new Map(Object.entries(s.first_operations||{}));
+ for(const e of s.log||[])if(e.type==='operation_started'&&e.operation===1&&!firstOperations.has(e.job))firstOperations.set(e.job,e);
+ for(const j of s.jobs){
+  const planned=j.release_at===null,t=planned?j.planned_release_at:(j.release_at??j.entered);
+  if(t==null||t<start||t>end)continue;
+  const first=firstOperations.get(j.id);
+  const machine=first?.machine||j.operations[0]?.machine_group_members?.[0]||j.operations[0]?.machine;
+  const laneIndex=visible.findIndex(r=>r.kind==='processing'&&r.id===machine);if(laneIndex<0)continue;
+  const key=`${laneIndex}:${t}:${planned}`;if(!admissions.has(key))admissions.set(key,{laneIndex,t,planned,jobs:[]});admissions.get(key).jobs.push(j);
+ }
+ const laneTimes=new Map(),nextTimes=new Map();
+ for(const a of admissions.values()){if(!laneTimes.has(a.laneIndex))laneTimes.set(a.laneIndex,new Set());laneTimes.get(a.laneIndex).add(a.t);}
+ for(const [lane,values] of laneTimes){const ts=[...values].sort((a,b)=>a-b);ts.forEach((t,i)=>nextTimes.set(lane+':'+t,i+1<ts.length?Math.min(width-right,x(ts[i+1])):width-right));}
+ for(const mark of admissions.values()){
+  const px=x(mark.t),y=top+mark.laneIndex*lane,label=mark.jobs.map(j=>j.id).join(', ')+` ${fmt(mark.t)}s`;
+  const tooltip=mark.jobs.map(j=>`${j.id} / 投入希望 ${fmt(j.requested_at??j.entered)}秒 / ${mark.planned?'投入予定':'実投入'} ${fmt(mark.t)}秒`).join('\n');
+  const next=nextTimes.get(mark.laneIndex+':'+mark.t);
+  const room=Math.max(0,next-px-10),h=Math.min(24,Math.max(12,lane-2));
+  svg+=`<g data-kind="${mark.planned?'job-release-planned':'job-release'}"><title>${esc(tooltip)}</title><path d="${mark.planned?`M${px} ${y}l5 5l-5 5l-5-5Z`:`M${px-5} ${y}h10l-5 10Z`}" fill="${mark.planned?'#151f32':'#ffb9ef'}" stroke="#ffb9ef"/>${room>45?`<svg x="${px+7}" y="${y}" width="${room}" height="${h}" overflow="hidden"><text y="12" font-size="12" fill="#ffb9ef" stroke="#0b1120" stroke-width="3" paint-order="stroke">${esc(label)}</text></svg>`:''}</g>`;
+ }
+ const markers={optimizer_started:['#91a7ff','計算開始'],optimizer_received:['#f4cc75','計算受信'],optimizer_incumbent_received:['#91a7ff','改善解の逐次受信'],order_applied:['#6de0cf','順位適用'],dispatch_policy_changed:['#ffb9ef','搬送方式切替'],machine_failed:['#ff8690','故障'],machine_repaired:['#aeb2ff','復旧']};
+ const annotations=[];
+ (s.log||[]).filter(e=>markers[e.type]&&e.time>=start&&e.time<=s.time).forEach(e=>{
+  const [stroke,label]=markers[e.type],px=x(e.time),switching=e.type==='dispatch_policy_changed',delivery=e.type==='optimizer_incumbent_received';
+  const description=delivery?incumbentDeliveryDescription(e):switching?dispatchSwitchLabel(e):label;
+  svg+=`<line ${delivery?'data-kind="incumbent-delivery-line" ':''}x1="${px}" y1="${top-4}" x2="${px}" y2="${height-bottom}" stroke="${stroke}" stroke-dasharray="3 5" opacity="0.65"><title>${esc(description)} ${fmt(e.time)}秒 ${esc(e.request_id||e.order_id||e.machine||'')}</title></line>`;
+  if(switching||delivery)annotations.push({e,px,stroke,delivery,label:delivery?incumbentDeliveryLabel(e):description,description});
+ });
+ // Keep all timestamps on their exact lines. Group crowded header marks,
+ // and clip labels into separate bands without shrinking text or adding rows.
+ const groups=[];
+ for(const mark of annotations.sort((a,b)=>a.px-b.px)){
+  const previous=groups.at(-1);
+  if(previous&&mark.px-previous.at(-1).px<14)previous.push(mark);else groups.push([mark]);
+ }
+ groups.forEach((group,i)=>{
+  const mark=group.filter(m=>m.delivery).at(-1)||group.at(-1),px=mark.px;
+  const before=i?groups[i-1].at(-1).px:left,after=i+1<groups.length?groups[i+1][0].px:width-right;
+  const lo=i?(before+group[0].px)/2:left,hi=i+1<groups.length?(group.at(-1).px+after)/2:width-right;
+  const alignRight=hi-px<110,a=alignRight?lo:px+7,b=alignRight?px-7:hi,room=Math.max(0,b-a);
+  const switches=mark.delivery?group.filter(m=>!m.delivery):[],extra=group.length-1-switches.length;
+  const description=group.map(m=>m.description).join('\n'),label=mark.label+(extra>0?` / 他${extra}件`:'')+switches.map(m=>` / ${m.label}`).join('');
+  svg+=`<g data-kind="${mark.delivery?'incumbent-delivery':'dispatch-policy-change'}" data-time="${mark.e.time}" data-count="${group.length}"><title>${esc(description)}</title>${mark.delivery?`<path d="M${px} 1l5 5l-5 5l-5-5Z" fill="${mark.stroke}" stroke="#0b1120"/>`:''}${room>48?`<svg x="${a}" y="0" width="${room}" height="16" overflow="hidden"><text x="2" y="12" font-size="12" fill="${mark.stroke}" stroke="#0b1120" stroke-width="3" paint-order="stroke">${esc(label)}</text></svg>`:''}</g>`;
+ });
+ svg+=`<line x1="${x(s.time)}" y1="${top-4}" x2="${x(s.time)}" y2="${height-bottom}" stroke="#6de0cf" stroke-width="2"/>`;
+ svg+='</svg>';$('gantt').innerHTML=svg;
+}
+new ResizeObserver(()=>{if(latest)drawGantt(latest);}).observe($('gantt'));
+$('start').onclick=()=>action(()=>control('start'));$('pause').onclick=()=>action(()=>control('pause'));$('step').onclick=()=>action(()=>control('step',{seconds:1}));$('reset').onclick=()=>action(()=>control('reset'));$('speed').onchange=()=>action(()=>control('speed',{speed:Number($('speed').value)}));$('window').onchange=()=>{if(latest)drawGantt(latest);saveView();void refresh();};
+$('apply-transport-count').onclick=()=>action(async()=>{render(await api('/api/transporters',{count:Number($('transport-count').value)}));invalidateConfig();$('transport-count').value=latest.transport_count;notice(`搬送機械の台数を${latest.transport_count}台に設定しました`);});
+$('add-operation').onclick=()=>addOperation();
+$('job-form').onsubmit=e=>{e.preventDefault();action(async()=>{const operations=[...$('operations').children].map(row=>({machine:row.querySelector('select').value,duration:Number(row.querySelector('input').value)}));await send(eventTime({type:'add_job',job:{id:$('job-id').value,operations}}));$('job-id').value='';});};
+$('fail').onclick=()=>action(()=>send(eventTime({type:'fail_machine',machine:$('fault-machine').value})));$('repair').onclick=()=>action(()=>send(eventTime({type:'repair_machine',machine:$('fault-machine').value})));
+$('machines').onclick=e=>{const b=e.target.closest('button[data-machine]');if(b)action(()=>send({type:b.dataset.kind,machine:b.dataset.machine}));};
+$('send-json').onclick=()=>action(()=>send(JSON.parse($('command-json').value)));
+$('fault-mode').onchange=showFaultSettings;
+$('fault-example').onclick=()=>{const at=Number((latest?.time??0).toFixed(2))+5;$('fault-scenario-json').value=JSON.stringify([{type:'fail_machine',machine:machineIds[0],at},{type:'repair_machine',machine:machineIds[0],at:at+6}],null,2);};
+$('apply-faults').onclick=()=>action(async()=>{const policy={mode:$('fault-mode').value};if(policy.mode==='scenario')policy.events=JSON.parse($('fault-scenario-json').value);if(policy.mode==='random')policy.random={mean_uptime:Number($('fault-mean').value),repair_duration:Number($('fault-repair-duration').value),seed:Number($('fault-seed').value),machines:[...machineIds]};render(await api('/api/faults',policy));invalidateConfig();notice('故障モードを適用しました：'+faultNames[policy.mode]);});
+$('config-file').onchange=()=>action(async()=>{const file=$('config-file').files[0];if(file){const text=await file.text();JSON.parse(text);$('config-json').value=text;fullConfigLoaded=true;$('apply-config').disabled=false;notice('設定を読み込みました。「設定を適用して初期化」で適用できます');}});
+const sequenceModeNames={completion_or_time:'完了 または 指定時間',completion:'完了を待つ',time:'指定時間で開始'};
+function renderSequenceProgress(s){
+ const rows=s.scenario_sequence||[];
+ $('sequence-progress').innerHTML=rows.length?`<table><thead><tr><th>順番 / シナリオ</th><th>状態</th><th>完了ジョブ数</th><th>開始秒</th><th>完了秒</th><th>次の開始条件</th></tr></thead><tbody>${rows.map((r,i)=>`<tr><td>${esc(r.id)} / ${esc(r.name)}</td><td>${{pending:'開始待ち',running:'実行中',completed:'完了'}[r.status]}</td><td>${r.completed_jobs} / ${r.job_ids.length}</td><td>${r.started===null?'—':fmt(r.started)}</td><td>${r.completed===null?'—':fmt(r.completed)}</td><td>${i===rows.length-1?'最終シナリオ':esc(sequenceModeNames[r.mode])+(r.mode==='completion'?'':`（開始から ${fmt(r.interval)}秒${r.next_deadline===null?'':', 時刻 '+fmt(r.next_deadline)+'秒'}）`)}</td></tr>`).join('')}</tbody></table>`:'<p class="muted">連続投入は設定されていません。</p>';
+}
+function invalidateSequence(){sequenceRevision++;pendingSequence=null;$('sequence-apply').disabled=true;$('sequence-preview-result').textContent='連続投入は未確認です。';$('sequence-warnings-preview').innerHTML='';}
+function sequenceCopies(value){const n=Number(value);if(!Number.isInteger(n)||n<1||n>10000)throw Error('シナリオのコピー数は1〜10000の整数で指定してください');return n;}
+function normalizeScenarioPath(value){
+ if(typeof value!=='string')throw Error('ファイルのパスを文字列で指定してください');
+ let path=value.trim();
+ const unquote=p=>{const first=p.startsWith('"'),last=p.endsWith('"');if(first!==last||(first&&p.length<2))throw Error('パスの前後のダブルクォートを確認してください');return first?p.slice(1,-1).trim():p;};
+ if(path.startsWith('"')&&path.endsWith('"')&&path.length>=2)path=unquote(path);
+ const columns=path.split('\t');
+ if(columns.length===2&&/^\d+$/.test(columns[0].trim())){const candidate=unquote(columns[1].trim());if(/^(?:[A-Za-z]:[\\/]|\\\\|\/)/.test(candidate))path=candidate;}
+ path=unquote(path);
+ if(!path)throw Error('ファイルのパスを入力してください。例：data/input_data_24.json');
+ if(/[\x00-\x1f\x7f]/.test(path))throw Error('パスにタブ・改行、または表の余分な列が含まれています。ファイルのパスだけを指定してください');
+ return path;
+}
+function expandedSequenceEntries(){return sequenceEntries.flatMap(({copies=1,...entry})=>Array.from({length:sequenceCopies(copies)},()=>entry));}
+function sequenceSelectionTotal(){const valid=sequenceEntries.every(e=>Number.isInteger(e.copies??1)&&(e.copies??1)>=1&&(e.copies??1)<=10000);$('sequence-selection-total').textContent=valid?`元シナリオ ${sequenceEntries.length}件 / 連続投入 ${sequenceEntries.reduce((n,e)=>n+(e.copies??1),0)}回`:'コピー数を1〜10000の整数で入力してください';}
+function renderSequenceSelection(){
+ $('sequence-selection').innerHTML=sequenceEntries.length?`<table><thead><tr><th>順番</th><th>選択したシナリオ</th><th>コピー数（投入回数）</th><th>操作</th></tr></thead><tbody>${sequenceEntries.map((e,i)=>`<tr><td>${i+1}</td><td>${esc(e.path||e.name||e.config?.input_info?.source_file||'シナリオ')}</td><td><input type="number" min="1" max="10000" step="1" value="${esc(e.copies??1)}" data-sequence-copies="${i}" aria-label="シナリオ${i+1}のコピー数"></td><td><button data-sequence-action="up" data-index="${i}" ${i===0?'disabled':''}>↑</button> <button data-sequence-action="down" data-index="${i}" ${i===sequenceEntries.length-1?'disabled':''}>↓</button> <button data-sequence-action="remove" data-index="${i}">削除</button></td></tr>`).join('')}</tbody></table>`:'<p class="muted">シナリオを選択してください。</p>';
+ sequenceSelectionTotal();
+ invalidateSequence();
+}
+$('sequence-selection').onclick=e=>{const b=e.target.closest('button[data-sequence-action]');if(!b)return;const i=Number(b.dataset.index),kind=b.dataset.sequenceAction;if(kind==='remove')sequenceEntries.splice(i,1);else{const j=i+(kind==='up'?-1:1);[sequenceEntries[i],sequenceEntries[j]]=[sequenceEntries[j],sequenceEntries[i]];}renderSequenceSelection();};
+$('sequence-selection').oninput=e=>{if(e.target.dataset.sequenceCopies==null)return;const i=Number(e.target.dataset.sequenceCopies);if(!sequenceEntries[i])return;sequenceEntries[i].copies=Number(e.target.value);sequenceSelectionTotal();invalidateSequence();};
+$('sequence-copies-50').onclick=()=>{$('sequence-copies').value='50';};$('sequence-copies-100').onclick=()=>{$('sequence-copies').value='100';};
+$('sequence-add-current').onclick=()=>action(async()=>{if(!pendingJobScenario)throw Error('上のジョブシナリオを先に読み込んでください');const copies=sequenceCopies($('sequence-copies').value);sequenceEntries.push({config:structuredClone(pendingJobScenario),copies});renderSequenceSelection();notice(`読み込み済みシナリオを${copies}回分リストに追加しました`);});
+$('sequence-files').onchange=()=>action(async()=>{const selected=[...$('sequence-files').files];if(!selected.length)return;const copies=sequenceCopies($('sequence-copies').value),added=[];for(const f of selected){const data=JSON.parse(await f.text());added.push({config:data,name:f.name,copies});}sequenceEntries.push(...added);$('sequence-files').value='';renderSequenceSelection();notice(`${added.length}件の元シナリオを各${copies}回分リストに追加しました`);});
+$('sequence-add-paths').onclick=()=>action(async()=>{const paths=$('sequence-paths').value.split(/\r?\n/).map(p=>p.trim()).filter(Boolean).map(normalizeScenarioPath);if(!paths.length)throw Error('JSONパスを入力してください');const copies=sequenceCopies($('sequence-copies').value);sequenceEntries.push(...paths.map(path=>({path,copies})));$('sequence-paths').value='';renderSequenceSelection();notice(`${paths.length}件のパスを各${copies}回分リストに追加しました`);});
+['sequence-mode','sequence-interval','transport-count','import-processing','import-copies','import-transport-count'].forEach(id=>$(id).addEventListener('input',invalidateSequence));
+$('sequence-mode').addEventListener('change',()=>{$('sequence-interval').disabled=$('sequence-mode').value==='completion';invalidateSequence();});
+$('sequence-preview').onclick=()=>action(async()=>{invalidateSequence();const revision=sequenceRevision;if(!sequenceEntries.length)throw Error('シナリオを1件以上選択してください');const result=await api('/api/scenarios/sequence/preview',{entries:expandedSequenceEntries(),mode:$('sequence-mode').value,interval:Number($('sequence-interval').value),transport_count:Number($('transport-count').value),import_options:importOptions(),optimizer:optimizerSettings().optimizer,control:{mode:optimizerSettings().mode}});if(revision!==sequenceRevision)return;pendingSequence=result.config;$('sequence-warnings-preview').innerHTML=warningsHTML(result.preview);$('sequence-preview-result').innerHTML=`<p>確認済み：${result.preview.scenario_sequence.length}シナリオ / 合計${result.preview.scenario_sequence.reduce((n,r)=>n+r.job_ids.length,0)}ジョブ / 搬送機械 ${result.preview.transport_count}台 / ${esc(sequenceModeNames[$('sequence-mode').value])}${$('sequence-mode').value==='completion'?'':' / '+fmt(Number($('sequence-interval').value))+'秒'}</p><p>処理機械グループ：${groupDescription(result.preview)}</p><p>適用後のジョブIDはS1:J1など、シナリオ番号を付けて区別します。</p>`;$('sequence-apply').disabled=false;notice('連続投入の内容を確認しました。適用できます');});
+$('sequence-apply').onclick=()=>action(async()=>{if(!pendingSequence)throw Error('先に連続投入を確認してください');render(await api('/api/config',withOptimizerSettings(pendingSequence)));invalidateConfig();notice('連続投入を適用しました（0秒・一時停止・故障なし）');});
+renderSequenceSelection();
+function importOptions(){return {processing_time:$('import-processing').value,copies_per_route:Number($('import-copies').value),transport_count:Number($('import-transport-count').value)};}
+function clearJobScenario(){scenarioRevision++;pendingJobScenario=null;$('apply-job-scenario').disabled=true;$('job-scenario-preview').textContent='シナリオは未読み込みです。';}
+['config-path','import-processing','import-copies','import-transport-count'].forEach(id=>$(id).addEventListener('input',clearJobScenario));
+$('load-config-path').onclick=()=>action(async()=>{clearJobScenario();const revision=scenarioRevision;const path=normalizeScenarioPath($('config-path').value);$('config-path').value=path;$('load-config-path').disabled=true;try{const result=await api('/api/scenarios/preview',{path,import_options:importOptions()});if(revision!==scenarioRevision)return;pendingJobScenario=result.config;const s=result.preview,info=s.input_info;$('job-scenario-preview').innerHTML=`<p><strong>読み込み済み：${esc(info.source_file)}</strong></p><p>機械数 ${s.machine_count} / ジョブ数 ${s.job_count} / ${info.route_count}品種 × 各${info.copies_per_route}ジョブ / 搬送機械 ${s.transport_count}台<br>処理時間 ${esc({lower:'下限 L',upper:'上限 U',midpoint:'LとUの中間'}[info.processing_time])}<br>移動時間 ${esc(info.travel_rule)}<br>処理機械グループ：${groupDescription(s)}</p><details><summary>工程と移動時間を確認</summary>${s.jobs.map(j=>`<p><strong>${esc(j.id)}</strong><br>${j.operations.map((op,k)=>`${k?' → 移動 '+fmt(op.travel_before)+'秒 → ':''}${esc(op.machine)}（処理 ${fmt(op.duration)}秒）`).join('')}</p>`).join('')}</details>`;$('apply-job-scenario').disabled=false;notice('ジョブシナリオを読み込みました。内容を確認して適用してください');}finally{$('load-config-path').disabled=false;}});
+$('apply-job-scenario').onclick=()=>action(async()=>{if(!pendingJobScenario)throw Error('先にジョブシナリオを読み込んでください');const config=withOptimizerSettings(pendingJobScenario);$('apply-job-scenario').disabled=true;try{render(await api('/api/config',config));invalidateConfig();notice('ジョブシナリオを適用しました（0秒・一時停止・故障なし）');}finally{$('apply-job-scenario').disabled=!pendingJobScenario;}});
+$('apply-config').onclick=()=>action(async()=>{if(!fullConfigLoaded)throw Error('編集欄を開いて現在の設定を読み込んでください');const data=JSON.parse($('config-json').value);if(data.W&&!data.machines)data.import_options=importOptions();render(await api('/api/config',data));invalidateConfig();notice('初期設定を適用しました（0秒・一時停止）');});
+$('export').onclick=()=>action(async()=>{const s=await api('/api/state');render(s);const blob=new Blob([JSON.stringify(s,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='jobshop-result.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notice('結果JSONを保存しました');});
+const originalRender=render;
+render=function(s){if(viewPreference.experiment!==s.experiment_directory){saveView();loadView(s.experiment_directory);}originalRender(s);renderOptimizer(s);restoreDetails();};
+let optimizerHistory=null,optimizerHistoryBusy=false;
+const orderStateNames={unreleased:'投入前',not_ready:'前工程未完了',ready:'搬送可能',group_blocked:'行先グループ待ち',moving:'搬送中',done:'消化済み'};
+const solverNames={cp_sat:'OR-Tools CP-SAT',highs:'HiGHS MILP'};
+const phaseNames={legacy_computing:'ワーカーで計算中',idle:'待機',initializing:'ワーカー起動・ライブラリ読込',building_model:'モデル構築中',solving:'最小周期を探索中',validating:'解の制約検証中',extracting_order:'搬送順位を生成中',gap_continuation:'ギャップ未達・探索継続'};
+const solverStatusNames={OPTIMAL:'最適性確認済み',FEASIBLE:'暫定解（最適性未確認）',INFEASIBLE:'実行可能解なし',UNKNOWN:'時間内に解を取得できず',MODEL_INVALID:'モデル不正',ERROR:'計算エラー',DEADLINE_EXCEEDED:'総要求期限超過',settings_changed:'設定変更で取消',cancelled:'取消',experiment_completed:'シミュレーション完了で取消',reset:'リセットで取消'};
+let displayedSolver=null;
+function liveCalculationFallback(c,s){
+ const id=c.request_id||s.optimizer?.active?.request_id;if(!id)return null;
+ const req=optimizerHistory?.requests?.find(r=>r.request_id===id&&(s.experiment_epoch==null||r.experiment_epoch===s.experiment_epoch))||optimizerHistory?.active;
+ if(!req||req.request_id!==id||(s.experiment_epoch!=null&&req.experiment_epoch!==s.experiment_epoch))return null;
+ const raw=req?.incumbent?.result,sol=raw?.solution;if(!sol)return null;
+ const search=c.search_progress||req?.progress?.search_progress,bound=search?.bound==null?raw.solver_bound:Math.max(raw.solver_bound??-Infinity,search.bound);
+ return {request_id:id,solver:c.active_solver||req.optimizer?.solver,period:sol.T,bound,gap_percent:bound==null?null:Math.max(0,100*(sol.T-bound)/Math.max(1,Math.abs(sol.T))),optimal:false,status:'FEASIBLE',intermediate:true,received:true,verified:true,bound_current:!!search,application:req.incumbent.application,applied_period:req.incumbent.applied_period??sol.T,solve_seconds:search?.solver_seconds??raw.solve_seconds,total_wall_seconds:c.elapsed_wall_seconds,pattern:sol};
+}
+function calculationReference(last,c,name){
+ if(!last)return '計算結果はまだありません。実行可能な改善解を取得すると、計算中でもここに表示します。';
+ const interim=last.intermediate,period=last.period,label=last.optimal?'最適周期':'暫定周期';
+ const opts=c.problem||c.configured_optimizer||{},goal=opts.gap_percent??1,mode=opts.stop_condition||'time';
+ let html=`<p><span class="badge">${interim?'計算中・改善解取得済み':esc(solverStatusNames[last.status]||last.status)}</span> · ${esc(last.request_id)} · ${esc(name(last.solver))}</p><p>${period==null?'周期：解なし':`${label} <strong>${fmt(period)} 秒</strong>`}</p><p>下界${interim&&!last.bound_current?'（解取得時）':''} ${last.bound==null?'—':fmt(last.bound)+'秒'} / 最適性ギャップ ${last.gap_percent==null?'—':gapText(last.gap_percent)+'%'}</p><p>探索 ${last.solve_seconds==null?'—':fmt(last.solve_seconds)}秒 / 要求の総実時間 ${fmt(last.total_wall_seconds||0)}秒</p>`;
+ if(interim)html+=`<p>探索を継続しています。終了条件：${esc(stopConditionLabel(mode,goal,opts.solver_limit_wall_seconds??60))}。</p>`+(mode==='gap'?'<p>ギャップのみのため、設定された時間上限・総要求期限では終了しません。</p>':'');
+ if(last.termination_reason)html+=`<p>終了理由：${esc({optimal:'最適性確認済み',gap_reached:'指定ギャップに到達',time_limit:'時間上限',infeasible:'実行可能解なし',solver_stopped:'ソルバー終了'}[last.termination_reason]||last.termination_reason)}</p>`;
+ html+=`<p>受け渡し：${last.received?'結果受信済み':'結果未受信'} / 制約検証 ${last.verified?'合格':'—'} / ${esc({applied:c.execution_policy==='cyclic_timing'?'搬送時刻・担当機適用済み':'順位適用済み',staged_until_start:'パターン受信済み・JOB開始時に展開',compute_only:'計算のみ',retained_better_pattern:'既存の良いパターンを維持',rejected:'適用拒否',completed_run:'JOB完了のため適用対象なし'}[last.application]||'未適用')}</p>`;
+ if(last.status==='UNKNOWN')html+='<p>計算は終了しましたが、実行可能解を取得できませんでした。求解時間・設定を確認してください。</p>';
+ if(last.error)html+=`<p style="color:var(--red)">${esc(last.error)}</p>`;
+ if(c.active_solver&&!interim)html+='<p class="muted">上記は前回の結果です。新しい計算を実行中です。</p>';
+ return html;
+}
+function renderCalculation(c,s={}){
+ if(!c)return;
+ if(c.configured_solver!==displayedSolver){$('optimizer-solver').value=c.configured_solver;displayedSolver=c.configured_solver;}
+ const p=c.problem,last=c.live_result||liveCalculationFallback(c,s)||c.latest,cycle=c.cycle,name=id=>solverNames[id]||id||'—';
+ const period=last?.period,label=last?.optimal?'最適周期':'暫定周期';
+ $('cycle-headline').innerHTML=!cycle?'最適周期：'+(last?esc(solverStatusNames[last.status]||last.status):'未計算'):`${cycle.optimal?'最適周期':'暫定周期'} <strong>${fmt(cycle.period)} 秒</strong> <small>${esc(cycle.request_id)} / ${esc(name(cycle.solver))}${last&&last.request_id!==cycle.request_id?'（直近の取得解）':''}</small>`;
+ $('solver-live').textContent=c.active_solver?`${name(c.active_solver)} · ${phaseNames[c.phase]||c.phase} · ${fmt(c.elapsed_wall_seconds)}実秒`:`使用ソルバー：${name(c.configured_solver)} · 待機`;
+ $('solver-live').textContent+=` · 搬送：${s.simulation_start?.waiting?'JOB開始待ち':c.execution_policy==='cyclic_timing'?'周期時刻に完全一致':c.execution_policy==='timing_waiting'?'指定時刻パターン待ち':c.execution_policy==='priority'?'適用済み順位':'FIFO'}`;
+ const timing=s.optimizer?.timing;
+ $('timing-status').style.color=timing?.error?'var(--red)':'var(--text)';
+ $('timing-status').textContent=timing?.mode==='cyclic_timing'?(timing.error?`完全一致を維持できず一時停止：${timing.error.job_id} / ${timing.error.reason} / 指定 ${timing.error.planned_at==null?'—':fmt(timing.error.planned_at)}秒。順位のみ方式へ切り替えるか、初期設定に戻して再実行してください。`:!timing.active?'指定時刻パターンを待っています。':`指定時刻で搬送 ${timing.matched_transfers}回 / 最大時刻差 ${fmt(timing.max_error_seconds||0)}秒 / 適用周期 ${fmt(timing.period)}秒 / 基準時刻 ${fmt(timing.anchor)}秒`+(timing.next_transfer?` / 次回 ${timing.next_transfer.job_id} 工程${timing.next_transfer.source_operation} → ${timing.next_transfer.source_operation+1} / ${fmt(timing.next_transfer.at)}秒 / ${timing.next_transfer.transporter}`:'')):'';
+ const reuse=s.optimizer?.reuse;
+ if(reuse)$('solver-live').textContent+=` · ${reuse.state==='computing'?'新規求解中':reuse.state==='reusing'?(reuse.source_status==='OPTIMAL'?'最適解再利用':'暫定解再利用')+' '+reuse.reuse_count+'回':reuse.state==='replay'?'記録順位を再生':reuse.state==='unavailable'?'最適化原入力なし':'再計算待ち'}`;
+ $('simulation-start-status').textContent=timing?.error?`完全一致方式の時刻不一致で一時停止：${timing.error.reason}`:s.simulation_start?.error||(s.simulation_start?.waiting?`JOB投入を保留 · ${s.simulation_start.request_id||'計算要求準備中'} · 計算終了後に自動開始`:s.simulation_start?.admission_blocked?'JOB投入・時計を保留 · 開始操作で新規計算':'');
+ if(s.job_release?.enabled&&!s.simulation_start?.admission_blocked){$('solver-live').textContent+=` · 投入：${s.job_release.pattern?'周期調整 / 待機 '+s.job_release.waiting_count+'件':'解の受信まで即時'}`;const next=s.job_release.next_release_at??s.events?.find(e=>e.type==='release_job')?.at;if(next!=null)$('solver-live').textContent+=` · 次回JOB ${fmt(next)}秒（あと ${fmt(Math.max(0,next-s.time))}秒）`;}
+ panelHTML('optimizer-problem',p?`<p>${c.request_id?`要求 ${esc(c.request_id)} / シミュレーション ${fmt(c.requested_at_simulation_time)} 秒時点`:'次回の計算対象'} · ${esc(phaseNames[c.phase]||c.phase)}</p><dl><dt>目的</dt><dd>${esc(p.objective)}</dd><dt>ソルバー</dt><dd>${esc(name(c.active_solver||c.configured_solver))} / ${(c.active_solver||c.configured_solver)==='highs'?'線形整数計画':'整数制約計画（資源制約で補強）'}</dd><dt>規模</dt><dd>${p.routes}品種 / ${p.stations}槽 / ${p.moves}搬送・${p.terminals}終端 / 搬送機 ${p.transport_count}台</dd><dt>順位適用先</dt><dd>登録 ${p.mapped_jobs}ジョブ（原品種の周期パターンを展開）</dd><dt>周期の範囲</dt><dd>${p.analytic_lower_bound}〜${p.period_upper} 秒</dd><dt>求解条件</dt><dd>${esc(stopConditionLabel(p.stop_condition,p.gap_percent,p.solver_limit_wall_seconds))} / ${p.workers}ワーカー</dd><dt>制約</dt><dd>${esc(p.constraints)}</dd><dt>入力</dt><dd>${esc(c.source_file||'現在のJSON設定')}</dd></dl><details><summary>品種ごとの経路・処理時間の上下限</summary><div class="overflow"><table><thead><tr><th>品種</th><th>経路</th><th>L（秒）</th><th>U（秒）</th></tr></thead><tbody>${(p.routes_detail||[]).map(r=>`<tr><td>${r.route}</td><td>${esc(r.stations.join(' → '))}</td><td>${esc(r.lower.join(', '))}</td><td>${esc(r.upper.join(', '))}</td></tr>`).join('')}</tbody></table></div></details>`:'最適化原入力がありません。W/R/N/V/L/Uを持つシナリオを読み込んでください。');
+ panelHTML('optimizer-reference',calculationReference(last,c,name));
+}
+function legacyCalculation(s,history){
+ const requests=history?.requests||[],active=history?.active||s.optimizer?.active,done=requests.filter(r=>!['starting','computing'].includes(r.status)),last=done.at(-1),good=done.filter(r=>r.result?.result?.solution).at(-1),request=active||last||requests.at(-1),raw=request?.problem,opts=request?.optimizer||{},result=last?.result?.result||last?.incumbent?.result,sol=result?.solution;
+ const compact=r=>r?{request_id:r.request_id,problem_id:r.problem_id,experiment_epoch:r.experiment_epoch,solver:r.optimizer?.solver||'cp_sat',period:r.result?.result?.solution?.T,optimal:r.status==='OPTIMAL',status:r.status}:null;
+ const latest=last?{...compact(last),bound:result?.solver_bound,gap_percent:sol&&result?.solver_bound!=null?Math.max(0,100*(sol.T-result.solver_bound)/Math.max(1,sol.T)):null,received:!!last.result,application:s.completed&&last.application==='applied'?'completed_run':last.application,error:last.error||last.rejection_reason,verified:result?.verification?.valid,solve_seconds:result?.solve_seconds,total_wall_seconds:last.total_wall_seconds}:null;
+ return {configured_solver:opts.solver||'cp_sat',active_solver:active?(active.optimizer?.solver||opts.solver||'cp_sat'):null,phase:active?(active.progress?.phase||'legacy_computing'):'idle',elapsed_wall_seconds:s.optimizer?.active?.elapsed_wall_seconds??active?.elapsed_wall_seconds??0,request_id:active?.request_id,requested_at_simulation_time:active?.simulation_time,source_file:s.input_info?.source_file,execution_policy:s.optimizer?.order_id?'priority':'fifo',latest,cycle:compact(good),problem:raw?{routes:raw.R,stations:raw.W.length,moves:raw.N.reduce((a,n)=>a+n-1,0),terminals:raw.R,mapped_jobs:request.mapping?.length||0,transport_count:request.transport_count,analytic_lower_bound:result?.analytic_lower_bound??'—',period_upper:opts.upper||10000,solver_limit_wall_seconds:opts.solver_limit_wall_seconds||10,workers:opts.workers||1,objective:'周期Tの最小化（整数秒）',constraints:'処理時間L〜U、槽容量、搬送機の競合・回送・周期内帰還、終端の自動排出',routes_detail:Array.from({length:raw.R},(_,r)=>({route:r+1,stations:raw.V.slice(0,raw.N[r]+1).map(row=>row[r]),lower:raw.L.slice(0,raw.N[r]).map(row=>row[r]),upper:raw.U.slice(0,raw.N[r]).map(row=>row[r])}))}:null};
+}
+function renderOptimizer(s){
+ const o=s.optimizer||{},m=s.metrics||{},active=o.active;
+ if(!o.calculation)o.calculation=legacyCalculation(s,optimizerHistory);
+ renderCalculation(o.calculation,s);
+ const conformance=s.metrics?.cycle_conformance,conformanceShape=!conformance?'legacy':!conformance.available?'waiting':Object.values(conformance.channels).some(c=>c.all.count)?'measured':'collecting';
+ if($('cycle-conformance').dataset.shape!==conformanceShape||updatePanel('cycle-conformance')){renderCycleConformance(s);$('cycle-conformance').dataset.shape=conformanceShape;}
+ const delivery=o.calculation?.pattern_delivery||'final';
+ $('optimizer-delivery-status').textContent=delivery==='incremental'?`改善解を逐次受け渡し / 受信 ${o.calculation?.callback_updates||0}回${o.calculation?.intermediate?' / 現在の暫定周期 '+fmt(o.calculation.intermediate.period)+'秒':''}。FIFO・計算のみモードでは記録のみ、優先順位モードでは検証後に適用します。`:'計算終了後にパターンを受け渡します。計算途中の改善解は図・履歴への記録に使用します。';
+ const received=o.calculation?.intermediate||o.calculation?.latest;
+ if(received?.application==='retained_better_pattern')$('optimizer-delivery-status').textContent+=` 受信解の周期は既存解より長いため、運転には ${fmt(received.applied_period)}秒の良いパターンを維持しています。受信・計算は継続しています。`;
+ if(received?.application==='staged_until_start')$('optimizer-delivery-status').textContent+=' パターンは受信・検証済みです。JOB未投入のため、搬送順位は計算完了時にまとめて展開します。';
+ $('optimizer-summary').textContent=`${active?'計算中 '+active.request_id+' / '+active.status+' / '+fmt(active.elapsed_wall_seconds||0)+'実秒 / '+(active.reasons||[]).join(', '):'計算待機'} · 適用順位 ${o.order_id||'未適用 / FIFO'} · 再計算 ${o.reuse?.recalculation_mode==='events'?'定期なし・イベント時のみ':fmt(o.next_period||0)+'秒'} · 待ち起点 ${(o.pending_reasons||[]).join(', ')||'なし'}`;
+ if(!o.reuse)$('optimizer-summary').textContent+=' · 解の再利用・再計算モードを有効にするにはアプリを再起動してください';
+ $('optimizer-metrics').textContent=`完了 ${m.completed_jobs||0} / 未完了 ${m.unfinished_jobs||0} · 全完了 ${m.all_completed_at==null?'—':fmt(m.all_completed_at)+'秒'} · 平均搬送待ち ${fmt(m.job_transport_wait_seconds?.mean||0)}秒 · 飛越し ${m.skip_count||0}件`;
+ if(updatePanel('optimizer-order'))renderOrder(s);
+ const selections=(s.log||[]).filter(e=>e.type==='priority_selected').slice(-30).reverse();
+ if(updatePanel('optimizer-skips'))$('optimizer-skips').innerHTML=selections.map(e=>`<p>${fmt(e.time)}秒 · ${esc(e.transfer_id)} / rank ${e.rank??'未登録'}${(e.skipped_count??e.skipped?.length??0)>50?' / 飛越し '+e.skipped_count+'件（先頭50件を表示・全件は実験出力）':''}<br><small>${(e.skipped||[]).map(k=>`rank ${k.rank}: ${esc(k.transfer_id)} — ${esc(orderStateNames[k.reason]||k.reason)}`).join('<br>')||'上位飛越しなし'}</small></p>`).join('');
+ $('experiment-directory').textContent='実験保存先: '+(s.experiment_directory||'');
+ if(optimizerHistory||o.calculation?.live_result){
+ const requests=optimizerHistory?.requests||[],cycle=o.calculation?.cycle,last=requests.find(r=>r.request_id===cycle?.request_id&&r.problem_id===cycle?.problem_id&&r.experiment_epoch===cycle?.experiment_epoch),live=o.calculation?.live_result||liveCalculationFallback(o.calculation,s),result=last?.result?.result||last?.incumbent?.result,sol=live&&live.request_id===cycle?.request_id&&live.period===cycle?.period?live.pattern||result?.solution:result?.solution;
+ $('optimizer-pattern').innerHTML=sol?`<p>周期 ${fmt(sol.T)}秒で繰り返すパターン / ${esc(last?.request_id||live?.request_id||cycle?.request_id)} / ${esc(solverNames[last?.optimizer?.solver||live?.solver||cycle?.solver]||'')}</p><table><thead><tr><th>品種 / 工程</th><th>周期内の開始秒</th><th>搬送機</th><th>種別</th></tr></thead><tbody>${sol.events.map((event,i)=>({event,i,start:sol.starts[i]})).sort((a,b)=>a.start-b.start||a.i-b.i).map(({event,i,start})=>`<tr><td>${esc(event.join(' / '))}</td><td>${fmt(start)}</td><td>${sol.hoists[i]==null?'—':'T'+(sol.hoists[i]+1)}</td><td>${sol.is_terminal?.[i]?'自動排出':'搬送'}</td></tr>`).join('')}</tbody></table>`:'周期パターンは未取得です。';
+ $('optimizer-requests').innerHTML=`<table><thead><tr><th>要求</th><th>ソルバー</th><th>起点</th><th>結果 / 適用</th><th>周期T（秒）</th><th>実秒</th><th>詳細</th></tr></thead><tbody>${requests.slice(-30).reverse().map(r=>`<tr><td>${esc(r.request_id)}</td><td>${esc(solverNames[r.optimizer?.solver]||r.optimizer?.solver||'—')}</td><td>${esc((r.reasons||[]).join(', '))}</td><td>${esc(solverStatusNames[r.status]||r.status)} / ${esc(r.application||'—')}</td><td>${r.result?.result?.solution?.T??r.incumbent?.result?.solution?.T??'—'}</td><td>${fmt(r.total_wall_seconds||0)}</td><td>${esc(r.error||r.rejection_reason||r.result?.error||'')}</td></tr>`).join('')}</tbody></table>`;
+ }
+}
+function renderCycleConformance(s){
+ const c=s.metrics?.cycle_conformance,host=$('cycle-conformance');
+ if(!c){host.innerHTML='<p class="muted">周期一致度の表示には、変更後のサーバーを起動してください。</p>';return;}
+ if(!c.available){host.innerHTML='<p class="muted">比較できる計算周期を待っています。搬送機数などのモデル条件が変わった場合は、新しい周期を受信してから計測します。</p>';return;}
+ const kind=$('cycle-conformance-kind').value||'transport',channel=c.channels[kind],steady=$('cycle-conformance-steady').checked,stats=channel?.[steady?'steady':'all'],ref=c.reference,names={transport:'搬送開始',admission:'JOB実投入',completion:'JOB完了'};
+ if(!stats)return;
+ const number=(value,suffix='')=>value==null?'—':fmt(value)+suffix;
+ const age=channel.last_observed_at==null?null:Math.max(0,c.simulation_time-channel.last_observed_at);
+ let html=`<p>比較周期 <strong>${fmt(ref.period)}秒</strong> / ${esc(ref.request_id)} / ${ref.status==='OPTIMAL'?'最適性確認済み':'暫定周期'} / ${ref.used_for_dispatch?'優先順位に使用する周期':s.simulation_start?.waiting?'受信済み・運転開始待ち':'参考周期（順位未適用）'} · 比較開始 ${fmt(ref.since)}秒${steady?' / 立上げ除外後 '+fmt(ref.since+2*ref.period)+'秒から':''}</p>`;
+ if(!stats.count)html+=`<p class="muted">${steady?'立上げ除外後の':'同じ品種・工程の隣接JOBの'}観測区間がまだありません。実測イベントが増えると計算します。</p>`;
+ else html+=`<div class="cards l--grid"><div><small>${names[kind]}の周期一致スコア${stats.count<5?'（参考値）':''}</small><strong style="display:block;font-size:24px;color:var(--accent)">${number(stats.score_percent,'%')}</strong><small>平均絶対相対誤差 ${number(stats.mean_absolute_error_percent,'%')}</small></div><div><small>±${c.tolerance_percent}%以内の一致率</small><strong style="display:block;font-size:24px">${number(stats.within_5_percent,'%')}</strong><small>${stats.count}区間 / ${stats.group_count}工程を観測</small></div><div><small>実測間隔の中央値</small><strong style="display:block;font-size:24px">${number(stats.median_period_seconds,'秒')}</strong><small>計算周期との差 ${number(stats.bias_percent,'%')}</small></div></div><p>ばらつき（MAD/T）：${number(stats.jitter_percent,'%')} / 相対誤差P95：${number(stats.p95_error_percent,'%')} / JOB順の逆転：${stats.reversed_count}区間</p>`;
+ html+=`<p class="muted">観測工程 ${stats.group_count} / ${channel.expected_groups} · 最新${c.window_intervals}区間が対象（現在の比較周期で累計${channel.total_intervals}区間） · ${age==null?'隣接JOBの通過待ち':'直近の区間成立は '+fmt(age)+'シミュレーション秒前'}${age!=null&&age>2*ref.period?' · 観測の更新が2周期以上ありません':''} · 原品種不明の除外イベント ${c.unmapped_events}</p>`;
+ const samples=(channel.samples||[]).filter(p=>!steady||(p.previous_at>=ref.since+2*ref.period&&(p.next_at??p.at)>=ref.since+2*ref.period));
+ if(samples.length){
+  const width=Math.max(480,Math.floor(host.getBoundingClientRect().width)),height=180,left=55,right=15,top=20,bottom=35;
+  const minTime=Math.min(...samples.map(p=>p.at)),maxTime=Math.max(minTime+1,...samples.map(p=>p.at));
+  const low=Math.min(0.8,...samples.map(p=>p.ratio)),high=Math.max(1.2,...samples.map(p=>p.ratio));
+  const x=t=>left+(t-minTime)/(maxTime-minTime)*(width-left-right),y=r=>height-bottom-(r-low)/(high-low)*(height-top-bottom);
+  let svg=`<svg width="100%" viewBox="0 0 ${width} ${height}" role="img" aria-label="実測間隔と計算周期の比"><rect width="100%" height="100%" fill="#0b1120"/><text x="6" y="14" font-size="12" fill="#fff">実測間隔 / T</text><line x1="${left}" y1="${y(1)}" x2="${width-right}" y2="${y(1)}" stroke="#f4cc75" stroke-dasharray="5 4"/><text x="${left-6}" y="${y(1)+4}" text-anchor="end" font-size="12" fill="#fff">1.00</text>`;
+  for(const r of [low,high])svg+=`<text x="${left-6}" y="${y(r)+4}" text-anchor="end" font-size="12" fill="#fff">${fmt(r)}</text>`;
+  for(const p of samples)svg+=`<circle cx="${x(p.at)}" cy="${y(p.ratio)}" r="3" fill="${Math.abs(p.ratio-1)<=.05+1e-10?'#6de0cf':'#ff8690'}"><title>品種${p.route_id}${p.operation?' / 工程'+p.operation:''} / JOB番号${p.instance_index-1}→${p.instance_index} / 間隔${fmt(p.interval_seconds)}秒 / 比${fmt(p.ratio)} / ${fmt(p.at)}秒時点</title></circle>`;
+  for(const t of [minTime,maxTime])svg+=`<text x="${x(t)}" y="${height-16}" text-anchor="${t===minTime?'start':'end'}" font-size="12" fill="#fff">${fmt(t)}秒</text>`;
+  svg+=`<text x="${left}" y="${height-2}" font-size="12" fill="#aab8cd">黄破線：計算周期T / 緑：±5%以内 / 赤：範囲外（各点に詳細）</text></svg>`;html+=svg;
+ }
+ if(stats.groups.length)html+=`<details><summary>品種・工程ごとの一致度</summary><div class="overflow"><table><thead><tr><th>品種 / 工程</th><th>区間数</th><th>実測中央値</th><th>スコア</th><th>±5％一致率</th><th>平均誤差</th></tr></thead><tbody>${stats.groups.map(g=>`<tr><td>${g.route_id} / ${g.operation||names[kind]}</td><td>${g.count}</td><td>${fmt(g.median_period_seconds)}秒</td><td>${fmt(g.score_percent)}%</td><td>${fmt(g.within_5_percent)}%</td><td>${fmt(g.mean_absolute_error_percent)}%</td></tr>`).join('')}</tbody></table></div></details>`;
+ host.innerHTML=html;
+}
+for(const id of ['cycle-conformance-kind','cycle-conformance-steady'])$(id).onchange=()=>{saveView();if(latest)renderCycleConformance(latest);};
+$('simulation-start-mode').onchange=()=>{const mode=$('simulation-start-mode').value;return action(async()=>{try{render(await api('/api/optimizer/config',{optimizer:{simulation_start_mode:mode}}));notice(mode==='after_optimization'?'計算完了後にJOB投入するモードを適用しました。開始 / 再開で新規計算します':'計算と運転を並行するモードを適用しました');}catch(e){$('simulation-start-mode').value=latest?.simulation_start?.mode||'parallel';throw e;}});};
+$('optimizer-settings').onclick=()=>action(async()=>{render(await api('/api/optimizer/config',optimizerSettings()));notice('計算条件を適用しました。シミュレーションと連続投入を維持します');});
+function showRecalculationSettings(){$('optimizer-period').disabled=$('optimizer-recalculation').value!=='periodic';}
+function optimizerSettings(){return {mode:$('optimizer-mode').value,optimizer:{simulation_start_mode:$('simulation-start-mode').value,solver:$('optimizer-solver').value,period_sim_seconds:Number($('optimizer-period').value),solver_limit_wall_seconds:Number($('optimizer-limit').value),stop_condition:$('optimizer-stop').value,pattern_delivery:$('optimizer-delivery').value,transfer_execution:$('transfer-execution').value||'priority',gap_percent:Number($('optimizer-gap').value),workers:Number($('optimizer-workers').value),delay_job_release:$('delay-job-release').checked,recalculation_mode:$('optimizer-recalculation').value,request_limit_wall_seconds:Number($('optimizer-deadline').value)}};}
+async function requestWithOptimizerSettings(){const settings=optimizerSettings(),applied=latest?.optimizer?.calculation?.configured_optimizer,changed=!applied||settings.mode!==latest.optimizer.mode||Object.entries(settings.optimizer).some(([key,value])=>value!==applied[key]);if(changed){const state=await api('/api/optimizer/config',settings);render(state);if(state.optimizer?.active)return {request_id:state.optimizer.active.request_id};}return api('/api/optimizer/run',{});}
+function withOptimizerSettings(config){const settings=optimizerSettings();return {...config,optimizer:{...config.optimizer,...settings.optimizer},control:{...config.control,mode:settings.mode}};}
+function restoreOptimizerSettings(opts,mode){if(!opts)return;$('simulation-start-mode').value=opts.simulation_start_mode||'parallel';$('transfer-execution').value=opts.transfer_execution||'priority';for(const [id,key] of [['optimizer-solver','solver'],['optimizer-stop','stop_condition'],['optimizer-gap','gap_percent'],['optimizer-delivery','pattern_delivery'],['optimizer-period','period_sim_seconds'],['optimizer-limit','solver_limit_wall_seconds'],['optimizer-workers','workers'],['optimizer-recalculation','recalculation_mode'],['optimizer-deadline','request_limit_wall_seconds']])if(opts[key]!=null)$(id).value=opts[key];if(mode)$('optimizer-mode').value=mode;$('delay-job-release').checked=opts.delay_job_release!==false;showStopCondition();showRecalculationSettings();showTransferExecution();}
+function showTransferExecution(){
+ const strict=$('transfer-execution').value==='cyclic_timing';
+ $('transfer-execution-description').textContent=strict?'完全一致方式はJOB着手前に設定してください。「計算完了後にJOB投入」と投入調整を使用し、未着手工程の処理時間は解が選んだL〜U内の値に合わせます。搬送時間は周期モデルに合わせ、0秒の初回装入は槽を占有しない外部装入として扱います。更新時は着手済みJOBを元のパターンで完了させてから、新しいパターンのJOBを投入します。故障・時刻不一致は一時停止します。':'搬送順位のみを渡し、開始時刻・担当搬送機は運転状態から決めます。';
+ $('delay-job-release').disabled=strict;$('simulation-start-mode').disabled=strict;
+ if(strict){$('simulation-start-mode').value='after_optimization';$('delay-job-release').checked=true;}
+}
+$('transfer-execution').onchange=showTransferExecution;
+function gapText(value){if(value==null)return '—';const rounded=Number(value.toFixed(4)),target=Number($('optimizer-gap').value);return value>0&&rounded===target&&value<target?String(value):String(rounded);}
+function stopConditionLabel(mode,gap,seconds){const goal=gap===0?'最適性確認（ギャップ0%）':`ギャップ ${gap}%未満`;return mode==='gap'?`${goal}（時間上限なし）`:mode==='time_or_gap'?`${seconds}実秒または${goal}（先に到達した方）`:`${seconds}実秒（時間のみ）`;}
+function showStopCondition(){const mode=$('optimizer-stop').value,gapOnly=mode==='gap';$('optimizer-gap').disabled=mode==='time';$('optimizer-limit').disabled=gapOnly;$('optimizer-deadline').disabled=gapOnly;$('optimizer-stop-description').textContent=mode==='gap'?'ギャップ = 100 × (周期T − ソルバー下界) / max(1, |周期T|)。指定％未満まで探索します。0％では最適性確認まで探索します。時間上限・総要求期限は使用せず、計算取消で停止できます。':mode==='time_or_gap'?'求解時間の上限または指定ギャップのいずれかに先に到達した時点で終了します。総要求期限も有効です。':'指定した求解時間で終了します。指定ギャップは使用しません。総要求期限も有効です。';$('optimizer-stop-description').textContent+=' 最適性の証明・実行不能の判明時は、いずれの条件でも探索を終了します。';}
+$('optimizer-stop').onchange=showStopCondition;
+$('optimizer-recalculation').onchange=showRecalculationSettings;
+$('solver-apply').onclick=()=>action(async()=>{const solver=$('optimizer-solver').value;await requestWithOptimizerSettings();render(await readView());notice(`${solverNames[solver]}へ切り替えて再計算します`);});
+$('optimizer-run').onclick=()=>action(async()=>{const r=await requestWithOptimizerSettings();render(await readView());notice('再計算を受け付けました: '+r.request_id);});
+$('optimizer-cancel').onclick=()=>action(async()=>{await api('/api/optimizer/cancel',{});render(await api('/api/state'));notice('計算を取り消しました');});
+$('replay-load').onclick=()=>action(async()=>{render(await api('/api/replay',{path:$('replay-path').value}));notice('順位の受信時刻・追加・観測した故障を読み込みました。「開始 / 再開」で再生します');});
+$('route-job-add').onclick=()=>action(async()=>{const d={type:'add_job',job:{id:$('route-job-id').value,route_id:Number($('route-job-route').value)}};if($('route-job-at').value!=='')d.at=Number($('route-job-at').value);await send(d);});
+$('export').onclick=()=>action(async()=>{const r=await api('/api/result');const blob=new Blob([JSON.stringify(r,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='integrated-experiment.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notice('実験ファイルを保存しました: '+r.directory);});
+async function bootstrap(){
+ if(sessionLoading)return;sessionLoading=true;
+ try{
+  let session;
+  try{session=await api('/api/gui-session');}catch(error){
+   if(error.status!==404)throw error;
+   // Reconnect to an already running server without requiring a restart.
+   try{session=await api('/api/session');}catch(legacyError){if(legacyError.status!==404)throw legacyError;const config=await api('/api/config'),optimizer=await api('/api/optimizer/status'),state=await api('/api/state');session={config,optimizer,state};}
+  }
+  const c=session.config;$('optimizer-delivery').value=c.optimizer?.pattern_delivery||'final';$('optimizer-delivery').disabled=!['final','incremental'].includes(c.optimizer?.pattern_delivery);$('optimizer-delivery').title=$('optimizer-delivery').disabled?'パターン受け渡しの切替を有効にするにはサーバーを再起動してください':'';$('optimizer-stop').value=c.optimizer?.stop_condition||'time';$('optimizer-gap').value=c.optimizer?.gap_percent??1;showStopCondition();$('optimizer-stop').disabled=!['time','gap','time_or_gap'].includes(c.optimizer?.stop_condition);$('optimizer-stop').title=$('optimizer-stop').disabled?'終了条件の切替を有効にするにはサーバーを再起動してください':'';$('optimizer-recalculation').value=c.optimizer?.recalculation_mode||'events';showRecalculationSettings();$('delay-job-release').checked=c.optimizer?.delay_job_release!==false;
+  $('optimizer-recalculation').disabled=!session.state.optimizer?.reuse;
+  $('optimizer-recalculation').title=session.state.optimizer?.reuse?'':'この機能を有効にするにはアプリの再起動が必要です';
+  $('simulation-start-mode').value=c.optimizer?.simulation_start_mode||'parallel';
+  $('simulation-start-mode').disabled=!session.state.simulation_start;
+  $('simulation-start-mode').title=session.state.simulation_start?'':'開始モードを有効にするにはサーバーを再起動してください';
+  optimizerHistory=session.optimizer;
+  $('optimizer-mode').value=c.control?.mode||'fifo';$('optimizer-solver').value=c.optimizer?.solver||'cp_sat';$('optimizer-period').value=c.optimizer?.period_sim_seconds??60;$('optimizer-limit').value=c.optimizer?.solver_limit_wall_seconds??60;$('optimizer-workers').value=c.optimizer?.workers??8;$('optimizer-deadline').value=c.optimizer?.request_limit_wall_seconds??300;
+  if(session.config_compact)invalidateConfig();else{$('config-json').value=JSON.stringify(c,null,2);fullConfigLoaded=true;$('apply-config').disabled=false;}$('config-path').value=c.input_info?.source_file||'';
+  $('import-processing').value=c.import_options?.processing_time||'lower';$('import-copies').value=c.import_options?.copies_per_route??1;$('import-transport-count').value=session.state.transport_count??1;
+  $('transfer-execution').value=c.optimizer?.transfer_execution||'priority';
+  $('transfer-execution').disabled=!session.state.optimizer?.calculation?.available_execution_modes?.includes('cyclic_timing');
+  $('transfer-execution').title=$('transfer-execution').disabled?'完全一致方式を有効にするにはサーバーを再起動してください':'';showTransferExecution();
+  loadView(session.state.experiment_directory);render(session.state);sessionReady=true;
+  $('session-loading').hidden=true;document.querySelector('main').setAttribute('aria-busy','false');$('connection').textContent='接続済み · 200ms更新';
+  if(Number.isFinite(viewPreference.scroll))requestAnimationFrame(()=>window.scrollTo(0,viewPreference.scroll));
+ }catch(e){$('session-loading').textContent='現在の動作情報への再接続中… '+e.message;$('connection').textContent='再接続中';}
+ finally{sessionLoading=false;}
+}
+// Capture the originating control for all asynchronous click, submit and file actions.
+document.querySelectorAll('button,select,input[type=file],form,#machines').forEach(element=>{
+ for(const kind of ['onclick','onchange','onsubmit']){const handler=element[kind];if(!handler)continue;
+  element[kind]=function(event){const source=event?.submitter||event?.target?.closest('button')||element;
+   const previous=actionSource;actionSource=source;try{return handler.call(this,event);}finally{actionSource=previous;}
+  };
+ }
+});
+let lightViewSupported=true,compactOptimizerSupported=true;
+async function readView(){if(lightViewSupported){try{return await api('/api/view?window='+encodeURIComponent($('window').value)+'&order='+(panelVisible('optimizer-order')?'1':'0'));}catch(e){if(e.status!==404)throw e;lightViewSupported=false;}}return api('/api/state');}
+async function readOptimizer(){if(compactOptimizerSupported){try{return await api('/api/optimizer/summary');}catch(e){if(e.status!==404)throw e;compactOptimizerSupported=false;}}return api('/api/optimizer/status');}
+setInterval(async()=>{if(!sessionReady||optimizerHistoryBusy||busyActions.size)return;const revision=actionRevision;optimizerHistoryBusy=true;try{const status=await readOptimizer();if(revision===actionRevision&&!busyActions.size)optimizerHistory=status;}catch{}finally{optimizerHistoryBusy=false;}},1000);
+async function refresh(){if(!sessionReady){await bootstrap();return;}if(refreshing||busyActions.size)return;const revision=actionRevision;refreshing=true;try{const state=await readView();if(revision!==actionRevision||busyActions.size)return;render(state);$('connection').textContent='接続済み · 200ms更新';}catch(e){if(revision===actionRevision&&!busyActions.size){$('connection').textContent='接続エラー · 再接続中';notice(e.message,true);}}finally{refreshing=false;}}
+bootstrap();setInterval(refresh,200);
+setInterval(()=>{if(sessionReady&&typeof refreshOptimizationHistory==='function')void refreshOptimizationHistory();},2000);
+</script>
+<script src="/assets/optimization-history.js"></script>
+</body></html>
